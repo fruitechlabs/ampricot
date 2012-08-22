@@ -1,0 +1,1 @@
+"@APRICOREINSTALLDIRCORE@/core/bin/mysql/mysql-@APRICOREVERSIONMYSQL@/bin/mysqld.exe" --no-defaults --default-storage-engine=MyISAM --skip-innodb --port=6033 --datadir="@APRICOREINSTALLDIRCORE@/front/data/mysql/mysql-@APRICOREVERSIONMYSQL@" --skip-grant-tables --bootstrap --standalone <"@APRICOREINSTALLDIRCORE@/core/inc/mysqlresetrootpass.sql"

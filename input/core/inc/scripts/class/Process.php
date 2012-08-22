@@ -1,0 +1,420 @@
+<?php
+/*==================================================================================*\
+|| ################################################################################ ||
+|| # Product Name: Apricore                                        Version: 1.0.0 # ||
+|| # License Type: Free License                                                   # ||
+|| # ---------------------------------------------------------------------------- # ||
+|| # 																			  # ||
+|| #           Copyright ©2005-2012 FruiTechLabs. All Rights Reserved.           # ||
+|| #     This product may be redistributed in whole or significant part under     # ||
+|| # "The MIT License (MIT)" - http://www.opensource.org/licenses/mit-license.php # ||
+|| # 																			  # ||
+|| # ----------------------- "Apricore" IS FREE SOFTWARE ------------------------ # ||
+|| #        http://apricore.fruitechlabs.com | http://www.fruitechlabs.com        # ||
+|| ################################################################################ ||
+\*==================================================================================*/
+
+
+namespace Apricore;
+require_once 'Kernel.php';
+
+class Process extends Kernel
+{
+	public function deleteVHost()
+	{
+		printf(gettext('Do you really want to delete \'%1$s\' virtual host?') . "\r\n" . gettext('Type \'yes\' to confirm..') . "\r\n", $_SERVER['argv'][1]);
+
+		$confirm = trim(fgets(STDIN));
+		$confirm = trim($confirm, '\'');
+
+		if ($confirm == 'yes')
+		{
+			unlink($this->apricoredirvhost . '/' . $_SERVER['argv'][1] );
+			exec('"../hosts.exe" rem ' . $vhostdir, $execoutput);
+			printf("\r\n" . gettext('%1$s') . "\r\n" . gettext('Virtual Host deleted successfully!') . "\r\n" . gettext('Press Enter to exit...'), $execoutput[0]);
+		    trim(fgets(STDIN));
+			exit();
+		}
+		else
+		{
+			print(gettext('Virtual Host not deleted!') . "\r\n" . gettext('Press Enter to exit...'));
+		    trim(fgets(STDIN));
+			exit();
+		}
+	}
+
+	public function addVHost()
+	{
+		printf(gettext('Enter your Virtual Host.') . "\r\n" . gettext('Example: \'test\' Would create a new virtual host with the url: \'http://test/\' which points to: \'%1$stest/\'') . "\r\n", $this->apricoredirdata . '/' . 'www');
+
+		$vhostdir = trim(fgets(STDIN));
+		$vhostdir = trim($vhostdir, '/\'');
+
+		if (empty($vhostdir))
+		{
+			print("\r\n" . gettext('Invalid Virtual Host! Virtual Host not created!') . "\r\n" . gettext('Press Enter to exit...'));
+			trim(fgets(STDIN));
+			exit();
+		}
+
+		if (is_file($this->apricoredirvhost . '/' . $vhostdir . '.conf'))
+		{
+			printf("\r\n" . gettext('Virtual Host already exists!') . "\r\n" . gettext('Press Enter to exit...'), $vhostdir);
+			trim(fgets(STDIN));
+			exit();
+		}
+
+		if (!is_dir($this->apricoredirdata . '/www/' . $vhostdir))
+		{
+			exec('mkdir "' . $this->apricoredirdata . '/www/' . $vhostdir . '"');
+			@file_put_contents($this->apricoredirdata . '/www/' . $vhostdir . '/index.html', str_replace('localhost', $vhostdir, @file_get_contents($this->apricoredirdata . '/www/' . 'localhost/index.html')));
+		}
+
+		if (!is_dir($this->apricoredirtmp . '/log/' . $vhostdir))
+		{
+			exec('mkdir "' . $this->apricoredirtmp . '/log/apache/' . $vhostdir . '"');
+			@file_put_contents($this->apricoredirtmp . '/log/apache/' . $vhostdir . '/error.log', '');
+			@file_put_contents($this->apricoredirtmp . '/log/apache/' . $vhostdir . '/access.log', '');
+		}
+
+		$vhostfilecontents = '<VirtualHost *:*>
+    ServerName ' . $vhostdir . '
+    DocumentRoot "../../../../front/data/www/' . $vhostdir . '"
+    ErrorLog "../../../../front/tmp/log/apache/' . $vhostdir . '/error.log"
+    CustomLog "../../../../front/tmp/log/apache/' . $vhostdir . '/access.log" common
+</VirtualHost>';
+
+		@file_put_contents($this->apricoredirvhost . '/' . $vhostdir . '.conf', $vhostfilecontents) or die('Unable to update virtual hosts conf file!');
+
+		exec('"../hosts.exe" rem ' . $vhostdir);
+		exec('"../hosts.exe" add ' . $vhostdir . ' 127.0.0.1', $execoutput);
+
+		printf("\r\n" . gettext('%1$s') . "\r\n" . gettext('Virtual Host created successfully!') . "\r\n" . gettext('Press Enter to exit...'), $execoutput[0]);
+
+		trim(fgets(STDIN));
+		exit();
+	}
+
+	public function testPort($install = 0, $hostname = '127.0.0.1', $port = 80, $errno = 0, $errstr = '', $timeout = 1)
+	{
+		$fp = @fsockopen($hostname, $port, $errno, $errstr, $timeout);
+
+		if ($fp)
+		{
+			$serverfound = 0;
+			printf(gettext('Your port \'%1$s\' is actually used by:') . "\r\n--------------------------------------------------\r\n", $port);
+			$out = "GET / HTTP/1.1\r\nHost: " . $hostname . "\r\nConnection: Close\r\n\r\n";
+			fwrite($fp, $out);
+
+			while (!feof($fp))
+			{
+				$line = fgets($fp, 128);
+				if (preg_match('/Server: /i', $line))
+				{
+					printf(gettext('%1$s'), $line);
+					$serverfound = 1;
+				}
+			}
+
+			fclose($fp);
+
+			if (!$serverfound)
+			{
+				print(gettext('Information not available, it might be \'Skype\' or another windows application!'));
+			}
+			else if ($install)
+			{
+				print("\r\n" . gettext('Can NOT install \'Apache Service\', please stop the above application(s) and try again!'));
+			}
+		}
+		else
+		{
+			printf(gettext('Congrats! Your port \'%1$s\' is not actually used.'), $port);
+		}
+
+		print("\r\n" . gettext('Press Enter to exit...'));
+		trim(fgets(STDIN));
+	}
+
+	public function deleteAlias()
+	{
+		printf(gettext('Do you really want to delete \'%1$s\' alias?') . "\r\n" . gettext('Type \'yes\' to confirm..') . "\r\n", $_SERVER['argv'][1]);
+
+		$confirm = trim(fgets(STDIN));
+		$confirm = trim($confirm, '\'');
+
+		if ($confirm == 'yes')
+		{
+			unlink($this->apricorediralias . '/' . $_SERVER['argv'][1]);
+			print(gettext('Alias deleted successfully!') . "\r\n" . gettext('Press Enter to exit...'));
+		    trim(fgets(STDIN));
+			exit();
+		}
+		else
+		{
+			print(gettext('Alias not deleted!') . "\r\n" . gettext('Press Enter to exit...'));
+		    trim(fgets(STDIN));
+			exit();
+		}
+	}
+
+	public function addAlias()
+	{
+		print(gettext('Enter your alias.') . "\r\n" . gettext('Example: \'test\' Would create an alias for the url: \'http://localhost/test/\'') . "\r\n");
+
+		$aliasdir = trim(fgets(STDIN));
+		$aliasdir = trim($aliasdir, '/\'');
+
+		if (empty($aliasdir))
+		{
+			print("\r\n" . gettext('Invalid Alias! Alias not created!') . "\r\n" . gettext('Press Enter to exit...'));
+			trim(fgets(STDIN));
+			exit();
+		}
+
+		if (is_file($this->apricorediralias . '/' . $aliasdir . '.conf'))
+		{
+			printf("\r\n" . gettext('Alias already exists!') . "\r\n" . gettext('Press Enter to exit...'), $aliasdir);
+			trim(fgets(STDIN));
+			exit();
+		}
+
+		printf(gettext('Enter the destination of your alias -fully qualified directory path-.') . "\r\n" . gettext('Example: \'c:/test/\' Would make \'http://localhost/%1$s/\' point to: \'c:/test/\'') . "\r\n", $aliasdir);
+
+		$aliasdest = trim(fgets(STDIN));
+
+		if (is_dir($aliasdest))
+		{
+			$aliasfilecontents = 'Alias /' . $aliasdir . ' "' . $aliasdest . '"
+<Directory "' . $aliasdest . '">
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride all
+    ' . ((str_replace('.', '', substr($this->apricoreversionapache, 0, 3)) == '24') ? 'Require local' : 'Order Deny,Allow
+    Deny from all
+    Allow from 127.0.0.1') . '
+</Directory>';
+
+			@file_put_contents($this->apricorediralias . '/' . $aliasdir . '.conf', $aliasfilecontents) or die('Unable to create alias conf file!');
+
+			print("\r\n" . gettext('Alias created successfully!') . "\r\n" . gettext('Press Enter to exit...'));
+		}
+		else
+		{
+			print("\r\n" . gettext('This directory doesn\'t exist! Alias not created!') . "\r\n" . gettext('Press Enter to exit...'));
+		}
+
+		trim(fgets(STDIN));
+		exit();
+	}
+
+	public function switchServerStatus($status)
+	{
+		$textonline = '# Controls who can get stuff from this server.
+    ' . ((str_replace('.', '', substr($this->apricoreversionapache, 0, 3)) == '24') ? 'Require all granted' : 'Order Allow,Deny
+    Allow from all');
+
+		$textoffline = '# Controls who can get stuff from this server.
+    ' . ((str_replace('.', '', substr($this->apricoreversionapache, 0, 3)) == '24') ? 'Require local' : 'Order Deny,Allow
+    Deny from all
+    Allow from 127.0.0.1');
+
+		$this->apricoreapacheconfcontent = str_replace((($status == 'online') ? $textoffline : $textonline), (($status == 'online') ? $textonline : $textoffline), @file_get_contents($this->apricoreapacheconf));
+		@file_put_contents($this->apricoreapacheconf, $this->apricoreapacheconfcontent);
+	}
+
+	public function msg($operands)
+	{
+		switch ($operands)
+		{
+			case 'phpapacheincompatible':
+				print(gettext('Sorry, this \'PHP\' version doesn\'t seem to be compatible with your actual \'Apache\' version. Switching \'PHP\' version cancelled!'));
+				break;
+
+			case 'apachephpincompatible':
+				print(gettext('Sorry, this \'Apache\' version doesn\'t seem to be compatible with your actual \'PHP\' version. Switching \'Apache\' version cancelled!'));
+				break;
+
+			default:
+				print(gettext('Unknown operands!'));
+				break;
+		}
+
+		print("\r\n" . gettext('Press Enter to exit...'));
+		trim(fgets(STDIN));
+	}
+
+	public function iniSet($inifile, $params)
+	{
+		$inifilecontents = @file_get_contents($this->{$inifile});
+
+		foreach ($params as $param => $value)
+		{
+			$inifilecontents = preg_replace('|' . $param . ' = .*|', $param . ' = "' . $value . '"', $inifilecontents);
+		}
+
+		@file_put_contents($this->{$inifile}, $inifilecontents);
+	}
+
+	public function listDir($dir)
+	{
+		if ($handle = @opendir($dir))
+		{
+			while (($file = @readdir($handle)) !== false)
+			{
+				if ($file != "." && $file != ".." && is_dir($dir . '/' . $file))
+				{
+					$list[] = $file;
+				}
+			}
+
+			closedir($handle);
+		}
+
+		if (isset($list))
+		{
+			return $list;
+		}
+		else
+		{
+			return;
+		}
+	}
+
+	public function switchPHPVersion($newphpversion)
+	{
+		$phpapachecompatibleversion = str_replace('.', '_', str_replace('.0', '', substr($this->apricoreversionapache, 0, strrpos($this->apricoreversionapache, '.'))));
+
+		if (is_file($this->apricoreinstalldirphp . '/php-' . $newphpversion . '/php5apache' . $phpapachecompatibleversion . '.dll'))
+		{
+			$conffilecontents = @file($this->apricoreapacheconf);
+			$newconffilecontents = '';
+
+			foreach ($conffilecontents as $line)
+			{
+				if (strstr($line, 'LoadModule') && strstr($line, 'php'))
+				{
+					$newconffilecontents .= 'LoadModule php5_module ../../php/php-' . $newphpversion . '/php5apache' . $phpapachecompatibleversion . '.dll' . "\r\n";
+				}
+				else if (strstr($line, 'PHPIniDir'))
+				{
+					$newconffilecontents .= 'PHPIniDir ../../../../front/conf/php/php-' . $newphpversion . '/' . "\r\n";
+				}
+				else
+				{
+					$newconffilecontents .= $line;
+				}
+			}
+
+			@file_put_contents($this->apricoreapacheconf, $newconffilecontents);
+
+			$this->iniSet('apricorefileconf', array('apricoreversionphp' => $newphpversion));
+		}
+	}
+
+	public function switchApacheVersion($newapacheversion)
+	{
+		$apachephpcompatibleversion = str_replace('.', '_', str_replace('.0', '', substr($newapacheversion, 0, strrpos($newapacheversion, '.'))));
+
+		if (is_file($this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php5apache' . $apachephpcompatibleversion . '.dll'))
+		{
+			$this->iniSet('apricorefileconf', array('apricoreversionapache' => $newapacheversion));
+		}
+	}
+
+	public function switchApacheModule($apachemoduleargv)
+	{
+		$conffilecontents = @file_get_contents($this->apricoreapacheconf) or die ("$this->apricoreapacheconf file not found!");
+
+		if ($apachemoduleargv[2] == 'on')
+		{
+			$findtext    = '#LoadModule ' . $apachemoduleargv[1];
+			$replacetext = 'LoadModule ' . $apachemoduleargv[1];
+		}
+		else
+		{
+			$findtext    = 'LoadModule ' . $apachemoduleargv[1];
+			$replacetext = '#LoadModule ' . $apachemoduleargv[1];
+		}
+
+		$conffilecontents = str_replace($findtext, $replacetext, $conffilecontents);
+		@file_put_contents($this->apricoreapacheconf, $conffilecontents);
+	}
+
+	public function switchPHPExtension($phpextensionargv)
+	{
+		$inifilecontents = @file_get_contents($this->apricorephpini) or die ("$this->apricorephpini file not found!");
+
+		if ($phpextensionargv[2] == 'on')
+		{
+			$findtext    = ';extension=' . $phpextensionargv[1] . '.dll';
+			$replacetext = 'extension=' . $phpextensionargv[1] . '.dll';
+		}
+		else
+		{
+			$findtext    = 'extension=' . $phpextensionargv[1] . '.dll';
+			$replacetext = ';extension=' . $phpextensionargv[1] . '.dll';
+		}
+
+		$inifilecontents = str_replace($findtext, $replacetext, $inifilecontents);
+		@file_put_contents($this->apricorephpini, $inifilecontents);
+	}
+
+	public function switchPHPSetting($phpsettingargv)
+	{
+		$inifilecontents = @file_get_contents($this->apricorephpini) or die ("$this->apricorephpini file not found!");
+
+		if ($phpsettingargv[2] == 'on')
+		{
+			$findtext    = $phpsettingargv[1] . ' = Off';
+			$replacetext = $phpsettingargv[1] . ' = On';
+		}
+		else
+		{
+			$findtext    = $phpsettingargv[1] . ' = On';
+			$replacetext = $phpsettingargv[1] . ' = Off';
+		}
+
+		$inifilecontents = str_replace($findtext, $replacetext, $inifilecontents);
+		@file_put_contents($this->apricorephpini, $inifilecontents);
+	}
+
+	public function resetMySQLPass()
+	{
+		print(gettext('Enter new MySQL root password:') . "\r\n");
+
+		$newmysqlrootpass = trim(fgets(STDIN));
+
+		if (empty($newmysqlrootpass))
+		{
+			print("\r\n" . gettext('Invalid new MySQL root password! MySQL root password not changed!') . "\r\n" . gettext('Press Enter to exit...'));
+			trim(fgets(STDIN));
+			exit();
+		}
+
+		printf(gettext('Confirm new MySQL root password:') . "\r\n");
+
+		$newmysqlrootpassconfirm = trim(fgets(STDIN));
+
+		if ($newmysqlrootpass != $newmysqlrootpassconfirm)
+		{
+			print("\r\n" . gettext('The passwords you typed do not match. MySQL root password not changed!') . "\r\n" . gettext('Press Enter to exit...'));
+			trim(fgets(STDIN));
+			exit();
+		}
+
+		$sqlfilecontents = "USE `mysql`;
+UPDATE `user` SET Password=PASSWORD('" . $newmysqlrootpass . "') WHERE User='root';
+FLUSH PRIVILEGES;";
+
+		@file_put_contents($this->apricoredirtmp . '/dmp/mysqlresetrootpass.sql', $sqlfilecontents) or die('Unable to create sql file!');
+
+		$batfilecontents = '"' . $this->apricoreinstalldirmysql . '/mysql-' . $this->apricoreversionmysql . '/bin/mysqld.exe" --no-defaults --skip-innodb --port=6033 --default-storage-engine=MyISAM --datadir="' . $this->apricoredirdata . '/mysql" --bind-address=127.0.0.1 --bootstrap --skip-grant-tables --standalone <"' . $this->apricoreinstalldirroot . '/front/tmp/dmp/mysqlresetrootpass.sql"';
+
+		@file_put_contents($this->apricoredirtmp . '/dmp/mysqlresetrootpass.bat', $batfilecontents) or die('Unable to create batch file!');
+
+		exec($this->apricoredirtmp . '/dmp/mysqlresetrootpass.bat');
+
+		unlink($this->apricoredirtmp . '/dmp/mysqlresetrootpass.sql');
+		unlink($this->apricoredirtmp . '/dmp/mysqlresetrootpass.bat');
+	}
+}
