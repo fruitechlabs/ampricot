@@ -218,7 +218,7 @@ class Process extends Kernel
     Deny from all
     Allow from 127.0.0.1');
 
-		$this->ampricotapacheconfcontent = str_replace((($status == 'online') ? $textoffline : $textonline), (($status == 'online') ? $textonline : $textoffline), @file_get_contents($this->ampricotapacheconf));
+		$this->ampricotapacheconfcontent = str_replace((($status == 'on') ? $textoffline : $textonline), (($status == 'on') ? $textonline : $textoffline), @file_get_contents($this->ampricotapacheconf));
 		@file_put_contents($this->ampricotapacheconf, $this->ampricotapacheconfcontent);
 	}
 

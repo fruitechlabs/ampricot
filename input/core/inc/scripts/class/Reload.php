@@ -27,18 +27,6 @@ class Reload extends Kernel
 		$this->ampricottpl = require_once 'Template.php';
 	}
 
-	public function harmonymode()
-	{
-		if ($this->ampricotconf['ampricotharmony'] == 'on')
-		{
-			$this->ampricottpl = str_replace(array('SwitchHarmonyMode.php on', 'ActionSwitchHarmonyMode; Glyph: 99'), array('SwitchHarmonyMode.php off', 'ActionSwitchHarmonyMode; Glyph: 3'), $this->ampricottpl);
-		}
-		else
-		{
-			$this->ampricottpl = str_replace(array('SwitchHarmonyMode.php off', 'ActionSwitchHarmonyMode; Glyph: 3'), array('SwitchHarmonyMode.php on', 'ActionSwitchHarmonyMode; Glyph: 99'), $this->ampricottpl);
-		}
-	}
-
 	public function serverstatus()
 	{
 		if ($this->ampricotconf['ampricotstatus'] == 'on')
@@ -48,6 +36,18 @@ class Reload extends Kernel
 		else
 		{
 			$this->ampricottpl = str_replace(array('SwitchServerStatus.php off', 'ActionSwitchServerStatus; Glyph: 3'), array('SwitchServerStatus.php on', 'ActionSwitchServerStatus; Glyph: 99'), $this->ampricottpl);
+		}
+	}
+
+	public function harmonymode()
+	{
+		if ($this->ampricotconf['ampricotharmony'] == 'on')
+		{
+			$this->ampricottpl = str_replace(array('SwitchHarmonyMode.php on', 'ActionSwitchHarmonyMode; Glyph: 99'), array('SwitchHarmonyMode.php off', 'ActionSwitchHarmonyMode; Glyph: 3'), $this->ampricottpl);
+		}
+		else
+		{
+			$this->ampricottpl = str_replace(array('SwitchHarmonyMode.php off', 'ActionSwitchHarmonyMode; Glyph: 3'), array('SwitchHarmonyMode.php on', 'ActionSwitchHarmonyMode; Glyph: 99'), $this->ampricottpl);
 		}
 	}
 
@@ -472,6 +472,7 @@ Type: item; Caption: "' . gettext('More versions...') . '"; Action: run; FileNam
 	public function commit()
 	{
 		$this->serverstatus();
+		$this->harmonymode();
 		$this->language();
 		$this->apacheversion();
 		$this->apachevhost();
