@@ -27,11 +27,27 @@ class Reload extends Kernel
 		$this->ampricottpl = require_once 'Template.php';
 	}
 
+	public function harmonymode()
+	{
+		if ($this->ampricotconf['ampricotharmony'] == 'on')
+		{
+			$this->ampricottpl = str_replace(array('SwitchHarmonyMode.php on', 'ActionSwitchHarmonyMode; Glyph: 99'), array('SwitchHarmonyMode.php off', 'ActionSwitchHarmonyMode; Glyph: 3'), $this->ampricottpl);
+		}
+		else
+		{
+			$this->ampricottpl = str_replace(array('SwitchHarmonyMode.php off', 'ActionSwitchHarmonyMode; Glyph: 3'), array('SwitchHarmonyMode.php on', 'ActionSwitchHarmonyMode; Glyph: 99'), $this->ampricottpl);
+		}
+	}
+
 	public function serverstatus()
 	{
-		if ($this->ampricotconf['ampricotstatus'] == 'online')
+		if ($this->ampricotconf['ampricotstatus'] == 'on')
 		{
-			$this->ampricottpl = str_replace(array(gettext('Switch Server Online'), 'SwitchServerStatus.php online', 'Glyph: 99'), array(gettext('Switch Server Offline'), 'SwitchServerStatus.php offline', 'Glyph: 99'), $this->ampricottpl);
+			$this->ampricottpl = str_replace(array('SwitchServerStatus.php on', 'ActionSwitchServerStatus; Glyph: 99'), array('SwitchServerStatus.php off', 'ActionSwitchServerStatus; Glyph: 3'), $this->ampricottpl);
+		}
+		else
+		{
+			$this->ampricottpl = str_replace(array('SwitchServerStatus.php off', 'ActionSwitchServerStatus; Glyph: 3'), array('SwitchServerStatus.php on', 'ActionSwitchServerStatus; Glyph: 99'), $this->ampricottpl);
 		}
 	}
 

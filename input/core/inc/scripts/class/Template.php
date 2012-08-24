@@ -104,8 +104,9 @@ Type: item; Caption: "' . gettext('E&xit') . '"; Action: multi; Actions: ActionE
 ;AMPRICOTMENURIGHTEND
 
 [ActionReload]
-;ACTIONRELOADSTART
-Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+;ACTIONRELOADSTART' . 
+(($this->ampricotconf['ampricotharmony'] == 'on') ? 'Action: run; FileName: "' . $this->ampricotinstalldirroot . '/core/inc/harmonymode.bat"; Flags: waituntilterminated' : '')
+. 'Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
 Action: resetservices
 Action: readconfig
 ;ACTIONRELOADEND
@@ -137,9 +138,18 @@ Action: service; Service: AmpricotApache; ServiceAction: startresume; Flags: ign
 Action: service; Service: AmpricotMySQL; ServiceAction: startresume; Flags: ignoreerrors waituntilterminated
 ;ACTIONSERVICERESTARTALLEND
 
+[ActionSwitchHarmonyMode]
+;ACTIONSWITCHHARMONYMODESTART
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' SwitchHarmonyMode.php on"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: service; Service: AmpricotApache; ServiceAction: restart
+Action: resetservices
+Action: readconfig
+;ACTIONSWITCHHARMONYMODEEND
+
 [ActionSwitchServerStatus]
 ;ACTIONSWITCHSERVERSTATUSSTART
-Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' SwitchServerStatus.php online"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' SwitchServerStatus.php on"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
 Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
 Action: service; Service: AmpricotApache; ServiceAction: restart
 Action: resetservices
@@ -156,7 +166,9 @@ Action: readconfig
 ;MENUADVANCEDSTART
 Type: submenu; Caption: "' . gettext('Browse Directories') . '"; SubMenu: MenuAdvancedBrowse; Glyph: 99
 Type: separator
-Type: item; Caption: "' . gettext('Switch Server Online') . '"; Action: multi; Actions: ActionSwitchServerStatus; Glyph: 99
+Type: item; Caption: "' . gettext('Activate &Harmony Mode') . '"; Action: multi; Actions: ActionSwitchHarmonyMode; Glyph: 99
+Type: item; Caption: "' . gettext('Server On The &Web') . '"; Action: multi; Actions: ActionSwitchServerStatus; Glyph: 99
+Type: separator
 Type: item; Caption: "' . gettext('&Reload Settings') . '"; Action: multi; Actions: ActionReload; Glyph: 99
 ;MENUADVANCEDEND
 

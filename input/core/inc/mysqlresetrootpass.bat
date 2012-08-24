@@ -1,1 +1,2 @@
+FOR /F "tokens=5 delims= " %%P IN ('netstat -a -n -o ^| findstr 0.0:6033') DO TaskKill.exe /F /T /PID %%P
 "@AMPRICOTINSTALLDIRCORE@/core/bin/mysql/mysql-@AMPRICOTVERSIONMYSQL@/bin/mysqld.exe" --no-defaults --default-storage-engine=MyISAM --skip-innodb --port=6033 --datadir="@AMPRICOTINSTALLDIRCORE@/front/data/mysql/mysql-@AMPRICOTVERSIONMYSQL@" --skip-grant-tables --bootstrap --standalone <"@AMPRICOTINSTALLDIRCORE@/core/inc/mysqlresetrootpass.sql"

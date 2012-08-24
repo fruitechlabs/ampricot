@@ -210,7 +210,7 @@ $output = '
 					<div><span class="shade">' . $ampricotconf['ampricotversionphp'] . '</span>PHP:</div>
 
 					<div class="bborder2px">&nbsp;</div>
-					<div class="centerpad">' . gettext('Server Status: ') . ucfirst($ampricotconf['ampricotstatus']) . '</div>
+					<div class="centerpad">' . gettext('Server Status: ') . (($ampricotconf['ampricotstatus'] == 'on') ? gettext('On The Web') : gettext('Off The Web')) . '</div>
 					' . ((!empty($loadavg)) ? '<div class="centerpad">Server Load: ' . $loadavg[0] . '&nbsp;&nbsp;' . $loadavg[1] . '&nbsp;&nbsp;' . $loadavg[2] . '</div>' : '') . '
 
 				</div>

@@ -252,18 +252,3 @@ Function str_trim
     Pop $R2
     Exch $R1
 FunctionEnd
-
-Function SCQuickLaunch_Show
-    ${NSD_CreateCheckbox} 120u 105u 100% 10u "$(^AddQuickLaunch)"
-    Pop $SCQuickLaunch
-    SetCtlColors $SCQuickLaunch "" "ffffff"
-    ${NSD_Check} $SCQuickLaunch
-FunctionEnd
-
-Function SCQuickLaunch_Leave
-    ${NSD_GetState} $SCQuickLaunch $0
-    ${If} $0 <> 0
-        SetOutPath $QUICKLAUNCH
-        CreateShortcut "$QUICKLAUNCH\$(^Name).lnk" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
-    ${EndIf}
-FunctionEnd

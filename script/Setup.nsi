@@ -52,7 +52,6 @@ SetDatablockOptimize On
 
 # Custom Variables
 Var StartMenuGroup
-var SCQuickLaunch
 Var WINDRIVE
 
 # Apache Vars
@@ -121,6 +120,10 @@ ReserveFile "${NSISDIR}\Plugins\System.dll"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_FINISHPAGE_RUN "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
 !define MUI_FINISHPAGE_RUN_TEXT "$(^StartLink)"
+!define MUI_FINISHPAGE_QUICKLAUNCH
+!define MUI_FINISHPAGE_QUICKLAUNCH_TEXT $(^AddQuickLaunch)
+!define MUI_FINISHPAGE_HARMONYMODE
+!define MUI_FINISHPAGE_HARMONYMODE_TEXT $(^ActivateHarmonyMode)
 !define MUI_FINISHPAGE_LINK "${AMPRICOTURLTEXT}"
 !define MUI_FINISHPAGE_LINK_LOCATION "${AMPRICOTURL}"
 !define MUI_UNABORTWARNING
@@ -137,8 +140,6 @@ ReserveFile "${NSISDIR}\Plugins\System.dll"
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_STARTMENU "Application" "$StartMenuGroup"
 !insertmacro MUI_PAGE_INSTFILES
-!define MUI_PAGE_CUSTOMFUNCTION_SHOW "SCQuickLaunch_Show"
-!define MUI_PAGE_CUSTOMFUNCTION_LEAVE "SCQuickLaunch_Leave"
 !insertmacro MUI_PAGE_FINISH
 !insertmacro MUI_UNPAGE_CONFIRM
 !insertmacro MUI_UNPAGE_INSTFILES
@@ -495,6 +496,7 @@ LangString "^StartLink" "${LANG_ENGLISH}" "Start ${AMPRICOTNAME}"
 LangString "^UninstallLink" "${LANG_ENGLISH}" "Uninstall ${AMPRICOTNAME}"
 LangString "^AlreadyInstalled" "${LANG_ENGLISH}" "${AMPRICOTNAME} is apparently already installed!$\r$\nWould you like to UNINSTALL old version now?"
 LangString "^AddQuickLaunch" "${LANG_ENGLISH}" "Add to &Quick Launch"
+LangString "^ActivateHarmonyMode" "${LANG_ENGLISH}" "Activate &Harmony Mode"
 LangString "^ApachePageTitle" "${LANG_ENGLISH}" "Apache Server Information"
 LangString "^ApachePageDesc" "${LANG_ENGLISH}" "Please enter your apache server's information."
 LangString "^ApachePageOptsServerName" "${LANG_ENGLISH}" "&Server Name"
