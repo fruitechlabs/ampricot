@@ -1,2 +1,2 @@
 USE `mysql`;
-UPDATE `user` SET Password=PASSWORD('@APRICOREMYSQLROOTPASS@') WHERE User='root';
+UPDATE `user` SET Password=PASSWORD('@AMPRICOTMYSQLROOTPASS@') WHERE User='root';

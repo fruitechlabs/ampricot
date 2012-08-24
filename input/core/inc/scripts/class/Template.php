@@ -1,23 +1,26 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: Apricore                                        Version: 1.0.0 # ||
+|| # Product Name: Ampricot                                        Version: 1.0.0 # ||
 || # License Type: Free License                                                   # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
-|| #           Copyright ©2005-2012 FruiTechLabs. All Rights Reserved.           # ||
+|| #           Copyright ©2005-2012 FruiTechLabs. All Rights Reserved.            # ||
 || #     This product may be redistributed in whole or significant part under     # ||
 || # "The MIT License (MIT)" - http://www.opensource.org/licenses/mit-license.php # ||
 || # 																			  # ||
-|| # ----------------------- "Apricore" IS FREE SOFTWARE ------------------------ # ||
-|| #        http://apricore.fruitechlabs.com | http://www.fruitechlabs.com        # ||
+|| # ----------------------- "Ampricot" IS FREE SOFTWARE ------------------------ # ||
+|| #            http://www.ampricot.com | http://www.fruitechlabs.com             # ||
 || ################################################################################ ||
 \*==================================================================================*/
 
 
-$apricoretpl = '
+namespace Ampricot;
+
+
+$ampricottpl = '
 [Config]
-;APRICORECONFIGSTART
+;AMPRICOTCONFIGSTART
 ImageList=imagelist.bmp
 ServiceCheckInterval=1
 ServiceGlyphRunning=99
@@ -26,23 +29,25 @@ ServiceGlyphStopped=99
 TrayIconAllRunning=2
 TrayIconSomeRunning=1
 TrayIconNoneRunning=0
-ID={apricore}
-AboutHeader=Apricore
-AboutVersion=' . $this->apricoreversioncore . '
-;APRICORECONFIGEND
+ID={ampricot}
+AboutHeader=Ampricot
+AboutVersion=' . $this->ampricotversioncore . '
+;AMPRICOTCONFIGEND
 
 [AboutText]
-Copyright (c) 2012 FruiTechLabs.
-http://apricore.fruitechlabs.com
+Copyright (c) 2012 FruiTech Labs.
+Application: Ampricot - http://www.ampricot.com
+Company: FruiTech Labs - http://www.fruitechlabs.com
+Developer: Abdelrahman Omran - http://www.omranic.com
 
 [Services]
-Name: ApricoreApache
-Name: ApricoreMySQL
+Name: AmpricotApache
+Name: AmpricotMySQL
 
 [Messages]
-AllRunningHint=Apricore - ' . gettext('All sevices running!') . '
-SomeRunningHint=Apricore - ' . gettext('Some sevices running!') . '
-NoneRunningHint=Apricore - ' . gettext('No sevices running!') . '
+AllRunningHint=Ampricot - ' . gettext('All sevices running!') . '
+SomeRunningHint=Ampricot - ' . gettext('Some sevices running!') . '
+NoneRunningHint=Ampricot - ' . gettext('No sevices running!') . '
 
 [DoubleClickAction]
 ;DOUBLECLICKACTIONSTART
@@ -50,16 +55,16 @@ Action: run; FileName: "explorer.exe"; Parameters: "http://localhost/"
 ;DOUBLECLICKACTIONEND
 
 [StartupAction]
-;APRICORESTARTUPACTIONSTART
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . $this->apricorephpini . ' Refresh.php"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+;AMPRICOTSTARTUPACTIONSTART
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
 Action: resetservices
 Action: readconfig
-Action: service; Service: ApricoreApache; ServiceAction: startresume; Flags: ignoreerrors
-Action: service; Service: ApricoreMySQL; ServiceAction: startresume; Flags: ignoreerrors
-;APRICORESTARTUPACTIONEND
+Action: service; Service: AmpricotApache; ServiceAction: startresume; Flags: ignoreerrors
+Action: service; Service: AmpricotMySQL; ServiceAction: startresume; Flags: ignoreerrors
+;AMPRICOTSTARTUPACTIONEND
 
 [Menu.Right.Settings]
-;APRICOREMENURIGHTSETTINGSSTART
+;AMPRICOTMENURIGHTSETTINGSSTART
 AutoLineReduction=no
 BarVisible=no
 SeparatorsAlignment=center
@@ -71,12 +76,12 @@ SeparatorsGradientEnd=clGray
 SeparatorsGradientStart=clSilver
 SeparatorsGradientStyle=vertical
 SeparatorsSeparatorStyle=caption
-;APRICOREMENURIGHTSETTINGSEND
+;AMPRICOTMENURIGHTSETTINGSEND
 
 [Menu.Right]
-;APRICOREMENURIGHTSTART
+;AMPRICOTMENURIGHTSTART
 Type: item; Caption: "' . gettext('Public Homepage') . '"; Action: run; FileName: "explorer.exe"; Parameters: "http://localhost/"; Glyph: 99
-Type: item; Caption: "' . gettext('Public Directory') . '"; Action: shellexecute; FileName: "'. $this->apricoreinstalldirroot . '/front/data/www"; Glyph: 99
+Type: item; Caption: "' . gettext('Public Directory') . '"; Action: shellexecute; FileName: "'. $this->ampricotinstalldirroot . '/front/data/www"; Glyph: 99
 Type: separator
 Type: submenu; Caption: "' . gettext('Apache Alias') . '"; SubMenu: MenuApacheAlias; Glyph: 99
 Type: submenu; Caption: "' . gettext('Virtual Host') . '"; SubMenu: MenuApacheVHost; Glyph: 99
@@ -93,50 +98,50 @@ Type: submenu; Caption: "' . gettext('&Language') . '"; SubMenu: MenuLanguage; G
 Type: separator
 Type: submenu; Caption: "' . gettext('Ad&vanced') . '"; SubMenu: MenuAdvanced; Glyph: 99
 Type: separator
-Type: item; Caption: "' . gettext('&Support') . '"; Action: run; FileName: "explorer.exe"; Parameters: "http://apricore.fruitechlabs.com/support"; Glyph: 99
+Type: item; Caption: "' . gettext('&Support') . '"; Action: run; FileName: "explorer.exe"; Parameters: "http://support.fruitechlabs.com/forumdisplay.php?fid=1"; Glyph: 99
 Type: item; Caption: "' . gettext('&About') . '"; Action: about; Glyph: 99
 Type: item; Caption: "' . gettext('E&xit') . '"; Action: multi; Actions: ActionExit; Glyph: 99
-;APRICOREMENURIGHTEND
+;AMPRICOTMENURIGHTEND
 
 [ActionReload]
 ;ACTIONRELOADSTART
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . $this->apricorephpini . ' Refresh.php"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
 Action: resetservices
 Action: readconfig
 ;ACTIONRELOADEND
 
 [ActionExit]
 ;ACTIONEXITSTART
-Action: service; Service: ApricoreApache; ServiceAction: stop; Flags: ignoreerrors
-Action: service; Service: ApricoreMySQL; ServiceAction: stop; Flags: ignoreerrors
+Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors
+Action: service; Service: AmpricotMySQL; ServiceAction: stop; Flags: ignoreerrors
 Action: exit
 ;ACTIONEXITEND
 
 [ActionServiceStartAll]
 ;ACTIONSERVICESTARTALLSTART
-Action: service; Service: ApricoreApache; ServiceAction: startresume; Flags: ignoreerrors
-Action: service; Service: ApricoreMySQL; ServiceAction: startresume; Flags: ignoreerrors
+Action: service; Service: AmpricotApache; ServiceAction: startresume; Flags: ignoreerrors
+Action: service; Service: AmpricotMySQL; ServiceAction: startresume; Flags: ignoreerrors
 ;ACTIONSERVICESTARTALLEND
 
 [ActionServiceStopAll]
 ;ACTIONSERVICESTOPALLSTART
-Action: service; Service: ApricoreApache; ServiceAction: stop; Flags: ignoreerrors
-Action: service; Service: ApricoreMySQL; ServiceAction: stop; Flags: ignoreerrors
+Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors
+Action: service; Service: AmpricotMySQL; ServiceAction: stop; Flags: ignoreerrors
 ;ACTIONSERVICESTOPALLEND
 
 [ActionServiceRestartAll]
 ;ACTIONSERVICERESTARTALLSTART
-Action: service; Service: ApricoreApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
-Action: service; Service: ApricoreMySQL; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
-Action: service; Service: ApricoreApache; ServiceAction: startresume; Flags: ignoreerrors waituntilterminated
-Action: service; Service: ApricoreMySQL; ServiceAction: startresume; Flags: ignoreerrors waituntilterminated
+Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
+Action: service; Service: AmpricotMySQL; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
+Action: service; Service: AmpricotApache; ServiceAction: startresume; Flags: ignoreerrors waituntilterminated
+Action: service; Service: AmpricotMySQL; ServiceAction: startresume; Flags: ignoreerrors waituntilterminated
 ;ACTIONSERVICERESTARTALLEND
 
 [ActionSwitchServerStatus]
 ;ACTIONSWITCHSERVERSTATUSSTART
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . $this->apricorephpini . ' SwitchServerStatus.php online"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . $this->apricorephpini . ' Refresh.php"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: service; Service: ApricoreApache; ServiceAction: restart
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' SwitchServerStatus.php online"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: service; Service: AmpricotApache; ServiceAction: restart
 Action: resetservices
 Action: readconfig
 ;ACTIONSWITCHSERVERSTATUSEND
@@ -157,8 +162,8 @@ Type: item; Caption: "' . gettext('&Reload Settings') . '"; Action: multi; Actio
 
 [MenuAdvancedBrowse]
 ;MENUADVANCEDBROWSESTART
-Type: item; Caption: "' . gettext('cgi-bin') . '"; Action: shellexecute; FileName: "' . $this->apricoreinstalldirroot . '/front/data/cgi-bin"; Glyph: 99
-Type: item; Caption: "' . gettext('MySQL Data') . '"; Action: shellexecute; FileName: "' . $this->apricoreinstalldirroot . '/front/data/mysql/mysql-' . $this->apricoreversionmysql . '"; Glyph: 99
+Type: item; Caption: "' . gettext('cgi-bin') . '"; Action: shellexecute; FileName: "' . $this->ampricotinstalldirroot . '/front/data/cgi-bin"; Glyph: 99
+Type: item; Caption: "' . gettext('MySQL Data') . '"; Action: shellexecute; FileName: "' . $this->ampricotinstalldirroot . '/front/data/mysql/mysql-' . $this->ampricotversionmysql . '"; Glyph: 99
 ;MENUADVANCEDBROWSEEND
 
 [MenuApache]
@@ -177,9 +182,9 @@ Type: submenu; Caption: "' . gettext('Tools') . '"; SubMenu: MenuApacheTools; Gl
 
 [MenuApacheService]
 ;MENUAPACHESERVICESTART
-Type: item; Caption: "' . gettext('Start Service') . '"; Action: service; Service: ApricoreApache; ServiceAction: startresume; Glyph: 99
-Type: item; Caption: "' . gettext('Stop Service') . '"; Action: service; Service: ApricoreApache; ServiceAction: stop; Glyph: 99
-Type: item; Caption: "' . gettext('Restart Service') . '"; Action: service; Service: ApricoreApache; ServiceAction: restart; Glyph: 99
+Type: item; Caption: "' . gettext('Start Service') . '"; Action: service; Service: AmpricotApache; ServiceAction: startresume; Glyph: 99
+Type: item; Caption: "' . gettext('Stop Service') . '"; Action: service; Service: AmpricotApache; ServiceAction: stop; Glyph: 99
+Type: item; Caption: "' . gettext('Restart Service') . '"; Action: service; Service: AmpricotApache; ServiceAction: restart; Glyph: 99
 Type: separator
 Type: item; Caption: "' . gettext('Install Service') . '"; Action: multi; Actions: ActionApacheServiceInstall; Glyph: 99
 Type: item; Caption: "' . gettext('Uninstall Service') . '"; Action: multi; Actions: ActionApacheServiceUninstall; Glyph: 99
@@ -213,43 +218,43 @@ Type: separator
 
 [MenuApacheTools]
 ;MENUAPACHETOOLSSTART
-Type: item; Caption: "' . gettext('Test Port 80') . '"; Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php.exe"; Parameters: "-c ' . $this->apricorephpini . ' TestPort.php 0"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated; Glyph: 99
-Type: item; Caption: "' . gettext('httpd.conf') . '"; Action: run; FileName: "notepad.exe"; parameters: "' . $this->apricoreapacheconf . '"; Glyph: 99
-Type: item; Caption: "' . gettext('access.log') . '"; Action: run; FileName: "notepad.exe"; parameters: "' . $this->apricoredirtmp . '/log/apache/access.log"; Glyph: 99
-Type: item; Caption: "' . gettext('error.log') . '"; Action: run; FileName: "notepad.exe"; parameters: "' . $this->apricoredirtmp . '/log/apache/error.log"; Glyph: 99
+Type: item; Caption: "' . gettext('Test Port 80') . '"; Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php.exe"; Parameters: "-c ' . $this->ampricotphpini . ' TestPort.php 0"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated; Glyph: 99
+Type: item; Caption: "' . gettext('httpd.conf') . '"; Action: run; FileName: "notepad.exe"; parameters: "' . $this->ampricotapacheconf . '"; Glyph: 99
+Type: item; Caption: "' . gettext('access.log') . '"; Action: run; FileName: "notepad.exe"; parameters: "' . $this->ampricotdirtmp . '/log/apache/access.log"; Glyph: 99
+Type: item; Caption: "' . gettext('error.log') . '"; Action: run; FileName: "notepad.exe"; parameters: "' . $this->ampricotdirtmp . '/log/apache/error.log"; Glyph: 99
 ;MENUAPACHETOOLSEND
 
 [ActionApacheServiceInstall]
 ;ACTIONAPACHESERVICEINSTALLSTART
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php.exe"; Parameters: "-c ' . $this->apricorephpini . ' TestPort.php 1"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirapache . '/apache-' . $this->apricoreversionapache . '/bin/httpd.exe"; Parameters: "' . $this->apricoreserviceapacheinstall . '"; ShowCmd: hidden; Flags: waituntilterminated
-Action: run; FileName: "sc"; Parameters: "config ApricoreApache start= demand"; ShowCmd: hidden; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php.exe"; Parameters: "-c ' . $this->ampricotphpini . ' TestPort.php 1"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirapache . '/apache-' . $this->ampricotversionapache . '/bin/httpd.exe"; Parameters: "' . $this->ampricotserviceapacheinstall . '"; ShowCmd: hidden; Flags: waituntilterminated
+Action: run; FileName: "sc"; Parameters: "config AmpricotApache start= demand"; ShowCmd: hidden; Flags: waituntilterminated
 Action: resetservices
 Action: readconfig
 ;ACTIONAPACHESERVICEINSTALLEND
 
 [ActionApacheServiceUninstall]
 ;ACTIONAPACHESERVICEUNINSTALLSTART
-Action: service; Service: ApricoreApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirapache . '/apache-' . $this->apricoreversionapache . '/bin/httpd.exe"; Parameters: "' . $this->apricoreserviceapacheuninstall . '"; ShowCmd: hidden; Flags: waituntilterminated
+Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirapache . '/apache-' . $this->ampricotversionapache . '/bin/httpd.exe"; Parameters: "' . $this->ampricotserviceapacheuninstall . '"; ShowCmd: hidden; Flags: waituntilterminated
 Action: resetservices
 Action: readconfig
 ;ACTIONAPACHESERVICEUNINSTALLEND
 
 [ActionApacheAliasAdd]
 ;ACTIONAPACHEALIASADDSTART
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php.exe"; Parameters: "-c ' . $this->apricorephpini . ' AliasAdd.php"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . $this->apricorephpini . ' Refresh.php"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: service; Service: ApricoreApache; ServiceAction: restart
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php.exe"; Parameters: "-c ' . $this->ampricotphpini . ' AliasAdd.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: service; Service: AmpricotApache; ServiceAction: restart
 Action: resetservices
 Action: readconfig
 ;ACTIONAPACHEALIASADDEND
 
 [ActionApacheVHostAdd]
 ;ACTIONAPACHEVHOSTADDSTART
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php.exe"; Parameters: "-c ' . $this->apricorephpini . ' VHostAdd.php"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . $this->apricorephpini . ' Refresh.php"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: service; Service: ApricoreApache; ServiceAction: restart
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php.exe"; Parameters: "-c ' . $this->ampricotphpini . ' VHostAdd.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: service; Service: AmpricotApache; ServiceAction: restart
 Action: resetservices
 Action: readconfig
 ;ACTIONAPACHEVHOSTADDEND
@@ -269,9 +274,9 @@ Type: submenu; Caption: "' . gettext('Tools') . '"; SubMenu: MenuMySQLTools; Gly
 
 [MenuMySQLService]
 ;MENUMYSQLSERVICESTART
-Type: item; Caption: "' . gettext('Start Service') . '"; Action: service; Service: ApricoreMySQL; ServiceAction: startresume; Flags: ignoreerrors; Glyph: 99
-Type: item; Caption: "' . gettext('Stop Service') . '"; Action: service; Service: ApricoreMySQL; ServiceAction: stop; Glyph: 99
-Type: item; Caption: "' . gettext('Restart Service') . '"; Action: service; Service: ApricoreMySQL; ServiceAction: restart; Glyph: 99
+Type: item; Caption: "' . gettext('Start Service') . '"; Action: service; Service: AmpricotMySQL; ServiceAction: startresume; Flags: ignoreerrors; Glyph: 99
+Type: item; Caption: "' . gettext('Stop Service') . '"; Action: service; Service: AmpricotMySQL; ServiceAction: stop; Glyph: 99
+Type: item; Caption: "' . gettext('Restart Service') . '"; Action: service; Service: AmpricotMySQL; ServiceAction: restart; Glyph: 99
 Type: separator
 Type: item; Caption: "' . gettext('Install Service') . '"; Action: multi; Actions: ActionMySQLServiceInstall; Glyph: 99
 Type: item; Caption: "' . gettext('Uninstall Service') . '"; Action: multi; Actions: ActionMySQLServiceUninstall; Glyph: 99
@@ -279,31 +284,31 @@ Type: item; Caption: "' . gettext('Uninstall Service') . '"; Action: multi; Acti
 
 [MenuMySQLTools]
 ;MENUMYSQLTOOLSSTART
-Type: item; Caption: "' . gettext('Console') . '"; Action: run; FileName: "' . $this->apricoreinstalldirmysql . '/mysql-' . $this->apricoreversionmysql . '/bin/mysql.exe"; Parameters: "-u root -p"; Glyph: 99
+Type: item; Caption: "' . gettext('Console') . '"; Action: run; FileName: "' . $this->ampricotinstalldirmysql . '/mysql-' . $this->ampricotversionmysql . '/bin/mysql.exe"; Parameters: "-u root -p"; Glyph: 99
 Type: item; Caption: "' . gettext('Reset Root Password') . '"; Action: multi; Actions: ActionResetMySQLPass; Glyph: 99
-Type: item; Caption: "' . gettext('mysql.ini') . '"; Action: run; FileName: "notepad.exe"; parameters: "' . $this->apricoremysqlini . '"; Glyph: 99
-Type: item; Caption: "' . gettext('error.log') . '"; Action: run; FileName: "notepad.exe"; parameters: "' . $this->apricoredirtmp . '/log/mysql/error.log"; Glyph: 99
+Type: item; Caption: "' . gettext('mysql.ini') . '"; Action: run; FileName: "notepad.exe"; parameters: "' . $this->ampricotmysqlini . '"; Glyph: 99
+Type: item; Caption: "' . gettext('error.log') . '"; Action: run; FileName: "notepad.exe"; parameters: "' . $this->ampricotdirtmp . '/log/mysql/error.log"; Glyph: 99
 ;MENUMYSQLTOOLSEND
 
 [ActionResetMySQLPass]
 ;ACTIONRESETMYSQLPASSSTART
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php.exe"; Parameters: "-c ' . $this->apricorephpini . ' ResetMySQLPass.php"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: service; Service: ApricoreMySQL; ServiceAction: restart
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php.exe"; Parameters: "-c ' . $this->ampricotphpini . ' ResetMySQLPass.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: service; Service: AmpricotMySQL; ServiceAction: restart
 Action: resetservices
 Action: readconfig
 ;ACTIONRESETMYSQLPASSEND
 
 [ActionMySQLServiceInstall]
 ;ACTIONMYSQLSERVICEINSTALLSTART
-Action: run; FileName: "' . $this->apricoreinstalldirmysql . '/mysql-' . $this->apricoreversionmysql . '/bin/mysqld.exe"; Parameters: "' . $this->apricoreservicemysqlinstall . '"; ShowCmd: hidden; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirmysql . '/mysql-' . $this->ampricotversionmysql . '/bin/mysqld.exe"; Parameters: "' . $this->ampricotservicemysqlinstall . '"; ShowCmd: hidden; Flags: ignoreerrors waituntilterminated
 Action: resetservices
 Action: readconfig
 ;ACTIONMYSQLSERVICEINSTALLEND
 
 [ActionMySQLServiceUninstall]
 ;ACTIONMYSQLSERVICEUNINSTALLSTART
-Action: service; Service: ApricoreMySQL; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirmysql . '/mysql-' . $this->apricoreversionmysql . '/bin/mysqld.exe"; Parameters: "' . $this->apricoreservicemysqluninstall . '"; ShowCmd: hidden; Flags: waituntilterminated
+Action: service; Service: AmpricotMySQL; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirmysql . '/mysql-' . $this->ampricotversionmysql . '/bin/mysqld.exe"; Parameters: "' . $this->ampricotservicemysqluninstall . '"; ShowCmd: hidden; Flags: waituntilterminated
 Action: resetservices
 Action: readconfig
 ;ACTIONMYSQLSERVICEUNINSTALLEND
@@ -334,12 +339,12 @@ Type: submenu; Caption: "' . gettext('Tools') . '"; SubMenu: MenuPHPTools; Glyph
 
 [MenuPHPTools]
 ;MENUPHPTOOLSSTART
-Type: item; Caption: "' . gettext('php.ini') . '"; Action: run; FileName: "notepad.exe"; parameters: "' . $this->apricorephpini . '"; Glyph: 99
-Type: item; Caption: "' . gettext('error.log') . '"; Action: run; FileName: "notepad.exe"; parameters: "' . $this->apricoredirtmp . '/log/php/error.log"; Glyph: 99
+Type: item; Caption: "' . gettext('php.ini') . '"; Action: run; FileName: "notepad.exe"; parameters: "' . $this->ampricotphpini . '"; Glyph: 99
+Type: item; Caption: "' . gettext('error.log') . '"; Action: run; FileName: "notepad.exe"; parameters: "' . $this->ampricotdirtmp . '/log/php/error.log"; Glyph: 99
 ;MENUPHPTOOLSEND
 
 ;ACTIONPHPEXTENSION
 
 ';
 
-return $apricoretpl;
+return $ampricottpl;

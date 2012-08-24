@@ -1,6 +1,6 @@
 <?php
-namespace Apricore;
+namespace Ampricot;
 require_once 'class/Process.php';
 $process = new Process();
-$process->iniSet('apricorefileconf', array('apricoreversionmysql' => $_SERVER['argv'][1], 'apricoreservicemysqlinstall' => '--install-manual ApricoreMySQL --defaults-file=' . $process->apricoreinstalldirroot . '/front/conf/mysql/mysql-' . $_SERVER['argv'][1] . '/mysql.ini'));
+$process->iniSet('ampricotfileconf', array('ampricotversionmysql' => $_SERVER['argv'][1], 'ampricotservicemysqlinstall' => '--install-manual AmpricotMySQL --defaults-file=' . $process->ampricotinstalldirroot . '/front/conf/mysql/mysql-' . $_SERVER['argv'][1] . '/mysql.ini'));
 ?>

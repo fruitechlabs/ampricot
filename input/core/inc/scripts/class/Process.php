@@ -1,21 +1,21 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: Apricore                                        Version: 1.0.0 # ||
+|| # Product Name: Ampricot                                        Version: 1.0.0 # ||
 || # License Type: Free License                                                   # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
-|| #           Copyright ©2005-2012 FruiTechLabs. All Rights Reserved.           # ||
+|| #           Copyright ©2005-2012 FruiTechLabs. All Rights Reserved.            # ||
 || #     This product may be redistributed in whole or significant part under     # ||
 || # "The MIT License (MIT)" - http://www.opensource.org/licenses/mit-license.php # ||
 || # 																			  # ||
-|| # ----------------------- "Apricore" IS FREE SOFTWARE ------------------------ # ||
-|| #        http://apricore.fruitechlabs.com | http://www.fruitechlabs.com        # ||
+|| # ----------------------- "Ampricot" IS FREE SOFTWARE ------------------------ # ||
+|| #            http://www.ampricot.com | http://www.fruitechlabs.com             # ||
 || ################################################################################ ||
 \*==================================================================================*/
 
 
-namespace Apricore;
+namespace Ampricot;
 require_once 'Kernel.php';
 
 class Process extends Kernel
@@ -29,7 +29,7 @@ class Process extends Kernel
 
 		if ($confirm == 'yes')
 		{
-			unlink($this->apricoredirvhost . '/' . $_SERVER['argv'][1] );
+			unlink($this->ampricotdirvhost . '/' . $_SERVER['argv'][1] );
 			exec('"../hosts.exe" rem ' . $vhostdir, $execoutput);
 			printf("\r\n" . gettext('%1$s') . "\r\n" . gettext('Virtual Host deleted successfully!') . "\r\n" . gettext('Press Enter to exit...'), $execoutput[0]);
 		    trim(fgets(STDIN));
@@ -45,7 +45,7 @@ class Process extends Kernel
 
 	public function addVHost()
 	{
-		printf(gettext('Enter your Virtual Host.') . "\r\n" . gettext('Example: \'test\' Would create a new virtual host with the url: \'http://test/\' which points to: \'%1$stest/\'') . "\r\n", $this->apricoredirdata . '/' . 'www');
+		printf(gettext('Enter your Virtual Host.') . "\r\n" . gettext('Example: \'test\' Would create a new virtual host with the url: \'http://test/\' which points to: \'%1$stest/\'') . "\r\n", $this->ampricotdirdata . '/' . 'www');
 
 		$vhostdir = trim(fgets(STDIN));
 		$vhostdir = trim($vhostdir, '/\'');
@@ -57,24 +57,24 @@ class Process extends Kernel
 			exit();
 		}
 
-		if (is_file($this->apricoredirvhost . '/' . $vhostdir . '.conf'))
+		if (is_file($this->ampricotdirvhost . '/' . $vhostdir . '.conf'))
 		{
 			printf("\r\n" . gettext('Virtual Host already exists!') . "\r\n" . gettext('Press Enter to exit...'), $vhostdir);
 			trim(fgets(STDIN));
 			exit();
 		}
 
-		if (!is_dir($this->apricoredirdata . '/www/' . $vhostdir))
+		if (!is_dir($this->ampricotdirdata . '/www/' . $vhostdir))
 		{
-			exec('mkdir "' . $this->apricoredirdata . '/www/' . $vhostdir . '"');
-			@file_put_contents($this->apricoredirdata . '/www/' . $vhostdir . '/index.html', str_replace('localhost', $vhostdir, @file_get_contents($this->apricoredirdata . '/www/' . 'localhost/index.html')));
+			exec('mkdir "' . $this->ampricotdirdata . '/www/' . $vhostdir . '"');
+			@file_put_contents($this->ampricotdirdata . '/www/' . $vhostdir . '/index.html', str_replace('localhost', $vhostdir, @file_get_contents($this->ampricotdirdata . '/www/' . 'localhost/index.html')));
 		}
 
-		if (!is_dir($this->apricoredirtmp . '/log/' . $vhostdir))
+		if (!is_dir($this->ampricotdirtmp . '/log/' . $vhostdir))
 		{
-			exec('mkdir "' . $this->apricoredirtmp . '/log/apache/' . $vhostdir . '"');
-			@file_put_contents($this->apricoredirtmp . '/log/apache/' . $vhostdir . '/error.log', '');
-			@file_put_contents($this->apricoredirtmp . '/log/apache/' . $vhostdir . '/access.log', '');
+			exec('mkdir "' . $this->ampricotdirtmp . '/log/apache/' . $vhostdir . '"');
+			@file_put_contents($this->ampricotdirtmp . '/log/apache/' . $vhostdir . '/error.log', '');
+			@file_put_contents($this->ampricotdirtmp . '/log/apache/' . $vhostdir . '/access.log', '');
 		}
 
 		$vhostfilecontents = '<VirtualHost *:*>
@@ -84,7 +84,7 @@ class Process extends Kernel
     CustomLog "../../../../front/tmp/log/apache/' . $vhostdir . '/access.log" common
 </VirtualHost>';
 
-		@file_put_contents($this->apricoredirvhost . '/' . $vhostdir . '.conf', $vhostfilecontents) or die('Unable to update virtual hosts conf file!');
+		@file_put_contents($this->ampricotdirvhost . '/' . $vhostdir . '.conf', $vhostfilecontents) or die('Unable to update virtual hosts conf file!');
 
 		exec('"../hosts.exe" rem ' . $vhostdir);
 		exec('"../hosts.exe" add ' . $vhostdir . ' 127.0.0.1', $execoutput);
@@ -145,7 +145,7 @@ class Process extends Kernel
 
 		if ($confirm == 'yes')
 		{
-			unlink($this->apricorediralias . '/' . $_SERVER['argv'][1]);
+			unlink($this->ampricotdiralias . '/' . $_SERVER['argv'][1]);
 			print(gettext('Alias deleted successfully!') . "\r\n" . gettext('Press Enter to exit...'));
 		    trim(fgets(STDIN));
 			exit();
@@ -172,7 +172,7 @@ class Process extends Kernel
 			exit();
 		}
 
-		if (is_file($this->apricorediralias . '/' . $aliasdir . '.conf'))
+		if (is_file($this->ampricotdiralias . '/' . $aliasdir . '.conf'))
 		{
 			printf("\r\n" . gettext('Alias already exists!') . "\r\n" . gettext('Press Enter to exit...'), $aliasdir);
 			trim(fgets(STDIN));
@@ -189,12 +189,12 @@ class Process extends Kernel
 <Directory "' . $aliasdest . '">
     Options Indexes FollowSymLinks MultiViews
     AllowOverride all
-    ' . ((str_replace('.', '', substr($this->apricoreversionapache, 0, 3)) == '24') ? 'Require local' : 'Order Deny,Allow
+    ' . ((str_replace('.', '', substr($this->ampricotversionapache, 0, 3)) == '24') ? 'Require local' : 'Order Deny,Allow
     Deny from all
     Allow from 127.0.0.1') . '
 </Directory>';
 
-			@file_put_contents($this->apricorediralias . '/' . $aliasdir . '.conf', $aliasfilecontents) or die('Unable to create alias conf file!');
+			@file_put_contents($this->ampricotdiralias . '/' . $aliasdir . '.conf', $aliasfilecontents) or die('Unable to create alias conf file!');
 
 			print("\r\n" . gettext('Alias created successfully!') . "\r\n" . gettext('Press Enter to exit...'));
 		}
@@ -210,16 +210,16 @@ class Process extends Kernel
 	public function switchServerStatus($status)
 	{
 		$textonline = '# Controls who can get stuff from this server.
-    ' . ((str_replace('.', '', substr($this->apricoreversionapache, 0, 3)) == '24') ? 'Require all granted' : 'Order Allow,Deny
+    ' . ((str_replace('.', '', substr($this->ampricotversionapache, 0, 3)) == '24') ? 'Require all granted' : 'Order Allow,Deny
     Allow from all');
 
 		$textoffline = '# Controls who can get stuff from this server.
-    ' . ((str_replace('.', '', substr($this->apricoreversionapache, 0, 3)) == '24') ? 'Require local' : 'Order Deny,Allow
+    ' . ((str_replace('.', '', substr($this->ampricotversionapache, 0, 3)) == '24') ? 'Require local' : 'Order Deny,Allow
     Deny from all
     Allow from 127.0.0.1');
 
-		$this->apricoreapacheconfcontent = str_replace((($status == 'online') ? $textoffline : $textonline), (($status == 'online') ? $textonline : $textoffline), @file_get_contents($this->apricoreapacheconf));
-		@file_put_contents($this->apricoreapacheconf, $this->apricoreapacheconfcontent);
+		$this->ampricotapacheconfcontent = str_replace((($status == 'online') ? $textoffline : $textonline), (($status == 'online') ? $textonline : $textoffline), @file_get_contents($this->ampricotapacheconf));
+		@file_put_contents($this->ampricotapacheconf, $this->ampricotapacheconfcontent);
 	}
 
 	public function msg($operands)
@@ -282,11 +282,11 @@ class Process extends Kernel
 
 	public function switchPHPVersion($newphpversion)
 	{
-		$phpapachecompatibleversion = str_replace('.', '_', str_replace('.0', '', substr($this->apricoreversionapache, 0, strrpos($this->apricoreversionapache, '.'))));
+		$phpapachecompatibleversion = str_replace('.', '_', str_replace('.0', '', substr($this->ampricotversionapache, 0, strrpos($this->ampricotversionapache, '.'))));
 
-		if (is_file($this->apricoreinstalldirphp . '/php-' . $newphpversion . '/php5apache' . $phpapachecompatibleversion . '.dll'))
+		if (is_file($this->ampricotinstalldirphp . '/php-' . $newphpversion . '/php5apache' . $phpapachecompatibleversion . '.dll'))
 		{
-			$conffilecontents = @file($this->apricoreapacheconf);
+			$conffilecontents = @file($this->ampricotapacheconf);
 			$newconffilecontents = '';
 
 			foreach ($conffilecontents as $line)
@@ -305,9 +305,9 @@ class Process extends Kernel
 				}
 			}
 
-			@file_put_contents($this->apricoreapacheconf, $newconffilecontents);
+			@file_put_contents($this->ampricotapacheconf, $newconffilecontents);
 
-			$this->iniSet('apricorefileconf', array('apricoreversionphp' => $newphpversion));
+			$this->iniSet('ampricotfileconf', array('ampricotversionphp' => $newphpversion));
 		}
 	}
 
@@ -315,15 +315,15 @@ class Process extends Kernel
 	{
 		$apachephpcompatibleversion = str_replace('.', '_', str_replace('.0', '', substr($newapacheversion, 0, strrpos($newapacheversion, '.'))));
 
-		if (is_file($this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php5apache' . $apachephpcompatibleversion . '.dll'))
+		if (is_file($this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php5apache' . $apachephpcompatibleversion . '.dll'))
 		{
-			$this->iniSet('apricorefileconf', array('apricoreversionapache' => $newapacheversion));
+			$this->iniSet('ampricotfileconf', array('ampricotversionapache' => $newapacheversion));
 		}
 	}
 
 	public function switchApacheModule($apachemoduleargv)
 	{
-		$conffilecontents = @file_get_contents($this->apricoreapacheconf) or die ("$this->apricoreapacheconf file not found!");
+		$conffilecontents = @file_get_contents($this->ampricotapacheconf) or die ("$this->ampricotapacheconf file not found!");
 
 		if ($apachemoduleargv[2] == 'on')
 		{
@@ -337,12 +337,12 @@ class Process extends Kernel
 		}
 
 		$conffilecontents = str_replace($findtext, $replacetext, $conffilecontents);
-		@file_put_contents($this->apricoreapacheconf, $conffilecontents);
+		@file_put_contents($this->ampricotapacheconf, $conffilecontents);
 	}
 
 	public function switchPHPExtension($phpextensionargv)
 	{
-		$inifilecontents = @file_get_contents($this->apricorephpini) or die ("$this->apricorephpini file not found!");
+		$inifilecontents = @file_get_contents($this->ampricotphpini) or die ("$this->ampricotphpini file not found!");
 
 		if ($phpextensionargv[2] == 'on')
 		{
@@ -356,12 +356,12 @@ class Process extends Kernel
 		}
 
 		$inifilecontents = str_replace($findtext, $replacetext, $inifilecontents);
-		@file_put_contents($this->apricorephpini, $inifilecontents);
+		@file_put_contents($this->ampricotphpini, $inifilecontents);
 	}
 
 	public function switchPHPSetting($phpsettingargv)
 	{
-		$inifilecontents = @file_get_contents($this->apricorephpini) or die ("$this->apricorephpini file not found!");
+		$inifilecontents = @file_get_contents($this->ampricotphpini) or die ("$this->ampricotphpini file not found!");
 
 		if ($phpsettingargv[2] == 'on')
 		{
@@ -375,7 +375,7 @@ class Process extends Kernel
 		}
 
 		$inifilecontents = str_replace($findtext, $replacetext, $inifilecontents);
-		@file_put_contents($this->apricorephpini, $inifilecontents);
+		@file_put_contents($this->ampricotphpini, $inifilecontents);
 	}
 
 	public function resetMySQLPass()
@@ -406,15 +406,15 @@ class Process extends Kernel
 UPDATE `user` SET Password=PASSWORD('" . $newmysqlrootpass . "') WHERE User='root';
 FLUSH PRIVILEGES;";
 
-		@file_put_contents($this->apricoredirtmp . '/dmp/mysqlresetrootpass.sql', $sqlfilecontents) or die('Unable to create sql file!');
+		@file_put_contents($this->ampricotdirtmp . '/dmp/mysqlresetrootpass.sql', $sqlfilecontents) or die('Unable to create sql file!');
 
-		$batfilecontents = '"' . $this->apricoreinstalldirmysql . '/mysql-' . $this->apricoreversionmysql . '/bin/mysqld.exe" --no-defaults --skip-innodb --port=6033 --default-storage-engine=MyISAM --datadir="' . $this->apricoredirdata . '/mysql" --bind-address=127.0.0.1 --bootstrap --skip-grant-tables --standalone <"' . $this->apricoreinstalldirroot . '/front/tmp/dmp/mysqlresetrootpass.sql"';
+		$batfilecontents = '"' . $this->ampricotinstalldirmysql . '/mysql-' . $this->ampricotversionmysql . '/bin/mysqld.exe" --no-defaults --skip-innodb --port=6033 --default-storage-engine=MyISAM --datadir="' . $this->ampricotdirdata . '/mysql" --bind-address=127.0.0.1 --bootstrap --skip-grant-tables --standalone <"' . $this->ampricotinstalldirroot . '/front/tmp/dmp/mysqlresetrootpass.sql"';
 
-		@file_put_contents($this->apricoredirtmp . '/dmp/mysqlresetrootpass.bat', $batfilecontents) or die('Unable to create batch file!');
+		@file_put_contents($this->ampricotdirtmp . '/dmp/mysqlresetrootpass.bat', $batfilecontents) or die('Unable to create batch file!');
 
-		exec($this->apricoredirtmp . '/dmp/mysqlresetrootpass.bat');
+		exec($this->ampricotdirtmp . '/dmp/mysqlresetrootpass.bat');
 
-		unlink($this->apricoredirtmp . '/dmp/mysqlresetrootpass.sql');
-		unlink($this->apricoredirtmp . '/dmp/mysqlresetrootpass.bat');
+		unlink($this->ampricotdirtmp . '/dmp/mysqlresetrootpass.sql');
+		unlink($this->ampricotdirtmp . '/dmp/mysqlresetrootpass.bat');
 	}
 }

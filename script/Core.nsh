@@ -264,6 +264,6 @@ Function SCQuickLaunch_Leave
     ${NSD_GetState} $SCQuickLaunch $0
     ${If} $0 <> 0
         SetOutPath $QUICKLAUNCH
-        CreateShortcut "$QUICKLAUNCH\$(^Name).lnk" "$INSTDIR\core\inc\${APRICORELAUNCHER}"
+        CreateShortcut "$QUICKLAUNCH\$(^Name).lnk" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
     ${EndIf}
 FunctionEnd

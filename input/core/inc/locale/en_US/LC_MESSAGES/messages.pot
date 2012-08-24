@@ -1,417 +1,485 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Apricore 1.0.0\n"
+"Project-Id-Version: Ampricot 1.0.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-21 05:50+0200\n"
-"PO-Revision-Date: 2012-08-21 05:50+0200\n"
+"POT-Creation-Date: 2012-08-24 07:06+0200\n"
+"PO-Revision-Date: 2012-08-24 07:06+0200\n"
 "Last-Translator: Abdelrahman Omran <me@omranic.com>\n"
-"Language-Team: FruiTech Labs <apricore@fruitechlabs.com>\n"
+"Language-Team: FruiTech Labs <support@ampricot.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Language: English\n"
 "X-Poedit-Country: UNITED STATES\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-SearchPath-0: D:\\workspace\\fruitechlabs\\apricore\\input\\core\\inc\\scripts\n"
+"X-Poedit-SearchPath-0: D:/workspace/fruitechlabs/ampricot/input\n"
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:25
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:25
 #, php-format
 msgid "Do you really want to delete '%1$s' virtual host?"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:25
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:141
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:25
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:141
 #, php-format
 msgid "Type 'yes' to confirm.."
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:34
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:92
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:114
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:34
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:92
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:114
 #, php-format
 msgid "%1$s"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:34
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:34
 #, php-format
 msgid "Virtual Host deleted successfully!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:34
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:40
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:55
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:62
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:92
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:135
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:149
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:155
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:170
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:177
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:199
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:203
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:242
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:389
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:400
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:34
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:40
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:55
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:62
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:92
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:135
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:149
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:155
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:170
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:177
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:199
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:203
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:242
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:389
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:400
 #, php-format
 msgid "Press Enter to exit..."
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:40
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:40
 msgid "Virtual Host not deleted!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:48
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:48
 #, php-format
 msgid "Enter your Virtual Host."
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:48
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:48
 #, php-format
 msgid "Example: 'test' Would create a new virtual host with the url: 'http://test/' which points to: '%1$stest/'"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:55
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:55
 msgid "Invalid Virtual Host! Virtual Host not created!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:62
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:62
 #, php-format
 msgid "Virtual Host already exists!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:92
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:92
 #, php-format
 msgid "Virtual Host created successfully!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:105
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:105
 #, php-format
 msgid "Your port '%1$s' is actually used by:"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:123
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:123
 msgid "Information not available, it might be 'Skype' or another windows application!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:127
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:127
 msgid "Can NOT install 'Apache Service', please stop the above application(s) and try again!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:132
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:132
 #, php-format
 msgid "Congrats! Your port '%1$s' is not actually used."
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:141
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:141
 #, php-format
 msgid "Do you really want to delete '%1$s' alias?"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:149
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:149
 msgid "Alias deleted successfully!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:155
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:155
 msgid "Alias not deleted!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:163
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:163
 msgid "Enter your alias."
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:163
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:163
 msgid "Example: 'test' Would create an alias for the url: 'http://localhost/test/'"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:170
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:170
 msgid "Invalid Alias! Alias not created!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:177
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:177
 #, php-format
 msgid "Alias already exists!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:182
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:182
 #, php-format
 msgid "Enter the destination of your alias -fully qualified directory path-."
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:182
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:182
 #, php-format
 msgid "Example: 'c:/test/' Would make 'http://localhost/%1$s/' point to: 'c:/test/'"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:199
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:199
 msgid "Alias created successfully!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:203
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:203
 msgid "This directory doesn't exist! Alias not created!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:230
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:230
 msgid "Sorry, this 'PHP' version doesn't seem to be compatible with your actual 'Apache' version. Switching 'PHP' version cancelled!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:234
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:234
 msgid "Sorry, this 'Apache' version doesn't seem to be compatible with your actual 'PHP' version. Switching 'Apache' version cancelled!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:238
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:238
 msgid "Unknown operands!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:383
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:383
 msgid "Enter new MySQL root password:"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:389
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:389
 msgid "Invalid new MySQL root password! MySQL root password not changed!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:394
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:394
 #, php-format
 msgid "Confirm new MySQL root password:"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Process.php:400
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:400
 msgid "The passwords you typed do not match. MySQL root password not changed!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Reload.php:34
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:154
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Reload.php:34
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:159
 msgid "Switch Server Online"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Reload.php:34
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Reload.php:34
 msgid "Switch Server Offline"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Reload.php:84
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Reload.php:84
 msgid "Sorry, PHP configuration file 'php.ini' doesn't exist!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Reload.php:180
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Reload.php:180
 msgid "Sorry, Apache configuration file 'httpd.conf' doesn't exist!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Reload.php:245
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Reload.php:297
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Reload.php:245
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Reload.php:297
 msgid "Access Online"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Reload.php:247
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Reload.php:247
 msgid "Edit Alias"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Reload.php:248
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Reload.php:248
 msgid "Delete Alias"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Reload.php:298
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Reload.php:298
 msgid "Browse Directory"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Reload.php:300
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Reload.php:300
 msgid "Edit Virtual Host"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Reload.php:301
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Reload.php:301
 msgid "Delete Virtual Host"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Reload.php:303
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:218
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Reload.php:303
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:223
 msgid "access.log"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Reload.php:304
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:219
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:285
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:338
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Reload.php:304
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:224
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:290
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:343
 msgid "error.log"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Reload.php:368
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Reload.php:412
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Reload.php:445
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Reload.php:368
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Reload.php:412
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Reload.php:445
 msgid "More versions..."
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:43
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:48
 msgid "All sevices running!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:44
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:49
 msgid "Some sevices running!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:45
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:50
 msgid "No sevices running!"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:78
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:83
 msgid "Public Homepage"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:79
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:84
 msgid "Public Directory"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:81
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:86
 msgid "Apache Alias"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:82
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:87
 msgid "Virtual Host"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:84
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:89
 msgid "Apache"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:85
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:90
 msgid "MySQL"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:86
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:91
 msgid "PHP"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:88
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:93
 msgid "Start All Services"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:89
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:94
 msgid "Stop All Services"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:90
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:95
 msgid "Restart All Services"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:92
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:97
 msgid "&Language"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:94
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:99
 msgid "Ad&vanced"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:96
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:101
 msgid "&Support"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:97
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:102
 msgid "&About"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:98
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:103
 msgid "E&xit"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:152
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:157
 msgid "Browse Directories"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:155
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:160
 msgid "&Reload Settings"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:160
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:165
 msgid "cgi-bin"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:161
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:166
 msgid "MySQL Data"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:166
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:259
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:313
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:171
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:264
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:318
 msgid "Version"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:167
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:260
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:172
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:265
 msgid "Service"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:168
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:173
 msgid "Modules"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:169
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:261
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:316
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:174
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:266
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:321
 msgid "Tools"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:180
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:272
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:185
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:277
 msgid "Start Service"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:181
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:273
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:186
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:278
 msgid "Stop Service"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:182
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:274
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:187
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:279
 msgid "Restart Service"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:184
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:276
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:189
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:281
 msgid "Install Service"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:185
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:277
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:190
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:282
 msgid "Uninstall Service"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:189
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:194
 msgid "Add Alias"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:199
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:204
 msgid "Add Virtual Host"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:216
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:221
 msgid "Test Port 80"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:217
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:222
 msgid "httpd.conf"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:282
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:287
 msgid "Console"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:283
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:288
 msgid "Reset Root Password"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:284
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:289
 msgid "mysql.ini"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:314
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:319
 msgid "Settings"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:315
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:320
 msgid "Extensions"
 msgstr ""
 
-#: D:\workspace\fruitechlabs\apricore\input\core\inc\scripts/class/Template.php:337
+#: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Template.php:342
 msgid "php.ini"
+msgstr ""
+
+#: D:/workspace/fruitechlabs/ampricot/input/front/data/www/localhost/index.php:118
+msgid "Apache Virtual Hosts:"
+msgstr ""
+
+#: D:/workspace/fruitechlabs/ampricot/input/front/data/www/localhost/index.php:126
+msgid "Apache Alias:"
+msgstr ""
+
+#: D:/workspace/fruitechlabs/ampricot/input/front/data/www/localhost/index.php:134
+msgid "Apache Loaded Modules:"
+msgstr ""
+
+#: D:/workspace/fruitechlabs/ampricot/input/front/data/www/localhost/index.php:142
+msgid "PHP Loaded Extensions:"
+msgstr ""
+
+#: D:/workspace/fruitechlabs/ampricot/input/front/data/www/localhost/index.php:172
+msgid "Homepage"
+msgstr ""
+
+#: D:/workspace/fruitechlabs/ampricot/input/front/data/www/localhost/index.php:173
+msgid "FAQ"
+msgstr ""
+
+#: D:/workspace/fruitechlabs/ampricot/input/front/data/www/localhost/index.php:174
+msgid "Screenshots"
+msgstr ""
+
+#: D:/workspace/fruitechlabs/ampricot/input/front/data/www/localhost/index.php:175
+msgid "Downloads"
+msgstr ""
+
+#: D:/workspace/fruitechlabs/ampricot/input/front/data/www/localhost/index.php:176
+msgid "Contributors"
+msgstr ""
+
+#: D:/workspace/fruitechlabs/ampricot/input/front/data/www/localhost/index.php:177
+msgid "News"
+msgstr ""
+
+#: D:/workspace/fruitechlabs/ampricot/input/front/data/www/localhost/index.php:178
+msgid "Contact"
+msgstr ""
+
+#: D:/workspace/fruitechlabs/ampricot/input/front/data/www/localhost/index.php:179
+msgid "Support"
+msgstr ""
+
+#: D:/workspace/fruitechlabs/ampricot/input/front/data/www/localhost/index.php:200
+msgid "Navigation:"
+msgstr ""
+
+#: D:/workspace/fruitechlabs/ampricot/input/front/data/www/localhost/index.php:201
+msgid "Home"
+msgstr ""
+
+#: D:/workspace/fruitechlabs/ampricot/input/front/data/www/localhost/index.php:202
+msgid "PHP Info"
+msgstr ""
+
+#: D:/workspace/fruitechlabs/ampricot/input/front/data/www/localhost/index.php:203
+msgid "PHP Credits"
+msgstr ""
+
+#: D:/workspace/fruitechlabs/ampricot/input/front/data/www/localhost/index.php:213
+msgid "Server Status: "
 msgstr ""
 

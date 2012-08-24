@@ -1,48 +1,48 @@
 # Installer attributes
-Name "Apricore"
+Name "Ampricot"
 
 # General Symbol Definitions
-!define APRICOREID "apricore"
-!define APRICORENAME "Apricore"
-!define APRICOREVERSIONCOREMAJOR "1"
-!define APRICOREVERSIONCOREMINOR "0"
-!define APRICOREVERSIONCORE "1.0.0.0"
-!define APRICOREVERSIONAPACHE "2.4.2"
-!define APRICOREVERSIONMYSQL "5.5.27"
-!define APRICOREVERSIONPHP "5.4.6"
-!define APRICOREVERSIONPHPMYADMIN "3.5.2.2"
-!define APRICOREVERSIONADMINER "3.5.1"
-!define APRICORECOMPANY "FruiTech Labs"
-!define APRICOREURLTEXT "apricore.fruitechlabs.com"
-!define APRICOREURL "http://apricore.fruitechlabs.com"
-!define APRICOREURLABOUT "http://apricore.fruitechlabs.com/about"
-!define APRICOREURLUPDATE "http://apricore.fruitechlabs.com/update"
-!define APRICOREURLHELP "http://apricore.fruitechlabs.com/support"
-!define APRICORELAUNCHER "apricore.exe"
-!define APRICOREINSTALLER "apricore-${APRICOREVERSIONCORE}.exe"
-!define APRICOREUNINSTALLER "uninstall.exe"
-!define APRICOREREGKEY "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${APRICORENAME}"
+!define AMPRICOTID "ampricot"
+!define AMPRICOTNAME "Ampricot"
+!define AMPRICOTVERSIONCOREMAJOR "1"
+!define AMPRICOTVERSIONCOREMINOR "0"
+!define AMPRICOTVERSIONCORE "1.0.0.0"
+!define AMPRICOTVERSIONAPACHE "2.4.2"
+!define AMPRICOTVERSIONMYSQL "5.5.27"
+!define AMPRICOTVERSIONPHP "5.4.6"
+!define AMPRICOTVERSIONPHPMYADMIN "3.5.2.2"
+!define AMPRICOTVERSIONADMINER "3.5.1"
+!define AMPRICOTCOMPANY "FruiTech Labs"
+!define AMPRICOTURLTEXT "www.ampricot.com"
+!define AMPRICOTURL "http://www.ampricot.com"
+!define AMPRICOTURLABOUT "http://www.ampricot.com/about"
+!define AMPRICOTURLUPDATE "http://www.ampricot.com/update/"
+!define AMPRICOTURLHELP "http://support.fruitechlabs.com/forumdisplay.php?fid=1"
+!define AMPRICOTLAUNCHER "ampricot.exe"
+!define AMPRICOTINSTALLER "ampricot-${AMPRICOTVERSIONCORE}.exe"
+!define AMPRICOTUNINSTALLER "uninstall.exe"
+!define AMPRICOTREGKEY "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${AMPRICOTNAME}"
 !define MUI_LANGDLL_REGISTRY_ROOT "HKLM"
-!define MUI_LANGDLL_REGISTRY_KEY "${APRICOREREGKEY}"
+!define MUI_LANGDLL_REGISTRY_KEY "${AMPRICOTREGKEY}"
 !define MUI_LANGDLL_REGISTRY_VALUENAME "InstallerLanguage"
 
 # Installer attributes
 BrandingText " "
-OutFile "..\..\..\..\binary\apricore\${APRICOREINSTALLER}"
+OutFile "..\..\..\..\binary\ampricot\${AMPRICOTINSTALLER}"
 CRCCheck on
 XPStyle on
 ShowInstDetails hide
 ShowUninstDetails hide
-InstallDirRegKey HKLM "${APRICOREREGKEY}" "InstallLocation"
+InstallDirRegKey HKLM "${AMPRICOTREGKEY}" "InstallLocation"
 
 # File info
-VIProductVersion "${APRICOREVERSIONCORE}"
-VIAddVersionKey ProductName "Apricore"
-VIAddVersionKey ProductVersion "${APRICOREVERSIONCORE}"
-VIAddVersionKey CompanyName "${APRICORECOMPANY}"
-VIAddVersionKey FileVersion "${APRICOREVERSIONCORE}"
-VIAddVersionKey FileDescription "Apache ${APRICOREVERSIONAPACHE}, MySQL ${APRICOREVERSIONMYSQL}, PHP ${APRICOREVERSIONPHP}"
-VIAddVersionKey LegalCopyright "Copyright (c) 2012 ${APRICORECOMPANY}."
+VIProductVersion "${AMPRICOTVERSIONCORE}"
+VIAddVersionKey ProductName "Ampricot"
+VIAddVersionKey ProductVersion "${AMPRICOTVERSIONCORE}"
+VIAddVersionKey CompanyName "${AMPRICOTCOMPANY}"
+VIAddVersionKey FileVersion "${AMPRICOTVERSIONCORE}"
+VIAddVersionKey FileDescription "Apache ${AMPRICOTVERSIONAPACHE}, MySQL ${AMPRICOTVERSIONMYSQL}, PHP ${AMPRICOTVERSIONPHP}"
+VIAddVersionKey LegalCopyright "Copyright (c) 2012 ${AMPRICOTCOMPANY}."
 
 # Best Compression
 SetCompress Auto
@@ -115,14 +115,14 @@ ReserveFile "${NSISDIR}\Plugins\System.dll"
 !define MUI_COMPONENTSPAGE_SMALLDESC
 !define MUI_COMPONENTSPAGE_CHECKBITMAP "${NSISDIR}\Contrib\Graphics\Checks\modern.bmp"
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT "HKLM"
-!define MUI_STARTMENUPAGE_REGISTRY_KEY "${APRICOREREGKEY}"
+!define MUI_STARTMENUPAGE_REGISTRY_KEY "${AMPRICOTREGKEY}"
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "StartMenuGroup"
-!define MUI_STARTMENUPAGE_DEFAULTFOLDER "${APRICORENAME}"
+!define MUI_STARTMENUPAGE_DEFAULTFOLDER "${AMPRICOTNAME}"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
-!define MUI_FINISHPAGE_RUN "$INSTDIR\core\inc\${APRICORELAUNCHER}"
+!define MUI_FINISHPAGE_RUN "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
 !define MUI_FINISHPAGE_RUN_TEXT "$(^StartLink)"
-!define MUI_FINISHPAGE_LINK "${APRICOREURLTEXT}"
-!define MUI_FINISHPAGE_LINK_LOCATION "${APRICOREURL}"
+!define MUI_FINISHPAGE_LINK "${AMPRICOTURLTEXT}"
+!define MUI_FINISHPAGE_LINK_LOCATION "${AMPRICOTURL}"
 !define MUI_UNABORTWARNING
 # !define MUI_UNICON "..\input\core\inc\icon.ico"
 !define MUI_UNWELCOMEFINISHPAGE_BITMAP "..\input\core\inc\parse\wizard.bmp"
@@ -159,22 +159,22 @@ Section "-pre" SEC0000
 
     DetailPrint "$(^VCREDIST)"
     ExecWait '"$INSTDIR\core\inc\vc9.exe" /q'
-    Delete /REBOOTOK "$INSTDIR\core\inc\vcredist-9.exe"
+    Delete /REBOOTOK "$INSTDIR\core\inc\vc9.exe"
 SectionEnd
 
-Section "Apache HTTP Server ${APRICOREVERSIONAPACHE}" SEC0001
+Section "Apache HTTP Server ${AMPRICOTVERSIONAPACHE}" SEC0001
     SectionIn RO
 
     Var /GLOBAL installdirectory
     ${str_replace} "\" "/" "$INSTDIR" "$installdirectory"
 
     SetOverwrite on
-    SetOutPath $INSTDIR\core\bin\apache\apache-${APRICOREVERSIONAPACHE}
-    File /r /x cgi-bin /x conf /x htdocs /x include /x lib /x logs /x manual /x *.pdb /x *.txt ..\input\core\bin\apache\apache-${APRICOREVERSIONAPACHE}\*
-    SetOutPath $INSTDIR\core\bin\apache\apache-${APRICOREVERSIONAPACHE}\conf
+    SetOutPath $INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}
+    File /r /x cgi-bin /x conf /x htdocs /x include /x lib /x logs /x manual /x *.pdb /x *.txt ..\input\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\*
+    SetOutPath $INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\conf
     File ..\input\core\inc\parse\httpd.conf
-    SetOutPath $INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}
-    File /r ..\input\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\*
+    SetOutPath $INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}
+    File /r ..\input\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\*
     SetOutPath $INSTDIR\front\conf\apache\vhost
     File /r ..\input\front\conf\apache\vhost\*
     SetOutPath $INSTDIR\front\data\www
@@ -183,175 +183,175 @@ Section "Apache HTTP Server ${APRICOREVERSIONAPACHE}" SEC0001
     File /r ..\input\front\data\cgi-bin\*
     CreateDirectory $INSTDIR\front\tmp\log\apache\localhost
 
-    ${file_replace} "@APRICOREVERSIONAPACHE@" "${APRICOREVERSIONAPACHE}" "all" "all" "$INSTDIR\core\bin\apache\apache-${APRICOREVERSIONAPACHE}\conf\httpd.conf"
+    ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\conf\httpd.conf"
 
-    ${file_replace} "@APRICOREVERSIONPHP@" "${APRICOREVERSIONPHP}" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\httpd.conf"
-    ${file_replace} "@APRICOREVERSIONAPACHE@" "${APRICOREVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\httpd.conf"
-    ${file_replace} "@APRICOREINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\httpd.conf"
-    ${file_replace} "@APRICORESERVERPORTHTTPAPACHE@" "$mui.ApacheOptsPage.ServerPortHTTP.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\httpd.conf"
-    ${file_replace} "@APRICORESERVERADMINAPACHE@" "$mui.ApacheOptsPage.AdminEmail.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\httpd.conf"
-    ${file_replace} "@APRICORESERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\httpd.conf"
+    ${file_replace} "@AMPRICOTVERSIONPHP@" "${AMPRICOTVERSIONPHP}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
+    ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
+    ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
+    ${file_replace} "@AMPRICOTSERVERPORTHTTPAPACHE@" "$mui.ApacheOptsPage.ServerPortHTTP.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
+    ${file_replace} "@AMPRICOTSERVERADMINAPACHE@" "$mui.ApacheOptsPage.AdminEmail.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
+    ${file_replace} "@AMPRICOTSERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
 
-    ${file_replace} "@APRICOREVERSIONAPACHE@" "${APRICOREVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\extra\httpd-autoindex.conf"
-    ${file_replace} "@APRICOREINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\extra\httpd-autoindex.conf"
+    ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-autoindex.conf"
+    ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-autoindex.conf"
 
-    ${file_replace} "@APRICOREVERSIONAPACHE@" "${APRICOREVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\extra\httpd-dav.conf"
-    ${file_replace} "@APRICOREINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\extra\httpd-dav.conf"
+    ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-dav.conf"
+    ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-dav.conf"
 
-    ${file_replace} "@APRICORESERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\extra\httpd-info.conf"
+    ${file_replace} "@AMPRICOTSERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-info.conf"
 
-    ${file_replace} "@APRICOREVERSIONAPACHE@" "${APRICOREVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\extra\httpd-manual.conf"
-    ${file_replace} "@APRICOREINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\extra\httpd-manual.conf"
+    ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-manual.conf"
+    ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-manual.conf"
 
-    ${file_replace} "@APRICOREVERSIONAPACHE@" "${APRICOREVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\extra\httpd-multilang-errordoc.conf"
-    ${file_replace} "@APRICOREINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\extra\httpd-multilang-errordoc.conf"
+    ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-multilang-errordoc.conf"
+    ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-multilang-errordoc.conf"
 
-    ${file_replace} "@APRICORESERVERPORTHTTPSAPACHE@" "$mui.ApacheOptsPage.ServerPortHTTPS.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\extra\httpd-ssl.conf"
-    ${file_replace} "@APRICORESERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\extra\httpd-ssl.conf"
-    ${file_replace} "@APRICORESERVERADMINAPACHE@" "$mui.ApacheOptsPage.AdminEmail.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\extra\httpd-ssl.conf"
-    ${file_replace} "@APRICOREVERSIONAPACHE@" "${APRICOREVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\extra\httpd-ssl.conf"
+    ${file_replace} "@AMPRICOTSERVERPORTHTTPSAPACHE@" "$mui.ApacheOptsPage.ServerPortHTTPS.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-ssl.conf"
+    ${file_replace} "@AMPRICOTSERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-ssl.conf"
+    ${file_replace} "@AMPRICOTSERVERADMINAPACHE@" "$mui.ApacheOptsPage.AdminEmail.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-ssl.conf"
+    ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-ssl.conf"
 
-    ${file_replace} "@APRICORESERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\vhost\localhost.conf"
+    ${file_replace} "@AMPRICOTSERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\vhost\localhost.conf"
 
-    ${file_replace} "@APRICOREINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\data\www\localhost\index.php"
+    ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\data\www\localhost\index.php"
 
-    ExecWait '"$INSTDIR\core\bin\apache\apache-${APRICOREVERSIONAPACHE}\bin\httpd.exe" -k install -n ApricoreApache'
-    ExecWait 'sc config ApricoreApache start= demand'
+    ExecWait '"$INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\bin\httpd.exe" -k install -n AmpricotApache'
+    ExecWait 'sc config AmpricotApache start= demand'
 SectionEnd
 
-Section "MySQL ${APRICOREVERSIONMYSQL}" SEC0002
+Section "MySQL ${AMPRICOTVERSIONMYSQL}" SEC0002
     SectionIn RO
 
     SetOverwrite on
-    SetOutPath $INSTDIR\core\bin\mysql\mysql-${APRICOREVERSIONMYSQL}
-    File /r /x data /x docs /x include /x debug /x lib /x mysql-test /x scripts /x sql-bench /x *.lib /x *.pdb /x *.ini /x COPYING /x README ..\input\core\bin\mysql\mysql-${APRICOREVERSIONMYSQL}\*
-    SetOutPath $INSTDIR\front\conf\mysql\mysql-${APRICOREVERSIONMYSQL}
-    File /r ..\input\front\conf\mysql\mysql-${APRICOREVERSIONMYSQL}\*
-    SetOutPath $INSTDIR\front\data\mysql\mysql-${APRICOREVERSIONMYSQL}
-    File /r ..\input\core\bin\mysql\mysql-${APRICOREVERSIONMYSQL}\data\*
+    SetOutPath $INSTDIR\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}
+    File /r /x data /x docs /x include /x debug /x lib /x mysql-test /x scripts /x sql-bench /x *.lib /x *.pdb /x *.ini /x COPYING /x README ..\input\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\*
+    SetOutPath $INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}
+    File /r ..\input\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\*
+    SetOutPath $INSTDIR\front\data\mysql\mysql-${AMPRICOTVERSIONMYSQL}
+    File /r ..\input\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\data\*
     CreateDirectory $INSTDIR\front\tmp\log\mysql
 
-    ${file_replace} "@APRICORESERVERPORTMYSQL@" "$mui.MySQLOptsPage.ServerPort.VAL" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${APRICOREVERSIONMYSQL}\mysql.ini"
-    ${file_replace} "@APRICOREINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${APRICOREVERSIONMYSQL}\mysql.ini"
-    ${file_replace} "@APRICOREVERSIONMYSQL@" "${APRICOREVERSIONMYSQL}" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${APRICOREVERSIONMYSQL}\mysql.ini"
+    ${file_replace} "@AMPRICOTSERVERPORTMYSQL@" "$mui.MySQLOptsPage.ServerPort.VAL" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini"
+    ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini"
+    ${file_replace} "@AMPRICOTVERSIONMYSQL@" "${AMPRICOTVERSIONMYSQL}" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini"
 
-    ExecWait '"$INSTDIR\core\bin\mysql\mysql-${APRICOREVERSIONMYSQL}\bin\mysqld.exe" --install-manual ApricoreMySQL --defaults-file=$INSTDIR\front\conf\mysql\mysql-${APRICOREVERSIONMYSQL}\mysql.ini'
+    ExecWait '"$INSTDIR\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\bin\mysqld.exe" --install-manual AmpricotMySQL --defaults-file=$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini'
 
     DetailPrint "Updating MySQL 'root' password.."
-    ${file_replace} "@APRICOREMYSQLROOTPASS@" "$mui.MySQLOptsPage.RootPass.VAL" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.sql"
-    ${file_replace} "@APRICOREINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.bat"
-    ${file_replace} "@APRICOREVERSIONMYSQL@" "${APRICOREVERSIONMYSQL}" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.bat"
+    ${file_replace} "@AMPRICOTMYSQLROOTPASS@" "$mui.MySQLOptsPage.RootPass.VAL" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.sql"
+    ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.bat"
+    ${file_replace} "@AMPRICOTVERSIONMYSQL@" "${AMPRICOTVERSIONMYSQL}" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.bat"
 
     ExecWait '"$INSTDIR\core\inc\mysqlresetrootpass.bat"'
     Delete /REBOOTOK $INSTDIR\core\inc\mysqlresetrootpass.bat
     Delete /REBOOTOK $INSTDIR\core\inc\mysqlresetrootpass.sql
 SectionEnd
 
-Section "PHP ${APRICOREVERSIONPHP}" SEC0003
+Section "PHP ${AMPRICOTVERSIONPHP}" SEC0003
     SectionIn RO
 
     SetOverwrite on
-    SetOutPath $INSTDIR\core\bin\php\php-${APRICOREVERSIONPHP}
-    File /r /x extras /x dev /x *.ini /x *.reg /x *.lib /x *.txt /x php.ini-development /x php.ini-production ..\input\core\bin\php\php-${APRICOREVERSIONPHP}\*
-    SetOutPath $INSTDIR\front\conf\php\php-${APRICOREVERSIONPHP}
-    File /r ..\input\front\conf\php\php-${APRICOREVERSIONPHP}\*
+    SetOutPath $INSTDIR\core\bin\php\php-${AMPRICOTVERSIONPHP}
+    File /r /x extras /x dev /x *.ini /x *.reg /x *.lib /x *.txt /x php.ini-development /x php.ini-production ..\input\core\bin\php\php-${AMPRICOTVERSIONPHP}\*
+    SetOutPath $INSTDIR\front\conf\php\php-${AMPRICOTVERSIONPHP}
+    File /r ..\input\front\conf\php\php-${AMPRICOTVERSIONPHP}\*
     CreateDirectory $INSTDIR\front\tmp\log\php
 
-    ${file_replace} "@APRICOREVERSIONPHP@" "${APRICOREVERSIONPHP}" "all" "all" "$INSTDIR\front\conf\php\php-${APRICOREVERSIONPHP}\php.ini"
-    ${file_replace} "@APRICOREINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\php\php-${APRICOREVERSIONPHP}\php.ini"
+    ${file_replace} "@AMPRICOTVERSIONPHP@" "${AMPRICOTVERSIONPHP}" "all" "all" "$INSTDIR\front\conf\php\php-${AMPRICOTVERSIONPHP}\php.ini"
+    ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\php\php-${AMPRICOTVERSIONPHP}\php.ini"
 
-    ${file_replace} "#LoadModule php5_module" "LoadModule php5_module" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\httpd.conf"
-    ${file_replace} "#PHPIniDir" "PHPIniDir" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\httpd.conf"
-    ${file_replace} "#AddType application/x-httpd-php .php" "AddType application/x-httpd-php .php" "all" "all" "$INSTDIR\front\conf\apache\apache-${APRICOREVERSIONAPACHE}\httpd.conf"
+    ${file_replace} "#LoadModule php5_module" "LoadModule php5_module" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
+    ${file_replace} "#PHPIniDir" "PHPIniDir" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
+    ${file_replace} "#AddType application/x-httpd-php .php" "AddType application/x-httpd-php .php" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
 SectionEnd
 
 SectionGroup "PHP Apps" SECGRP0000
-    Section "phpMyAdmin ${APRICOREVERSIONPHPMYADMIN}" SEC0004
+    Section "phpMyAdmin ${AMPRICOTVERSIONPHPMYADMIN}" SEC0004
         SectionIn RO
 
         SetOverwrite on
-        SetOutPath $INSTDIR\core\app\phpmyadmin-${APRICOREVERSIONPHPMYADMIN}
-        File /r ..\input\core\app\phpmyadmin-${APRICOREVERSIONPHPMYADMIN}\*
+        SetOutPath $INSTDIR\core\app\phpmyadmin-${AMPRICOTVERSIONPHPMYADMIN}
+        File /r ..\input\core\app\phpmyadmin-${AMPRICOTVERSIONPHPMYADMIN}\*
         SetOutPath $INSTDIR\front\conf\apache\alias
         File ..\input\front\conf\apache\alias\phpmyadmin.conf
 
-        ${file_replace} "@APRICOREINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\alias\phpmyadmin.conf"
-        ${file_replace} "@APRICOREVERSIONPHPMYADMIN@" "${APRICOREVERSIONPHPMYADMIN}" "all" "all" "$INSTDIR\front\conf\apache\alias\phpmyadmin.conf"
+        ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\alias\phpmyadmin.conf"
+        ${file_replace} "@AMPRICOTVERSIONPHPMYADMIN@" "${AMPRICOTVERSIONPHPMYADMIN}" "all" "all" "$INSTDIR\front\conf\apache\alias\phpmyadmin.conf"
     SectionEnd
-    Section "Adminer ${APRICOREVERSIONADMINER}" SEC0005
+    Section "Adminer ${AMPRICOTVERSIONADMINER}" SEC0005
         SectionIn RO
 
         SetOverwrite on
-        SetOutPath $INSTDIR\core\app\adminer-${APRICOREVERSIONADMINER}
-        File /r ..\input\core\app\adminer-${APRICOREVERSIONADMINER}\*
+        SetOutPath $INSTDIR\core\app\adminer-${AMPRICOTVERSIONADMINER}
+        File /r ..\input\core\app\adminer-${AMPRICOTVERSIONADMINER}\*
         SetOutPath $INSTDIR\front\conf\apache\alias
         File ..\input\front\conf\apache\alias\adminer.conf
 
-        ${file_replace} "@APRICOREINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\alias\adminer.conf"
-        ${file_replace} "@APRICOREVERSIONADMINER@" "${APRICOREVERSIONADMINER}" "all" "all" "$INSTDIR\front\conf\apache\alias\adminer.conf"
+        ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\alias\adminer.conf"
+        ${file_replace} "@AMPRICOTVERSIONADMINER@" "${AMPRICOTVERSIONADMINER}" "all" "all" "$INSTDIR\front\conf\apache\alias\adminer.conf"
     SectionEnd
 SectionGroupEnd
 
 Section "-post" SEC00099
     SetOutPath $INSTDIR\core\inc
-    WriteUninstaller $INSTDIR\core\inc\${APRICOREUNINSTALLER}
+    WriteUninstaller $INSTDIR\core\inc\${AMPRICOTUNINSTALLER}
 
     !insertmacro MUI_STARTMENU_WRITE_BEGIN "Application"
     SetOutPath $SMPROGRAMS\$StartMenuGroup
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\$(^StartLink).lnk" "$INSTDIR\core\inc\${APRICORELAUNCHER}"
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\$(^UninstallLink).lnk" "$INSTDIR\core\inc\${APRICOREUNINSTALLER}"
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\$(^StartLink).lnk" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\$(^UninstallLink).lnk" "$INSTDIR\core\inc\${AMPRICOTUNINSTALLER}"
     !insertmacro MUI_STARTMENU_WRITE_END
 
-    WriteRegStr HKLM "${APRICOREREGKEY}" "InstallLocation" "$INSTDIR"
-    WriteRegStr HKLM "${APRICOREREGKEY}" "DisplayIcon" "$INSTDIR\core\inc\icon.ico"
-    WriteRegStr HKLM "${APRICOREREGKEY}" "DisplayName" "${APRICORENAME}"
-    WriteRegStr HKLM "${APRICOREREGKEY}" "DisplayVersion" "${APRICOREVERSIONCORE}"
-    WriteRegStr HKLM "${APRICOREREGKEY}" "Publisher" "${APRICORECOMPANY}"
-    WriteRegStr HKLM "${APRICOREREGKEY}" "ProductID" "${APRICOREID}"
-    WriteRegStr HKLM "${APRICOREREGKEY}" "URLInfoAbout" "${APRICOREURLABOUT}"
-    WriteRegStr HKLM "${APRICOREREGKEY}" "URLUpdateInfo" "${APRICOREURLUPDATE}"
-    WriteRegStr HKLM "${APRICOREREGKEY}" "HelpLink" "${APRICOREURLHELP}"
-    WriteRegStr HKLM "${APRICOREREGKEY}" "UninstallString" "$INSTDIR\core\inc\${APRICOREUNINSTALLER}"
-    WriteRegStr HKLM "${APRICOREREGKEY}" "Comments" "Apache ${APRICOREVERSIONAPACHE}, MySQL ${APRICOREVERSIONMYSQL}, PHP ${APRICOREVERSIONPHP}"
-    WriteRegDWORD HKLM "${APRICOREREGKEY}" "NoModify" 1
-    WriteRegDWORD HKLM "${APRICOREREGKEY}" "NoRepair" 1
-    WriteRegDWORD HKLM "${APRICOREREGKEY}" "VersionMajor" ${APRICOREVERSIONCOREMAJOR}
-    WriteRegDWORD HKLM "${APRICOREREGKEY}" "VersionMinor " ${APRICOREVERSIONCOREMINOR}
+    WriteRegStr HKLM "${AMPRICOTREGKEY}" "InstallLocation" "$INSTDIR"
+    WriteRegStr HKLM "${AMPRICOTREGKEY}" "DisplayIcon" "$INSTDIR\core\inc\icon.ico"
+    WriteRegStr HKLM "${AMPRICOTREGKEY}" "DisplayName" "${AMPRICOTNAME}"
+    WriteRegStr HKLM "${AMPRICOTREGKEY}" "DisplayVersion" "${AMPRICOTVERSIONCORE}"
+    WriteRegStr HKLM "${AMPRICOTREGKEY}" "Publisher" "${AMPRICOTCOMPANY}"
+    WriteRegStr HKLM "${AMPRICOTREGKEY}" "ProductID" "${AMPRICOTID}"
+    WriteRegStr HKLM "${AMPRICOTREGKEY}" "URLInfoAbout" "${AMPRICOTURLABOUT}"
+    WriteRegStr HKLM "${AMPRICOTREGKEY}" "URLUpdateInfo" "${AMPRICOTURLUPDATE}"
+    WriteRegStr HKLM "${AMPRICOTREGKEY}" "HelpLink" "${AMPRICOTURLHELP}"
+    WriteRegStr HKLM "${AMPRICOTREGKEY}" "UninstallString" "$INSTDIR\core\inc\${AMPRICOTUNINSTALLER}"
+    WriteRegStr HKLM "${AMPRICOTREGKEY}" "Comments" "Apache ${AMPRICOTVERSIONAPACHE}, MySQL ${AMPRICOTVERSIONMYSQL}, PHP ${AMPRICOTVERSIONPHP}"
+    WriteRegDWORD HKLM "${AMPRICOTREGKEY}" "NoModify" 1
+    WriteRegDWORD HKLM "${AMPRICOTREGKEY}" "NoRepair" 1
+    WriteRegDWORD HKLM "${AMPRICOTREGKEY}" "VersionMajor" ${AMPRICOTVERSIONCOREMAJOR}
+    WriteRegDWORD HKLM "${AMPRICOTREGKEY}" "VersionMinor " ${AMPRICOTVERSIONCOREMINOR}
 
     ${GetSize} "$INSTDIR" "/S=0K" $0 $1 $2
     IntFmt $0 "0x%08X" $0
-    WriteRegDWORD HKLM "${APRICOREREGKEY}" "EstimatedSize" $0
-    WriteRegStr HKLM "${APRICOREREGKEY}" "HelpTelephone" ""
-    WriteRegStr HKLM "${APRICOREREGKEY}" "Contact" ""
+    WriteRegDWORD HKLM "${AMPRICOTREGKEY}" "EstimatedSize" $0
+    WriteRegStr HKLM "${AMPRICOTREGKEY}" "HelpTelephone" ""
+    WriteRegStr HKLM "${AMPRICOTREGKEY}" "Contact" ""
 
     ${GetTime} "" "LS" $0 $1 $2 $3 $4 $5 $6
-    WriteRegStr HKLM "${APRICOREREGKEY}" "InstallDate" "$2$1$0"
-    WriteRegStr HKLM "${APRICOREREGKEY}" "InstallSource" ""
-    WriteRegStr HKLM "${APRICOREREGKEY}" "LocalPackage" ""
-    WriteRegStr HKLM "${APRICOREREGKEY}" "Readme" ""
+    WriteRegStr HKLM "${AMPRICOTREGKEY}" "InstallDate" "$2$1$0"
+    WriteRegStr HKLM "${AMPRICOTREGKEY}" "InstallSource" ""
+    WriteRegStr HKLM "${AMPRICOTREGKEY}" "LocalPackage" ""
+    WriteRegStr HKLM "${AMPRICOTREGKEY}" "Readme" ""
 
-    ${file_replace} "@APRICOREVERSIONCORE@" "${APRICOREVERSIONCORE}" "all" "all" "$INSTDIR\core\inc\apricore.conf"
-    ${file_replace} "@APRICOREVERSIONAPACHE@" "${APRICOREVERSIONAPACHE}" "all" "all" "$INSTDIR\core\inc\apricore.conf"
-    ${file_replace} "@APRICOREVERSIONMYSQL@" "${APRICOREVERSIONMYSQL}" "all" "all" "$INSTDIR\core\inc\apricore.conf"
-    ${file_replace} "@APRICOREVERSIONPHP@" "${APRICOREVERSIONPHP}" "all" "all" "$INSTDIR\core\inc\apricore.conf"
-    ${file_replace} "@APRICOREINSTALLDIRROOT@" "$installdirectory" "all" "all" "$INSTDIR\core\inc\apricore.conf"
-    ${file_replace} "@APRICOREVERSIONPHP@" "${APRICOREVERSIONPHP}" "all" "all" "$INSTDIR\core\inc\apricore.ini"
-    ${file_replace} "@APRICOREINSTALLDIRROOT@" "$installdirectory" "all" "all" "$INSTDIR\core\inc\apricore.ini"
-    ${file_replace} "@APRICOREVERSIONCORE@" "${APRICOREVERSIONCORE}" "all" "all" "$INSTDIR\core\inc\apricore.ini"
+    ${file_replace} "@AMPRICOTVERSIONCORE@" "${AMPRICOTVERSIONCORE}" "all" "all" "$INSTDIR\core\inc\ampricot.conf"
+    ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\core\inc\ampricot.conf"
+    ${file_replace} "@AMPRICOTVERSIONMYSQL@" "${AMPRICOTVERSIONMYSQL}" "all" "all" "$INSTDIR\core\inc\ampricot.conf"
+    ${file_replace} "@AMPRICOTVERSIONPHP@" "${AMPRICOTVERSIONPHP}" "all" "all" "$INSTDIR\core\inc\ampricot.conf"
+    ${file_replace} "@AMPRICOTINSTALLDIRROOT@" "$installdirectory" "all" "all" "$INSTDIR\core\inc\ampricot.conf"
+    ${file_replace} "@AMPRICOTVERSIONPHP@" "${AMPRICOTVERSIONPHP}" "all" "all" "$INSTDIR\core\inc\ampricot.ini"
+    ${file_replace} "@AMPRICOTINSTALLDIRROOT@" "$installdirectory" "all" "all" "$INSTDIR\core\inc\ampricot.ini"
+    ${file_replace} "@AMPRICOTVERSIONCORE@" "${AMPRICOTVERSIONCORE}" "all" "all" "$INSTDIR\core\inc\ampricot.ini"
 
     Var /GLOBAL urleninstalldirectory
     ${str_replace} " " "%20" "$installdirectory" "$urleninstalldirectory"
-    ${file_replace} "@APRICOREINSTALLDIRROOTENC@" "$urleninstalldirectory" "all" "all" "$INSTDIR\core\inc\apricore.ini"
+    ${file_replace} "@AMPRICOTINSTALLDIRROOTENC@" "$urleninstalldirectory" "all" "all" "$INSTDIR\core\inc\ampricot.ini"
 
     SetOutPath $SMSTARTUP
-    CreateShortcut "$SMSTARTUP\${APRICORENAME}.lnk" "$INSTDIR\core\inc\${APRICORELAUNCHER}"
+    CreateShortcut "$SMSTARTUP\${AMPRICOTNAME}.lnk" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
 
     SetOutPath $INSTDIR
     CreateShortcut "$INSTDIR\www.lnk" "$INSTDIR\front\data\www"
 
     IfSilent +1 +3
     SetOutPath $QUICKLAUNCH
-    CreateShortcut "$QUICKLAUNCH\${APRICORENAME}.lnk" "$INSTDIR\core\inc\${APRICORELAUNCHER}"
+    CreateShortcut "$QUICKLAUNCH\${AMPRICOTNAME}.lnk" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
 
     CreateDirectory $INSTDIR\front\tmp\dmp
 SectionEnd
@@ -359,11 +359,11 @@ SectionEnd
 
 # Uninstaller sections
 Section /o "-un.Main Uninstall Step" UNSEC0000
-    ExecWait 'sc stop ApricoreApache'
-    ExecWait 'sc stop ApricoreMySQL'
-    ExecWait '"$INSTDIR\core\inc\${APRICORELAUNCHER}" -quit -id={apricore}'
-    ExecWait '"$INSTDIR\core\bin\apache\apache-${APRICOREVERSIONAPACHE}\bin\httpd.exe" -k uninstall -n ApricoreApache'
-    ExecWait '"$INSTDIR\core\bin\mysql\mysql-${APRICOREVERSIONMYSQL}\bin\mysqld.exe" --remove ApricoreMySQL'
+    ExecWait 'sc stop AmpricotApache'
+    ExecWait 'sc stop AmpricotMySQL'
+    ExecWait '"$INSTDIR\core\inc\${AMPRICOTLAUNCHER}" -quit -id={ampricot}'
+    ExecWait '"$INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\bin\httpd.exe" -k uninstall -n AmpricotApache'
+    ExecWait '"$INSTDIR\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\bin\mysqld.exe" --remove AmpricotMySQL'
     RmDir /r /REBOOTOK $INSTDIR\core
     RmDir /r /REBOOTOK $INSTDIR\front\tmp
     ${GetTime} "" "LS" $0 $1 $2 $3 $4 $5 $6
@@ -373,9 +373,9 @@ Section /o "-un.Main Uninstall Step" UNSEC0000
 SectionEnd
 
 Section "-un.post" UNSEC0099
-    DeleteRegKey HKLM "${APRICOREREGKEY}"
-    Delete /REBOOTOK $QUICKLAUNCH\${APRICORENAME}.lnk
-    Delete /REBOOTOK $SMSTARTUP\${APRICORENAME}.lnk
+    DeleteRegKey HKLM "${AMPRICOTREGKEY}"
+    Delete /REBOOTOK $QUICKLAUNCH\${AMPRICOTNAME}.lnk
+    Delete /REBOOTOK $SMSTARTUP\${AMPRICOTNAME}.lnk
     Delete /REBOOTOK $INSTDIR\www.lnk
     RmDir /r /REBOOTOK $SMPROGRAMS\$StartMenuGroup
     Push $R0
@@ -393,7 +393,7 @@ Function .onInit
 
     ${Unless} ${AtLeastWinXP}
     ${AndUnless} ${AtLeastServicePack} 3
-        MessageBox MB_OK|MB_ICONSTOP "Unsupported operating system.$\nApricore ${APRICOREVERSIONCORE} requires at least Windows XP SP3 or later to be installed." /SD IDOK
+        MessageBox MB_OK|MB_ICONSTOP "Unsupported operating system.$\nAmpricot ${AMPRICOTVERSIONCORE} requires at least Windows XP SP3 or later to be installed." /SD IDOK
         Abort
     ${EndUnless}
 
@@ -414,7 +414,7 @@ Function .onInit
     Push $WINDIR
     Call GetRoot
     Pop $WINDRIVE
-    StrCpy $INSTDIR $WINDRIVE\apricore
+    StrCpy $INSTDIR $WINDRIVE\ampricot
 
     # Check if already running, If so don't open another but bring to front
     BringToFront
@@ -434,20 +434,20 @@ Function .onInit
     launch:
 
     # Check to see if already installed
-    ReadRegStr $R0 HKLM "${APRICOREREGKEY}" "InstallLocation"
+    ReadRegStr $R0 HKLM "${AMPRICOTREGKEY}" "InstallLocation"
     IfFileExists $R0 +1 notinstalledordone
     MessageBox MB_YESNO|MB_USERICON "$(^AlreadyInstalled)" /SD IDNO IDYES +1 IDNO quitnow
 
 
     ${GetTime} "" "LS" $0 $1 $2 $3 $4 $5 $6
     CreateDirectory $TEMP\$2-$1-$0-$4-$5-$6
-    ReadRegStr $R7 HKLM "${APRICOREREGKEY}" "UninstallString"
-    CopyFiles '$R7' '$TEMP\$2-$1-$0-$4-$5-$6\${APRICOREUNINSTALLER}'
+    ReadRegStr $R7 HKLM "${AMPRICOTREGKEY}" "UninstallString"
+    CopyFiles '$R7' '$TEMP\$2-$1-$0-$4-$5-$6\${AMPRICOTUNINSTALLER}'
 
     IfSilent +1 +3
-    ExecWait '"$TEMP\$2-$1-$0-$4-$5-$6\${APRICOREUNINSTALLER}" /S _?=$TEMP\$2-$1-$0-$4-$5-$6'
+    ExecWait '"$TEMP\$2-$1-$0-$4-$5-$6\${AMPRICOTUNINSTALLER}" /S _?=$TEMP\$2-$1-$0-$4-$5-$6'
     Goto +2
-    ExecWait '"$TEMP\$2-$1-$0-$4-$5-$6\${APRICOREUNINSTALLER}" _?=$TEMP\$2-$1-$0-$4-$5-$6' $7
+    ExecWait '"$TEMP\$2-$1-$0-$4-$5-$6\${AMPRICOTUNINSTALLER}" _?=$TEMP\$2-$1-$0-$4-$5-$6' $7
     StrCmp $7 1 quitnow
     Goto notinstalledordone
 
@@ -458,7 +458,7 @@ FunctionEnd
 
 # Uninstaller functions
 Function un.onInit
-    ReadRegStr $INSTDIR HKLM "${APRICOREREGKEY}" "InstallLocation"
+    ReadRegStr $INSTDIR HKLM "${AMPRICOTREGKEY}" "InstallLocation"
     !insertmacro MUI_STARTMENU_GETFOLDER "Application" "$StartMenuGroup"
     !insertmacro MUI_UNGETLANGUAGE
     !insertmacro SelectSection "${UNSEC0000}"
@@ -491,9 +491,9 @@ LicenseLangString ^LicenseFile ${LANG_ENGLISH} "..\input\core\inc\parse\license\
 
 # Installer Language Strings
 LangString "^VCREDIST" "${LANG_ENGLISH}" "Installing Microsoft Visual C++ 2008 SP1 Redistributable Package"
-LangString "^StartLink" "${LANG_ENGLISH}" "Start ${APRICORENAME}"
-LangString "^UninstallLink" "${LANG_ENGLISH}" "Uninstall ${APRICORENAME}"
-LangString "^AlreadyInstalled" "${LANG_ENGLISH}" "${APRICORENAME} is apparently already installed!$\r$\nWould you like to UNINSTALL old version now?"
+LangString "^StartLink" "${LANG_ENGLISH}" "Start ${AMPRICOTNAME}"
+LangString "^UninstallLink" "${LANG_ENGLISH}" "Uninstall ${AMPRICOTNAME}"
+LangString "^AlreadyInstalled" "${LANG_ENGLISH}" "${AMPRICOTNAME} is apparently already installed!$\r$\nWould you like to UNINSTALL old version now?"
 LangString "^AddQuickLaunch" "${LANG_ENGLISH}" "Add to &Quick Launch"
 LangString "^ApachePageTitle" "${LANG_ENGLISH}" "Apache Server Information"
 LangString "^ApachePageDesc" "${LANG_ENGLISH}" "Please enter your apache server's information."

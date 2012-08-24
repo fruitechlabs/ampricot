@@ -1,21 +1,21 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: Apricore                                        Version: 1.0.0 # ||
+|| # Product Name: Ampricot                                        Version: 1.0.0 # ||
 || # License Type: Free License                                                   # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
-|| #           Copyright ©2005-2012 FruiTechLabs. All Rights Reserved.           # ||
+|| #           Copyright ©2005-2012 FruiTechLabs. All Rights Reserved.            # ||
 || #     This product may be redistributed in whole or significant part under     # ||
 || # "The MIT License (MIT)" - http://www.opensource.org/licenses/mit-license.php # ||
 || # 																			  # ||
-|| # ----------------------- "Apricore" IS FREE SOFTWARE ------------------------ # ||
-|| #        http://apricore.fruitechlabs.com | http://www.fruitechlabs.com        # ||
+|| # ----------------------- "Ampricot" IS FREE SOFTWARE ------------------------ # ||
+|| #            http://www.ampricot.com | http://www.fruitechlabs.com             # ||
 || ################################################################################ ||
 \*==================================================================================*/
 
 
-namespace Apricore;
+namespace Ampricot;
 require_once 'Kernel.php';
 require_once 'Process.php';
 
@@ -24,28 +24,28 @@ class Reload extends Kernel
 	public function __construct()
 	{
 		parent::__construct();
-		$this->apricoretpl = require_once 'Template.php';
+		$this->ampricottpl = require_once 'Template.php';
 	}
 
 	public function serverstatus()
 	{
-		if ($this->apricoreconf['apricorestatus'] == 'online')
+		if ($this->ampricotconf['ampricotstatus'] == 'online')
 		{
-			$this->apricoretpl = str_replace(array(gettext('Switch Server Online'), 'SwitchServerStatus.php online', 'Glyph: 99'), array(gettext('Switch Server Offline'), 'SwitchServerStatus.php offline', 'Glyph: 99'), $this->apricoretpl);
+			$this->ampricottpl = str_replace(array(gettext('Switch Server Online'), 'SwitchServerStatus.php online', 'Glyph: 99'), array(gettext('Switch Server Offline'), 'SwitchServerStatus.php offline', 'Glyph: 99'), $this->ampricottpl);
 		}
 	}
 
 	public function language()
 	{
-		if ($handle = @opendir($this->apricoredirlang))
+		if ($handle = @opendir($this->ampricotdirlang))
 		{
 			$languages = array();
 
 			while (($folder = @readdir($handle)) !== false)
 			{
-				if ($folder != '.' && $folder != '..' && is_dir($this->apricoredirlang . '/' . $folder))
+				if ($folder != '.' && $folder != '..' && is_dir($this->ampricotdirlang . '/' . $folder))
 				{
-					if ($folder == $this->apricorelang)
+					if ($folder == $this->ampricotlang)
 					{
 						$languages["$folder"] = 1;
 					}
@@ -67,21 +67,21 @@ class Reload extends Kernel
 		{
 			$menulanguage .= 'Type: item; Caption: "' . gettext($langname) . '"; Action: multi; Actions: ActionLang_' . str_replace(' ', '', $langname) . (($langstatus) ? '; Glyph: 3' : '') . "\r\n";
 			$actionlanguage .= '[ActionLang_' . ucwords(str_replace(' ', '', $langname)) . "]\r\n;ACTIONLANG_" . strtoupper(str_replace(' ', '', $langname)) . "_START\r\n" .
-'Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->apricorephpini) . ' SwitchLang.php ' . $langname . '"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->apricorephpini) . ' Refresh.php"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+'Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' SwitchLang.php ' . $langname . '"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
 Action: resetservices
 Action: readconfig
 ;ACTIONLANG_' . strtoupper(str_replace(' ', '', $langname)) . "_END\r\n";
 		}
 
-		$this->apricoretpl = str_replace(';MENULANGUAGESTART', $menulanguage, $this->apricoretpl);
-		$this->apricoretpl = str_replace(';ACTIONLANGUAGE', $actionlanguage, $this->apricoretpl);
+		$this->ampricottpl = str_replace(';MENULANGUAGESTART', $menulanguage, $this->ampricottpl);
+		$this->ampricottpl = str_replace(';ACTIONLANGUAGE', $actionlanguage, $this->ampricottpl);
 	}
 
 	public function phpextension()
 	{
 		$phpextini = array();
-		$phpinilines = @file($this->apricorephpini) or die(gettext('Sorry, PHP configuration file \'php.ini\' doesn\'t exist!'));
+		$phpinilines = @file($this->ampricotphpini) or die(gettext('Sorry, PHP configuration file \'php.ini\' doesn\'t exist!'));
 
 		// Loaded PHP extensions (php.ini)
 		foreach($phpinilines as $line)
@@ -104,7 +104,7 @@ Action: readconfig
 		}
 
 		// Actual existing PHP extensions (File System)
-		if ($handle = @opendir($this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/ext/'))
+		if ($handle = @opendir($this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/ext/'))
 		{
 			$phpextfiles = array();
 
@@ -127,24 +127,24 @@ Action: readconfig
 		{
 			$menuphpextension .= 'Type: item; Caption: "' . $phpextname . '"; Action: multi; Actions: ActionPHPExtention_' . ucwords($phpextname) . (($phpextstatus) ? '; Glyph: 3' : '') . "\r\n";
 			$actionphpextension .= '[ActionPHPExtention_' . ucwords($phpextname) . "]\r\n;ACTIONPHPEXTENSION_" . strtoupper($phpextname) . "_START\r\n" .
-'Action: service; Service: ApricoreApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->apricorephpini) . ' SwitchPHPExtension.php ' . $phpextname . (($phpextstatus) ? ' off' : ' on') . '"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->apricorephpini) . ' Refresh.php"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "sc"; Parameters: "start ApricoreApache"; ShowCmd: hidden; Flags: waituntilterminated
+'Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' SwitchPHPExtension.php ' . $phpextname . (($phpextstatus) ? ' off' : ' on') . '"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "sc"; Parameters: "start AmpricotApache"; ShowCmd: hidden; Flags: waituntilterminated
 Action: resetservices
 Action: readconfig
 ;ACTIONPHPEXTENSION_' . strtoupper($phpextname) . "_END\r\n";
 		}
 
-		$this->apricoretpl = str_replace(';MENUPHPEXTENSIONSTART', $menuphpextension, $this->apricoretpl);
-		$this->apricoretpl = str_replace(';ACTIONPHPEXTENSION', $actionphpextension, $this->apricoretpl);
+		$this->ampricottpl = str_replace(';MENUPHPEXTENSIONSTART', $menuphpextension, $this->ampricottpl);
+		$this->ampricottpl = str_replace(';ACTIONPHPEXTENSION', $actionphpextension, $this->ampricottpl);
 	}
 
 	public function phpsetting()
 	{
 		$phpiniactual = array();
-		$phpinisettings = @parse_ini_file($this->apricorephpini);
-		$phpinisettingsraw = @parse_ini_file($this->apricorephpini, null, true);
+		$phpinisettings = @parse_ini_file($this->ampricotphpini);
+		$phpinisettingsraw = @parse_ini_file($this->ampricotphpini, null, true);
 
 		foreach($phpinisettingsraw as $phpsettingkey => $phpsettingvalue)
 		{
@@ -162,22 +162,22 @@ Action: readconfig
 		{
 			$menuphpsetting .= 'Type: item; Caption: "' . $phpsettingkey . '"; Action: multi; Actions: ActionPHPSetting_' . ucwords($phpsettingkey) . (($phpsettingvalue) ? '; Glyph: 3' : '') . "\r\n";
 			$actionphpsetting .= '[ActionPHPSetting_' . ucwords($phpsettingkey) . "]\r\n;ACTIONPHPSETTING_" . strtoupper($phpsettingkey) . "_START\r\n" .
-'Action: service; Service: ApricoreApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->apricorephpini) . ' SwitchPHPSetting.php ' . $phpsettingkey . (($phpsettingvalue) ? ' off' : ' on') . '"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->apricorephpini) . ' Refresh.php"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "sc"; Parameters: "start ApricoreApache"; ShowCmd: hidden; Flags: waituntilterminated
+'Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' SwitchPHPSetting.php ' . $phpsettingkey . (($phpsettingvalue) ? ' off' : ' on') . '"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "sc"; Parameters: "start AmpricotApache"; ShowCmd: hidden; Flags: waituntilterminated
 Action: resetservices
 Action: readconfig
 ;ACTIONPHPSETTING_' . strtoupper($phpsettingkey) . "_END\r\n";
 		}
 
-		$this->apricoretpl = str_replace(';MENUPHPSETTINGSTART', $menuphpsetting, $this->apricoretpl);
-		$this->apricoretpl = str_replace(';ACTIONPHPSETTING', $actionphpsetting, $this->apricoretpl);
+		$this->ampricottpl = str_replace(';MENUPHPSETTINGSTART', $menuphpsetting, $this->ampricottpl);
+		$this->ampricottpl = str_replace(';ACTIONPHPSETTING', $actionphpsetting, $this->ampricottpl);
 	}
 
 	public function apachemodule()
 	{
-		$apacheconflines = @file($this->apricoreapacheconf) or die(gettext('Sorry, Apache configuration file \'httpd.conf\' doesn\'t exist!'));
+		$apacheconflines = @file($this->ampricotapacheconf) or die(gettext('Sorry, Apache configuration file \'httpd.conf\' doesn\'t exist!'));
 
 		foreach($apacheconflines as $line)
 		{
@@ -201,22 +201,22 @@ Action: readconfig
 		{
 			$menuapachemodule .= 'Type: item; Caption: "' . $apachemodulename . '"; Action: multi; Actions: ActionApacheModule_' . ucwords($apachemodulename) . (($apachemodulestatus) ? '; Glyph: 3' : '') . "\r\n";
 			$actionapachemodule .= '[ActionApacheModule_' . ucwords($apachemodulename) . "]\r\n;ACTIONAPACHEMODULE_" . strtoupper($apachemodulename) . "_START\r\n" .
-'Action: service; Service: ApricoreApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->apricorephpini) . ' SwitchApacheModule.php ' . $apachemodulename . (($apachemodulestatus) ? ' off' : ' on') . '"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->apricorephpini) . ' Refresh.php"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "sc"; Parameters: "start ApricoreApache"; ShowCmd: hidden; Flags: waituntilterminated
+'Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' SwitchApacheModule.php ' . $apachemodulename . (($apachemodulestatus) ? ' off' : ' on') . '"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "sc"; Parameters: "start AmpricotApache"; ShowCmd: hidden; Flags: waituntilterminated
 Action: resetservices
 Action: readconfig
 ;ACTIONAPACHEMODULE_' . strtoupper($apachemodulename) . "_END\r\n";
 		}
 
-		$this->apricoretpl = str_replace(';MENUAPACHEMODULESTART', $menuapachemodule, $this->apricoretpl);
-		$this->apricoretpl = str_replace(';ACTIONAPACHEMODULE', $actionapachemodule, $this->apricoretpl);
+		$this->ampricottpl = str_replace(';MENUAPACHEMODULESTART', $menuapachemodule, $this->ampricottpl);
+		$this->ampricottpl = str_replace(';ACTIONAPACHEMODULE', $actionapachemodule, $this->ampricottpl);
 	}
 
 	public function apachealias()
 	{
-		if ($handle = @opendir($this->apricorediralias))
+		if ($handle = @opendir($this->ampricotdiralias))
 		{
 			$apachealiasexisting = array();
 
@@ -248,27 +248,27 @@ Type: item; Caption: "' . gettext('Edit Alias') . '"; Action: multi; Actions: Ac
 Type: item; Caption: "' . gettext('Delete Alias') . '"; Action: multi; Actions: ActionApacheAliasDelete_' . ucwords($cleanapachealiasname) . '; Glyph: 99
 ;MENUAPACHEALIASCONTROL_' . strtoupper($cleanapachealiasname) . "_END\r\n";
 			$actionapachealiascontrol .= '[ActionApacheAliasEdit_' . ucwords($cleanapachealiasname) . "]\r\n;ACTIONAPACHEALIASEDIT_" . strtoupper($cleanapachealiasname) . "_START\r\n" .
-'Action: run; FileName: "notepad.exe"; parameters:"' . $this->apricoreinstalldirroot . '/front/conf/apache/alias/' . $apachealiasname . '"; Flags: waituntilterminated
-Action: service; Service: ApricoreApache; ServiceAction: restart; Flags: ignoreerrors waituntilterminated
+'Action: run; FileName: "notepad.exe"; parameters:"' . $this->ampricotinstalldirroot . '/front/conf/apache/alias/' . $apachealiasname . '"; Flags: waituntilterminated
+Action: service; Service: AmpricotApache; ServiceAction: restart; Flags: ignoreerrors waituntilterminated
 ;ACTIONAPACHEALIASEDIT_' . strtoupper($cleanapachealiasname) . 'END
 ;ACTIONAPACHEALIASDELETE_' . strtoupper($cleanapachealiasname) . "_START\r\n[ActionApacheAliasDelete_" . ucwords($cleanapachealiasname) . ']
-Action: service; Service: ApricoreApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->apricorephpini) . ' AliasDelete.php ' . $apachealiasname . '"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->apricorephpini) . ' Refresh.php"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "sc"; Parameters: "start ApricoreApache"; ShowCmd: hidden; Flags: waituntilterminated
+Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' AliasDelete.php ' . $apachealiasname . '"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "sc"; Parameters: "start AmpricotApache"; ShowCmd: hidden; Flags: waituntilterminated
 Action: resetservices
 Action: readconfig
 ;ACTIONAPACHEALIASDELETE_' . strtoupper($cleanapachealiasname) . "_END\r\n";
 		}
 
-		$this->apricoretpl = str_replace(';MENUAPACHEALIASSTART', $menuapachealias, $this->apricoretpl);
-		$this->apricoretpl = str_replace(';MENUAPACHEALIASCONTROLSTART', $menuapachealiascontrol, $this->apricoretpl);
-		$this->apricoretpl = str_replace(';ACTIONAPACHEALIASCONTROL', $actionapachealiascontrol, $this->apricoretpl);
+		$this->ampricottpl = str_replace(';MENUAPACHEALIASSTART', $menuapachealias, $this->ampricottpl);
+		$this->ampricottpl = str_replace(';MENUAPACHEALIASCONTROLSTART', $menuapachealiascontrol, $this->ampricottpl);
+		$this->ampricottpl = str_replace(';ACTIONAPACHEALIASCONTROL', $actionapachealiascontrol, $this->ampricottpl);
 	}
 
 	public function apachevhost()
 	{
-		if ($handle = @opendir($this->apricoredirvhost))
+		if ($handle = @opendir($this->ampricotdirvhost))
 		{
 			$apachevhostexisting = array();
 
@@ -295,37 +295,37 @@ Action: readconfig
 			$menuapachevhost .= 'Type: submenu; Caption: "http://' . $cleanapachevhostname . '/"; SubMenu: MenuApacheVHostControl_' . ucwords($cleanapachevhostname) . "; Glyph: 99\r\n";
 			$menuapachevhostcontrol .= '[MenuApacheVHostControl_' . ucwords($cleanapachevhostname) . "]\r\n;MENUAPACHEVHOSTCONTROL_" . strtoupper($cleanapachevhostname) . "_START\r\n" .
 'Type: item; Caption: "' . gettext('Access Online') . '"; Action: run; FileName: "explorer.exe"; Parameters: "http://' . $cleanapachevhostname . '/"; Glyph: 99
-Type: item; Caption: "' . gettext('Browse Directory') . '"; Action: shellexecute; FileName: "'. $this->apricoreinstalldirroot . '/front/data/www/' . $cleanapachevhostname . '"; Glyph: 99
+Type: item; Caption: "' . gettext('Browse Directory') . '"; Action: shellexecute; FileName: "'. $this->ampricotinstalldirroot . '/front/data/www/' . $cleanapachevhostname . '"; Glyph: 99
 Type: separator
 Type: item; Caption: "' . gettext('Edit Virtual Host') . '"; Action: multi; Actions: ActionApacheVHostEdit_' . ucwords($cleanapachevhostname) . '; Glyph: 99
 Type: item; Caption: "' . gettext('Delete Virtual Host') . '"; Action: multi; Actions: ActionApacheVHostDelete_' . ucwords($cleanapachevhostname) . '; Glyph: 99
 Type: separator
-Type: item; Caption: ' . gettext('access.log') . '; Action: run; FileName: "notepad.exe"; parameters: "' . $this->apricoredirtmp . '/log/apache/' . $cleanapachevhostname . '/access.log"; Glyph: 99
-Type: item; Caption: ' . gettext('error.log') . '; Action: run; FileName: "notepad.exe"; parameters: "' . $this->apricoredirtmp . '/log/apache/' . $cleanapachevhostname . '/error.log"; Glyph: 99
+Type: item; Caption: ' . gettext('access.log') . '; Action: run; FileName: "notepad.exe"; parameters: "' . $this->ampricotdirtmp . '/log/apache/' . $cleanapachevhostname . '/access.log"; Glyph: 99
+Type: item; Caption: ' . gettext('error.log') . '; Action: run; FileName: "notepad.exe"; parameters: "' . $this->ampricotdirtmp . '/log/apache/' . $cleanapachevhostname . '/error.log"; Glyph: 99
 ;MENUAPACHEVHOSTCONTROL_' . strtoupper($cleanapachevhostname) . "_END\r\n";
 			$actionapachevhostcontrols .= '[ActionApacheVHostEdit_' . ucwords($cleanapachevhostname) . "]\r\n;ACTIONAPACHEVHOSTEDIT_" . strtoupper($cleanapachevhostname) . "_START\r\n" .
-'Action: run; FileName: "notepad.exe"; parameters:"' . $this->apricoreinstalldirroot . '/front/conf/apache/vhost/' . $apachevhostname . '"; Flags: waituntilterminated
-Action: service; Service: ApricoreApache; ServiceAction: restart; Flags: ignoreerrors waituntilterminated
+'Action: run; FileName: "notepad.exe"; parameters:"' . $this->ampricotinstalldirroot . '/front/conf/apache/vhost/' . $apachevhostname . '"; Flags: waituntilterminated
+Action: service; Service: AmpricotApache; ServiceAction: restart; Flags: ignoreerrors waituntilterminated
 ;ACTIONAPACHEVHOSTEDIT_' . strtoupper($cleanapachevhostname) . 'END
 ;ACTIONAPACHEVHOSTDELETE_' . strtoupper($cleanapachevhostname) . "_START\r\n[ActionApacheVHostDelete_" . ucwords($cleanapachevhostname) . ']
-Action: service; Service: ApricoreApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->apricorephpini) . ' VHostDelete.php ' . $apachevhostname . '"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->apricorephpini) . ' Refresh.php"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "sc"; Parameters: "start ApricoreApache"; ShowCmd: hidden; Flags: waituntilterminated
+Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' VHostDelete.php ' . $apachevhostname . '"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "sc"; Parameters: "start AmpricotApache"; ShowCmd: hidden; Flags: waituntilterminated
 Action: resetservices
 Action: readconfig
 ;ACTIONAPACHEVHOSTDELETE_' . strtoupper($cleanapachevhostname) . "_END\r\n";
 		}
 
-		$this->apricoretpl = str_replace(';MENUAPACHEVHOSTSTART', $menuapachevhost, $this->apricoretpl);
-		$this->apricoretpl = str_replace(';MENUAPACHEVHOSTCONTROLSTART', $menuapachevhostcontrol, $this->apricoretpl);
-		$this->apricoretpl = str_replace(';ACTIONAPACHEVHOSTCONTROLS', $actionapachevhostcontrols, $this->apricoretpl);
+		$this->ampricottpl = str_replace(';MENUAPACHEVHOSTSTART', $menuapachevhost, $this->ampricottpl);
+		$this->ampricottpl = str_replace(';MENUAPACHEVHOSTCONTROLSTART', $menuapachevhostcontrol, $this->ampricottpl);
+		$this->ampricottpl = str_replace(';ACTIONAPACHEVHOSTCONTROLS', $actionapachevhostcontrols, $this->ampricottpl);
 	}
 
 	public function apacheversion()
 	{
 		$process = new Process();
-		$apacheversions = $process->listDir($this->apricoreinstalldirapache);
+		$apacheversions = $process->listDir($this->ampricotinstalldirapache);
 		$menuapacheversion = ";MENUAPACHEVERSIONSTART\r\n";
 		$actionapacheversion = '';
 		ksort($apacheversions);
@@ -337,44 +337,44 @@ Action: readconfig
 			$apachephpcompatibleversion = str_replace('.', '_', str_replace('.0', '', substr($cleanapacheversion, 0, strrpos($cleanapacheversion, '.'))));
 			$apachephpcompatible = 1;
 
-			if (!is_file($this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php5apache' . $apachephpcompatibleversion . '.dll'))
+			if (!is_file($this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php5apache' . $apachephpcompatibleversion . '.dll'))
 			{
 				$apachephpcompatible = 0;
 				$actionapacheversion .= '[ActionApacheVersion_' . $cleanapacheversion2 . "]\r\n;ACTIONAPACHEVERSION_" . $cleanapacheversion2 . "_START\r\n" .
-'Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php.exe"; Parameters: "MSG.php apachephpincompatible"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+'Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php.exe"; Parameters: "MSG.php apachephpincompatible"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
 ;ACTIONAPACHEVERSION_' . $cleanapacheversion2 . "_END\r\n";
 			}
 			else
 			{
 				$actionapacheversion .= '[ActionApacheVersion_' . $cleanapacheversion2 . "]\r\n;ACTIONAPACHEVERSION_" . $cleanapacheversion2 . "_START\r\n" .
-'Action: service; Service: ApricoreApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
+'Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
 Action: closeservices; Flags: ignoreerrors
-Action: run; FileName: "' . $this->apricoreinstalldirapache . '/apache-' . $this->apricoreversionapache . '/bin/httpd.exe"; Parameters: "' . $this->apricoreserviceapacheuninstall . '"; ShowCmd: hidden; Flags: ignoreerrors waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->apricorephpini) . ' switchApacheVersion.php ' . $cleanapacheversion . '"; WorkingDir: "' . $this->apricoreinstalldirroot.'/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->apricorephpini) . ' SwitchPHPVersion.php ' . $this->apricoreversionphp . '"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirapache . '/apache-' . $cleanapacheversion . '/bin/httpd.exe"; Parameters: "' . $this->apricoreserviceapacheinstall . '"; ShowCmd: hidden; Flags: waituntilterminated
-Action: run; FileName: "sc"; Parameters: "config ApricoreApache start= demand"; ShowCmd: hidden; Flags: waituntilterminated
-Action: run; FileName: "sc"; Parameters: "start ApricoreApache"; ShowCmd: hidden; Flags: waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->apricorephpini) . ' Refresh.php"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirapache . '/apache-' . $this->ampricotversionapache . '/bin/httpd.exe"; Parameters: "' . $this->ampricotserviceapacheuninstall . '"; ShowCmd: hidden; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' switchApacheVersion.php ' . $cleanapacheversion . '"; WorkingDir: "' . $this->ampricotinstalldirroot.'/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' SwitchPHPVersion.php ' . $this->ampricotversionphp . '"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirapache . '/apache-' . $cleanapacheversion . '/bin/httpd.exe"; Parameters: "' . $this->ampricotserviceapacheinstall . '"; ShowCmd: hidden; Flags: waituntilterminated
+Action: run; FileName: "sc"; Parameters: "config AmpricotApache start= demand"; ShowCmd: hidden; Flags: waituntilterminated
+Action: run; FileName: "sc"; Parameters: "start AmpricotApache"; ShowCmd: hidden; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
 Action: resetservices
 Action: readconfig
 ;ACTIONAPACHEVERSION_' . $cleanapacheversion2 . "_END\r\n";
 			}
 
-			$menuapacheversion .= 'Type: item; Caption: "' . $cleanapacheversion . '"; Action: multi; Actions: ActionApacheVersion_' . $cleanapacheversion2 . (($apachephpcompatible) ? (($cleanapacheversion == $this->apricoreversionapache) ? '; Glyph: 3' : '') : '; Glyph: 4') . "\r\n";
+			$menuapacheversion .= 'Type: item; Caption: "' . $cleanapacheversion . '"; Action: multi; Actions: ActionApacheVersion_' . $cleanapacheversion2 . (($apachephpcompatible) ? (($cleanapacheversion == $this->ampricotversionapache) ? '; Glyph: 3' : '') : '; Glyph: 4') . "\r\n";
 		}
 
 		$menuapacheversion .= 'Type: separator
-		Type: item; Caption: "' . gettext('More versions...') . '"; Action: run; FileName: "explorer.exe"; Parameters: "http://apricore.fruitechlabs.com/download#apache"' . "; Glyph: 99\r\n";
+		Type: item; Caption: "' . gettext('More versions...') . '"; Action: run; FileName: "explorer.exe"; Parameters: "http://www.ampricot.com/download#apache"' . "; Glyph: 99\r\n";
 
-		$this->apricoretpl = str_replace(';MENUAPACHEVERSIONSTART', $menuapacheversion, $this->apricoretpl);
-		$this->apricoretpl = str_replace(';ACTIONAPACHEVERSION', $actionapacheversion, $this->apricoretpl);
+		$this->ampricottpl = str_replace(';MENUAPACHEVERSIONSTART', $menuapacheversion, $this->ampricottpl);
+		$this->ampricottpl = str_replace(';ACTIONAPACHEVERSION', $actionapacheversion, $this->ampricottpl);
 	}
 
 	public function phpversion()
 	{
 		$process = new Process();
-		$phpversions = $process->listDir($this->apricoreinstalldirphp);
+		$phpversions = $process->listDir($this->ampricotinstalldirphp);
 		$menuphpversion = ";MENUPHPVERSIONSTART\r\n";
 		$actionphpversion = '';
 		ksort($phpversions);
@@ -383,42 +383,42 @@ Action: readconfig
 		{
 			$cleanphpversion = str_replace('php-', '', $phpversion);
 			$cleanphpversion2 = str_replace('.', '_', $cleanphpversion);
-			$phpapachecompatibleversion = str_replace('.', '_', str_replace('.0', '', substr($this->apricoreversionapache, 0, strrpos($this->apricoreversionapache, '.'))));
+			$phpapachecompatibleversion = str_replace('.', '_', str_replace('.0', '', substr($this->ampricotversionapache, 0, strrpos($this->ampricotversionapache, '.'))));
 			$phpapachecompatible = 1;
 
-			if (!is_file($this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php5apache' . $phpapachecompatibleversion . '.dll'))
+			if (!is_file($this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php5apache' . $phpapachecompatibleversion . '.dll'))
 			{
 				$phpapachecompatible = 0;
 				$actionphpversion .= '[ActionPHPVersion_' . $cleanphpversion2 . "]\r\n;ACTIONPHPVERSION_" . $cleanphpversion2 . "_START\r\n" .
-'Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php.exe"; Parameters: "MSG.php phpapacheincompatible"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+'Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php.exe"; Parameters: "MSG.php phpapacheincompatible"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
 ;ACTIONPHPVERSION_' . $cleanphpversion2 . "_END\r\n";
 			}
 			else
 			{
 				$actionphpversion .= '[ActionPHPVersion_' . $cleanphpversion2 . "]\r\n;ACTIONPHPVERSION_" . $cleanphpversion2 . "_START\r\n" .
-'Action: service; Service: ApricoreApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->apricorephpini) . ' SwitchPHPVersion.php ' . $cleanphpversion . '"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "sc"; Parameters: "start ApricoreApache"; ShowCmd: hidden; Flags: waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->apricorephpini) . ' Refresh.php"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+'Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' SwitchPHPVersion.php ' . $cleanphpversion . '"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "sc"; Parameters: "start AmpricotApache"; ShowCmd: hidden; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
 Action: resetservices
 Action: readconfig
 ;ACTIONPHPVERSION_' . $cleanphpversion2 . "_END\r\n";
 			}
 
-			$menuphpversion .= 'Type: item; Caption: "' . $cleanphpversion . '"; Action: multi; Actions: ActionPHPVersion_' . $cleanphpversion2 . (($phpapachecompatible) ? (($cleanphpversion == $this->apricoreversionphp) ? '; Glyph: 3' : '') : '; Glyph: 4') . "\r\n";
+			$menuphpversion .= 'Type: item; Caption: "' . $cleanphpversion . '"; Action: multi; Actions: ActionPHPVersion_' . $cleanphpversion2 . (($phpapachecompatible) ? (($cleanphpversion == $this->ampricotversionphp) ? '; Glyph: 3' : '') : '; Glyph: 4') . "\r\n";
 		}
 
 		$menuphpversion .= 'Type: separator
-Type: item; Caption: "' . gettext('More versions...') . '"; Action: run; FileName: "explorer.exe"; Parameters: "http://apricore.fruitechlabs.com/download#php"' . "; Glyph: 99\r\n";
+Type: item; Caption: "' . gettext('More versions...') . '"; Action: run; FileName: "explorer.exe"; Parameters: "http://www.ampricot.com/download/"' . "; Glyph: 99\r\n";
 
-		$this->apricoretpl = str_replace(';MENUPHPVERSIONSTART', $menuphpversion, $this->apricoretpl);
-		$this->apricoretpl = str_replace(';ACTIONPHPVERSION', $actionphpversion, $this->apricoretpl);
+		$this->ampricottpl = str_replace(';MENUPHPVERSIONSTART', $menuphpversion, $this->ampricottpl);
+		$this->ampricottpl = str_replace(';ACTIONPHPVERSION', $actionphpversion, $this->ampricottpl);
 	}
 
 	public function mysqlversion()
 	{
 		$process = new Process();
-		$mysqlversions = $process->listDir($this->apricoreinstalldirmysql);
+		$mysqlversions = $process->listDir($this->ampricotinstalldirmysql);
 		$menumysqlversion = ";MENUMYSQLVERSIONSTART\r\n";
 		$actionmysqlversion = '';
 		ksort($mysqlversions);
@@ -427,30 +427,30 @@ Type: item; Caption: "' . gettext('More versions...') . '"; Action: run; FileNam
 		{
 			$cleanmysqlversion = str_replace('mysql-', '', $mysqlversion);
 			$cleanmysqlversion2 = str_replace('.', '_', $cleanmysqlversion);
-			$menumysqlversion .= 'Type: item; Caption: "' . $cleanmysqlversion . '"; Action: multi; Actions: ActionMySQLVersion_' . $cleanmysqlversion2 . (($cleanmysqlversion == $this->apricoreversionmysql) ? '; Glyph: 3' : '') . "\r\n";
+			$menumysqlversion .= 'Type: item; Caption: "' . $cleanmysqlversion . '"; Action: multi; Actions: ActionMySQLVersion_' . $cleanmysqlversion2 . (($cleanmysqlversion == $this->ampricotversionmysql) ? '; Glyph: 3' : '') . "\r\n";
 			$actionmysqlversion .= '[ActionMySQLVersion_' . $cleanmysqlversion2 . "]\r\n;ACTIONMYSQLVERSION_" . $cleanmysqlversion2 . "_START\r\n" .
-'Action: service; Service: ApricoreMySQL; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
+'Action: service; Service: AmpricotMySQL; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
 Action: closeservices; Flags: ignoreerrors
-Action: run; FileName: "' . $this->apricoreinstalldirmysql . '/mysql-' . $this->apricoreversionmysql . '/bin/mysqld.exe"; Parameters: "' . $this->apricoreservicemysqluninstall . '"; ShowCmd: hidden; Flags: ignoreerrors waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->apricorephpini) . ' SwitchMySQLVersion.php ' . $cleanmysqlversion . '"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirmysql . '/mysql-' . $cleanmysqlversion . '/bin/mysqld.exe"; Parameters: "' . $this->apricoreservicemysqlinstall . '"; ShowCmd: hidden; Flags: waituntilterminated
-Action: run; FileName: "sc"; Parameters: "start ApricoreMySQL"; ShowCmd: hidden; Flags: waituntilterminated
-Action: run; FileName: "' . $this->apricoreinstalldirphp . '/php-' . $this->apricoreversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->apricorephpini) . ' Refresh.php"; WorkingDir: "' . $this->apricoreinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirmysql . '/mysql-' . $this->ampricotversionmysql . '/bin/mysqld.exe"; Parameters: "' . $this->ampricotservicemysqluninstall . '"; ShowCmd: hidden; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' SwitchMySQLVersion.php ' . $cleanmysqlversion . '"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirmysql . '/mysql-' . $cleanmysqlversion . '/bin/mysqld.exe"; Parameters: "' . $this->ampricotservicemysqlinstall . '"; ShowCmd: hidden; Flags: waituntilterminated
+Action: run; FileName: "sc"; Parameters: "start AmpricotMySQL"; ShowCmd: hidden; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
 Action: resetservices
 Action: readconfig
 ;ACTIONMYSQLVERSION_' . $cleanmysqlversion2 . "_END\r\n";
 		}
 
 		$menumysqlversion .= 'Type: separator
-Type: item; Caption: "' . gettext('More versions...') . '"; Action: run; FileName: "explorer.exe"; Parameters: "http://apricore.fruitechlabs.com/download#mysql"' . "; Glyph: 99\r\n";
+Type: item; Caption: "' . gettext('More versions...') . '"; Action: run; FileName: "explorer.exe"; Parameters: "http://www.ampricot.com/download/"' . "; Glyph: 99\r\n";
 
-		$this->apricoretpl = str_replace(';MENUMYSQLVERSIONSTART', $menumysqlversion, $this->apricoretpl);
-		$this->apricoretpl = str_replace(';ACTIONMYSQLVERSION', $actionmysqlversion, $this->apricoretpl);
+		$this->ampricottpl = str_replace(';MENUMYSQLVERSIONSTART', $menumysqlversion, $this->ampricottpl);
+		$this->ampricottpl = str_replace(';ACTIONMYSQLVERSION', $actionmysqlversion, $this->ampricottpl);
 	}
 
 	public function save()
 	{
-		@file_put_contents($this->apricorefileini, $this->apricoretpl);
+		@file_put_contents($this->ampricotfileini, $this->ampricottpl);
 	}
 
 	public function commit()

@@ -1,6 +1,6 @@
 <?php
-namespace Apricore;
+namespace Ampricot;
 require_once 'class/Process.php';
 $process = new Process();
-$process->iniSet('apricorefileconf', array('apricorelang' => $_SERVER['argv'][1]));
+$process->iniSet('ampricotfileconf', array('ampricotlang' => $_SERVER['argv'][1]));
 ?>

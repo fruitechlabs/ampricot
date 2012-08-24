@@ -1,25 +1,25 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: Apricore                                        Version: 1.0.0 # ||
+|| # Product Name: Ampricot                                        Version: 1.0.0 # ||
 || # License Type: Free License                                                   # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
-|| #           Copyright ©2005-2012 FruiTechLabs. All Rights Reserved.           # ||
+|| #           Copyright ©2005-2012 FruiTechLabs. All Rights Reserved.            # ||
 || #     This product may be redistributed in whole or significant part under     # ||
 || # "The MIT License (MIT)" - http://www.opensource.org/licenses/mit-license.php # ||
 || # 																			  # ||
-|| # ----------------------- "Apricore" IS FREE SOFTWARE ------------------------ # ||
-|| #        http://apricore.fruitechlabs.com | http://www.fruitechlabs.com        # ||
+|| # ----------------------- "Ampricot" IS FREE SOFTWARE ------------------------ # ||
+|| #            http://www.ampricot.com | http://www.fruitechlabs.com             # ||
 || ################################################################################ ||
 \*==================================================================================*/
 
 
-namespace Apricore;
+namespace Ampricot;
 
 class Kernel
 {
-	public $apricorefileconf	= '../apricore.conf';
+	public $ampricotfileconf	= '../ampricot.conf';
 
 	public function __construct()
 	{
@@ -29,40 +29,40 @@ class Kernel
 
 	public function initConfig()
 	{
-		$this->apricoreconf						= @parse_ini_file($this->apricorefileconf);
+		$this->ampricotconf						= @parse_ini_file($this->ampricotfileconf);
 
-		$this->apricorelang						= $this->apricoreconf['apricorelang'];
-		$this->apricorelangdef					= $this->apricoreconf['apricorelangdef'];
-		$this->apricoreinstalldirroot			= $this->apricoreconf['apricoreinstalldirroot'];
-		$this->apricoreinstalldirapache			= $this->apricoreinstalldirroot . '/core/bin/apache';
-		$this->apricoreinstalldirmysql			= $this->apricoreinstalldirroot . '/core/bin/mysql';
-		$this->apricoreinstalldirphp			= $this->apricoreinstalldirroot . '/core/bin/php';
-		$this->apricoreversioncore				= $this->apricoreconf['apricoreversioncore'];
-		$this->apricoreversionapache			= $this->apricoreconf['apricoreversionapache'];
-		$this->apricoreversionmysql				= $this->apricoreconf['apricoreversionmysql'];
-		$this->apricoreversionphp				= $this->apricoreconf['apricoreversionphp'];
-		$this->apricoreserviceapacheinstall		= $this->apricoreconf['apricoreserviceapacheinstall'];
-		$this->apricoreserviceapacheuninstall	= $this->apricoreconf['apricoreserviceapacheuninstall'];
-		$this->apricoreservicemysqlinstall		= $this->apricoreconf['apricoreservicemysqlinstall'];
-		$this->apricoreservicemysqluninstall	= $this->apricoreconf['apricoreservicemysqluninstall'];
+		$this->ampricotlang						= $this->ampricotconf['ampricotlang'];
+		$this->ampricotlangdef					= $this->ampricotconf['ampricotlangdef'];
+		$this->ampricotinstalldirroot			= $this->ampricotconf['ampricotinstalldirroot'];
+		$this->ampricotinstalldirapache			= $this->ampricotinstalldirroot . '/core/bin/apache';
+		$this->ampricotinstalldirmysql			= $this->ampricotinstalldirroot . '/core/bin/mysql';
+		$this->ampricotinstalldirphp			= $this->ampricotinstalldirroot . '/core/bin/php';
+		$this->ampricotversioncore				= $this->ampricotconf['ampricotversioncore'];
+		$this->ampricotversionapache			= $this->ampricotconf['ampricotversionapache'];
+		$this->ampricotversionmysql				= $this->ampricotconf['ampricotversionmysql'];
+		$this->ampricotversionphp				= $this->ampricotconf['ampricotversionphp'];
+		$this->ampricotserviceapacheinstall		= $this->ampricotconf['ampricotserviceapacheinstall'];
+		$this->ampricotserviceapacheuninstall	= $this->ampricotconf['ampricotserviceapacheuninstall'];
+		$this->ampricotservicemysqlinstall		= $this->ampricotconf['ampricotservicemysqlinstall'];
+		$this->ampricotservicemysqluninstall	= $this->ampricotconf['ampricotservicemysqluninstall'];
 
-		$this->apricorefileini					= $this->apricoreinstalldirroot . '/core/inc/apricore.ini';
-		$this->apricoredirlang					= $this->apricoreinstalldirroot . '/core/inc/locale';
-		$this->apricoredirdata					= $this->apricoreinstalldirroot . '/front/data';
-		$this->apricorediralias					= $this->apricoreinstalldirroot . '/front/conf/apache/alias';
-		$this->apricoredirvhost					= $this->apricoreinstalldirroot . '/front/conf/apache/vhost';
-		$this->apricoreapacheconf				= $this->apricoreinstalldirroot . '/front/conf/apache/apache-' . $this->apricoreversionapache . '/httpd.conf';
-		$this->apricoremysqlini					= $this->apricoreinstalldirroot . '/front/conf/mysql/mysql-' . $this->apricoreversionmysql . '/mysql.ini';
-		$this->apricorephpini					= $this->apricoreinstalldirroot . '/front/conf/php/php-' . $this->apricoreversionphp . '/php.ini';
-		$this->apricoredirtmp					= $this->apricoreinstalldirroot . '/front/tmp';
+		$this->ampricotfileini					= $this->ampricotinstalldirroot . '/core/inc/ampricot.ini';
+		$this->ampricotdirlang					= $this->ampricotinstalldirroot . '/core/inc/locale';
+		$this->ampricotdirdata					= $this->ampricotinstalldirroot . '/front/data';
+		$this->ampricotdiralias					= $this->ampricotinstalldirroot . '/front/conf/apache/alias';
+		$this->ampricotdirvhost					= $this->ampricotinstalldirroot . '/front/conf/apache/vhost';
+		$this->ampricotapacheconf				= $this->ampricotinstalldirroot . '/front/conf/apache/apache-' . $this->ampricotversionapache . '/httpd.conf';
+		$this->ampricotmysqlini					= $this->ampricotinstalldirroot . '/front/conf/mysql/mysql-' . $this->ampricotversionmysql . '/mysql.ini';
+		$this->ampricotphpini					= $this->ampricotinstalldirroot . '/front/conf/php/php-' . $this->ampricotversionphp . '/php.ini';
+		$this->ampricotdirtmp					= $this->ampricotinstalldirroot . '/front/tmp';
 	}
 
 	public function initLocale()
 	{
-		putenv("LANG=" . $this->apricorelang);
-		setlocale(LC_ALL, $this->apricorelang);
+		putenv("LANG=" . $this->ampricotlang);
+		setlocale(LC_ALL, $this->ampricotlang);
 
-		bindtextdomain('messages', $this->apricoredirlang);
+		bindtextdomain('messages', $this->ampricotdirlang);
 		bind_textdomain_codeset('messages', 'utf-8');
 
 		textdomain('messages');
