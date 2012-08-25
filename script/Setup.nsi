@@ -124,6 +124,7 @@ ReserveFile "${NSISDIR}\Plugins\System.dll"
 !define MUI_FINISHPAGE_QUICKLAUNCH_TEXT $(^AddQuickLaunch)
 !define MUI_FINISHPAGE_HARMONYMODE
 !define MUI_FINISHPAGE_HARMONYMODE_TEXT $(^ActivateHarmonyMode)
+!define MUI_FINISHPAGE_HARMONYMODELABEL_TEXT $(^ActivateHarmonyModeLabel)
 !define MUI_FINISHPAGE_LINK "${AMPRICOTURLTEXT}"
 !define MUI_FINISHPAGE_LINK_LOCATION "${AMPRICOTURL}"
 !define MUI_UNABORTWARNING
@@ -497,6 +498,7 @@ LangString "^UninstallLink" "${LANG_ENGLISH}" "Uninstall ${AMPRICOTNAME}"
 LangString "^AlreadyInstalled" "${LANG_ENGLISH}" "${AMPRICOTNAME} is apparently already installed!$\r$\nWould you like to UNINSTALL old version now?"
 LangString "^AddQuickLaunch" "${LANG_ENGLISH}" "Add to &Quick Launch"
 LangString "^ActivateHarmonyMode" "${LANG_ENGLISH}" "Activate &Harmony Mode"
+LangString "^ActivateHarmonyModeLabel" "${LANG_ENGLISH}" "Activating Harmony Mode will FORCE CLOSE currently running applications using ports required by Ampricot to prevent conflict and guarantee smooth running of Ampricot. This option can be customized later as well."
 LangString "^ApachePageTitle" "${LANG_ENGLISH}" "Apache Server Information"
 LangString "^ApachePageDesc" "${LANG_ENGLISH}" "Please enter your apache server's information."
 LangString "^ApachePageOptsServerName" "${LANG_ENGLISH}" "&Server Name"
