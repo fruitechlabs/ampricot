@@ -85,7 +85,13 @@ Var mui.MySQLOptsPage.ServerPort.VAL
 !define SHCNE_ASSOCCHANGED 0x8000000
 !define SHCNF_IDLIST 0
 
+# MultiUser Symbol Definitions
+!define MULTIUSER_MUI
+!define MULTIUSER_EXECUTIONLEVEL Highest
+!define MULTIUSER_INSTALLMODE_COMMANDLINE
+
 # Included files
+!include MultiUser.nsh
 !include Sections.nsh
 !include MUI2.nsh
 !include Locate.nsh
@@ -135,6 +141,7 @@ ReserveFile "${NSISDIR}\Plugins\System.dll"
 # Installer pages
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_LICENSE "$(^LicenseFile)"
+!insertmacro MULTIUSER_PAGE_INSTALLMODE
 !insertmacro MUI_PAGE_COMPONENTS
 !insertmacro MUI_PAGE_APACHEOPTS
 !insertmacro MUI_PAGE_MYSQLOPTS
@@ -324,7 +331,7 @@ Section "-post" SEC00099
     IntFmt $0 "0x%08X" $0
     WriteRegDWORD HKLM "${AMPRICOTREGKEY}" "EstimatedSize" $0
     WriteRegStr HKLM "${AMPRICOTREGKEY}" "HelpTelephone" ""
-    WriteRegStr HKLM "${AMPRICOTREGKEY}" "Contact" ""
+    WriteRegStr HKLM "${AMPRICOTREGKEY}" "Contact" "http://www.ampricot.com/contact/"
 
     ${GetTime} "" "LS" $0 $1 $2 $3 $4 $5 $6
     WriteRegStr HKLM "${AMPRICOTREGKEY}" "InstallDate" "$2$1$0"
@@ -380,17 +387,12 @@ Section "-un.post" UNSEC0099
     Delete /REBOOTOK $SMSTARTUP\${AMPRICOTNAME}.lnk
     Delete /REBOOTOK $INSTDIR\www.lnk
     RmDir /r /REBOOTOK $SMPROGRAMS\$StartMenuGroup
-    Push $R0
-    StrCpy $R0 "$StartMenuGroup" 1
-    StrCmp $R0 ">" no_smgroup
-no_smgroup:
-    Pop $R0
 SectionEnd
 
 # Installer functions
 Function .onInit
     InitPluginsDir
-
+    !insertmacro MULTIUSER_INIT
     !insertmacro MUI_LANGDLL_DISPLAY
 
     ${Unless} ${AtLeastWinXP}
@@ -463,6 +465,7 @@ Function un.onInit
     ReadRegStr $INSTDIR HKLM "${AMPRICOTREGKEY}" "InstallLocation"
     !insertmacro MUI_STARTMENU_GETFOLDER "Application" "$StartMenuGroup"
     !insertmacro MUI_UNGETLANGUAGE
+    !insertmacro MULTIUSER_UNINIT
     !insertmacro SelectSection "${UNSEC0000}"
 FunctionEnd
 
@@ -498,7 +501,7 @@ LangString "^UninstallLink" "${LANG_ENGLISH}" "Uninstall ${AMPRICOTNAME}"
 LangString "^AlreadyInstalled" "${LANG_ENGLISH}" "${AMPRICOTNAME} is apparently already installed!$\r$\nWould you like to UNINSTALL old version now?"
 LangString "^AddQuickLaunch" "${LANG_ENGLISH}" "Add to &Quick Launch"
 LangString "^ActivateHarmonyMode" "${LANG_ENGLISH}" "Activate &Harmony Mode"
-LangString "^ActivateHarmonyModeLabel" "${LANG_ENGLISH}" "Activating Harmony Mode will FORCE CLOSE currently running applications using ports required by Ampricot to prevent conflict and guarantee smooth running of Ampricot. This option can be customized later as well."
+LangString "^ActivateHarmonyModeLabel" "${LANG_ENGLISH}" "Activating Harmony Mode will FORCE CLOSE currently running applications using ports required by Ampricot."
 LangString "^ApachePageTitle" "${LANG_ENGLISH}" "Apache Server Information"
 LangString "^ApachePageDesc" "${LANG_ENGLISH}" "Please enter your apache server's information."
 LangString "^ApachePageOptsServerName" "${LANG_ENGLISH}" "&Server Name"

@@ -86,6 +86,7 @@ MySQL Options page
 
     ${NSD_CreatePassword} 0 13u 48% 12u $mui.MySQLOptsPage.RootPass.VAL
     Pop $mui.MySQLOptsPage.RootPass.TXT
+    ${NSD_SetFocus} $mui.MySQLOptsPage.RootPass.TXT
     ${NSD_OnChange} $mui.MySQLOptsPage.RootPass.TXT mui.MySQLOptsPage.CheckEmptyOrNot
 
 
