@@ -27,6 +27,7 @@ Name "Ampricot"
 !define MUI_LANGDLL_REGISTRY_VALUENAME "InstallerLanguage"
 
 # Installer attributes
+RequestExecutionLevel highest
 BrandingText " "
 OutFile "..\..\..\..\binary\ampricot\${AMPRICOTINSTALLER}"
 CRCCheck on
@@ -85,13 +86,7 @@ Var mui.MySQLOptsPage.ServerPort.VAL
 !define SHCNE_ASSOCCHANGED 0x8000000
 !define SHCNF_IDLIST 0
 
-# MultiUser Symbol Definitions
-!define MULTIUSER_MUI
-!define MULTIUSER_EXECUTIONLEVEL Highest
-!define MULTIUSER_INSTALLMODE_COMMANDLINE
-
 # Included files
-!include MultiUser.nsh
 !include Sections.nsh
 !include MUI2.nsh
 !include Locate.nsh
@@ -128,6 +123,8 @@ ReserveFile "${NSISDIR}\Plugins\System.dll"
 !define MUI_FINISHPAGE_RUN_TEXT "$(^StartLink)"
 !define MUI_FINISHPAGE_QUICKLAUNCH
 !define MUI_FINISHPAGE_QUICKLAUNCH_TEXT $(^AddQuickLaunch)
+!define MUI_FINISHPAGE_STARTUP
+!define MUI_FINISHPAGE_STARTUP_TEXT $(^AddStartUp)
 !define MUI_FINISHPAGE_HARMONYMODE
 !define MUI_FINISHPAGE_HARMONYMODE_TEXT $(^ActivateHarmonyMode)
 !define MUI_FINISHPAGE_HARMONYMODELABEL_TEXT $(^ActivateHarmonyModeLabel)
@@ -141,7 +138,6 @@ ReserveFile "${NSISDIR}\Plugins\System.dll"
 # Installer pages
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_LICENSE "$(^LicenseFile)"
-!insertmacro MULTIUSER_PAGE_INSTALLMODE
 !insertmacro MUI_PAGE_COMPONENTS
 !insertmacro MUI_PAGE_APACHEOPTS
 !insertmacro MUI_PAGE_MYSQLOPTS
@@ -164,7 +160,7 @@ ReserveFile "${NSISDIR}\Plugins\System.dll"
 # Installer sections
 Section "-pre" SEC0000
     SetOutPath $INSTDIR\core\inc
-    File /r /x parse ..\input\core\inc\*
+    File /r /x parse /x harmonymode.bat ..\input\core\inc\*
 
     DetailPrint "$(^VCREDIST)"
     ExecWait '"$INSTDIR\core\inc\vc9.exe" /q'
@@ -352,6 +348,10 @@ Section "-post" SEC00099
     ${str_replace} " " "%20" "$installdirectory" "$urleninstalldirectory"
     ${file_replace} "@AMPRICOTINSTALLDIRROOTENC@" "$urleninstalldirectory" "all" "all" "$INSTDIR\core\inc\ampricot.ini"
 
+    IfSilent +1 +2
+    ${file_replace} "ampricotharmony = $\"off$\"" "ampricotharmony = $\"on$\"" "all" "all" "$INSTDIR\core\inc\ampricot.conf"
+    
+    IfSilent +1 +3
     SetOutPath $SMSTARTUP
     CreateShortcut "$SMSTARTUP\${AMPRICOTNAME}.lnk" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
 
@@ -392,7 +392,6 @@ SectionEnd
 # Installer functions
 Function .onInit
     InitPluginsDir
-    !insertmacro MULTIUSER_INIT
     !insertmacro MUI_LANGDLL_DISPLAY
 
     ${Unless} ${AtLeastWinXP}
@@ -465,7 +464,6 @@ Function un.onInit
     ReadRegStr $INSTDIR HKLM "${AMPRICOTREGKEY}" "InstallLocation"
     !insertmacro MUI_STARTMENU_GETFOLDER "Application" "$StartMenuGroup"
     !insertmacro MUI_UNGETLANGUAGE
-    !insertmacro MULTIUSER_UNINIT
     !insertmacro SelectSection "${UNSEC0000}"
 FunctionEnd
 
@@ -500,6 +498,7 @@ LangString "^StartLink" "${LANG_ENGLISH}" "Start ${AMPRICOTNAME}"
 LangString "^UninstallLink" "${LANG_ENGLISH}" "Uninstall ${AMPRICOTNAME}"
 LangString "^AlreadyInstalled" "${LANG_ENGLISH}" "${AMPRICOTNAME} is apparently already installed!$\r$\nWould you like to UNINSTALL old version now?"
 LangString "^AddQuickLaunch" "${LANG_ENGLISH}" "Add to &Quick Launch"
+LangString "^AddStartUp" "${LANG_ENGLISH}" "Add to &Startup"
 LangString "^ActivateHarmonyMode" "${LANG_ENGLISH}" "Activate &Harmony Mode"
 LangString "^ActivateHarmonyModeLabel" "${LANG_ENGLISH}" "Activating Harmony Mode will FORCE CLOSE currently running applications using ports required by Ampricot."
 LangString "^ApachePageTitle" "${LANG_ENGLISH}" "Apache Server Information"
