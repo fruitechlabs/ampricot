@@ -370,6 +370,8 @@ SectionEnd
 Section /o "-un.Main Uninstall Step" UNSEC0000
     ExecWait 'sc stop AmpricotApache'
     ExecWait 'sc stop AmpricotMySQL'
+    ; Force close not closed services 
+    ExecWait '"$INSTDIR\core\inc\harmonymode.exe"'
     ExecWait '"$INSTDIR\core\inc\${AMPRICOTLAUNCHER}" -quit -id={ampricot}'
     ExecWait '"$INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\bin\httpd.exe" -k uninstall -n AmpricotApache'
     ExecWait '"$INSTDIR\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\bin\mysqld.exe" --remove AmpricotMySQL'
