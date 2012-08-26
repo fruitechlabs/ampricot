@@ -24,6 +24,15 @@ class Reload extends Kernel
 	public function __construct()
 	{
 		parent::__construct();
+
+		//			This should be handled through the main laucher's config file 'ampricot.ini' within "[StartupAction]",
+		//	TODO:	but for some reasons it doesn't work smoothly; It MySQL server not to start from the first execution,
+		//			you've to restart the server to do so!!!
+		if ($this->ampricotconf['ampricotharmony'] == 'on')
+		{
+			exec('"../harmonymode.exe"');
+		}
+
 		$this->ampricottpl = require_once 'Template.php';
 	}
 
