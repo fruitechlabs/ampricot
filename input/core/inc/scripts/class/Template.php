@@ -56,7 +56,6 @@ Action: run; FileName: "explorer.exe"; Parameters: "http://localhost/"
 
 [StartupAction]
 ;AMPRICOTSTARTUPACTIONSTART
-' . (($this->ampricotconf['ampricotharmony'] == 'on') ? 'Action: run; FileName: "' . $this->ampricotinstalldirroot . '/core/inc/harmonymode.exe"; Flags: waituntilterminated' : '') . '
 Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
 Action: resetservices
 Action: readconfig
