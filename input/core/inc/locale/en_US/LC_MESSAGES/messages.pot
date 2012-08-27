@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Ampricot 1.0.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-08-24 18:53+0200\n"
-"PO-Revision-Date: 2012-08-24 18:53+0200\n"
+"PO-Revision-Date: 2012-08-27 01:58+0200\n"
 "Last-Translator: Abdelrahman Omran <me@omranic.com>\n"
 "Language-Team: FruiTech Labs <support@ampricot.com>\n"
 "MIME-Version: 1.0\n"
@@ -12,8 +12,7 @@ msgstr ""
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Language: English\n"
-"X-Poedit-Country: UNITED STATES\n"
+"Language: en_US\n"
 "X-Poedit-SearchPath-0: D:/workspace/fruitechlabs/ampricot/input\n"
 
 #: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:25
@@ -69,7 +68,9 @@ msgstr ""
 
 #: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:48
 #, php-format
-msgid "Example: 'test' Would create a new virtual host with the url: 'http://test/' which points to: '%1$stest/'"
+msgid ""
+"Example: 'test' Would create a new virtual host with the url: 'http://test/' "
+"which points to: '%1$stest/'"
 msgstr ""
 
 #: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:55
@@ -92,11 +93,15 @@ msgid "Your port '%1$s' is actually used by:"
 msgstr ""
 
 #: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:123
-msgid "Information not available, it might be 'Skype' or another windows application!"
+msgid ""
+"Information not available, it might be 'Skype' or another windows "
+"application!"
 msgstr ""
 
 #: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:127
-msgid "Can NOT install 'Apache Service', please stop the above application(s) and try again!"
+msgid ""
+"Can NOT install 'Apache Service', please stop the above application(s) and "
+"try again!"
 msgstr ""
 
 #: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:132
@@ -122,7 +127,8 @@ msgid "Enter your alias."
 msgstr ""
 
 #: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:163
-msgid "Example: 'test' Would create an alias for the url: 'http://localhost/test/'"
+msgid ""
+"Example: 'test' Would create an alias for the url: 'http://localhost/test/'"
 msgstr ""
 
 #: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:170
@@ -141,7 +147,8 @@ msgstr ""
 
 #: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:182
 #, php-format
-msgid "Example: 'c:/test/' Would make 'http://localhost/%1$s/' point to: 'c:/test/'"
+msgid ""
+"Example: 'c:/test/' Would make 'http://localhost/%1$s/' point to: 'c:/test/'"
 msgstr ""
 
 #: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:199
@@ -153,11 +160,15 @@ msgid "This directory doesn't exist! Alias not created!"
 msgstr ""
 
 #: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:230
-msgid "Sorry, this 'PHP' version doesn't seem to be compatible with your actual 'Apache' version. Switching 'PHP' version cancelled!"
+msgid ""
+"Sorry, this 'PHP' version doesn't seem to be compatible with your actual "
+"'Apache' version. Switching 'PHP' version cancelled!"
 msgstr ""
 
 #: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:234
-msgid "Sorry, this 'Apache' version doesn't seem to be compatible with your actual 'PHP' version. Switching 'Apache' version cancelled!"
+msgid ""
+"Sorry, this 'Apache' version doesn't seem to be compatible with your actual "
+"'PHP' version. Switching 'Apache' version cancelled!"
 msgstr ""
 
 #: D:/workspace/fruitechlabs/ampricot/input/core/inc/scripts/class/Process.php:238
@@ -489,4 +500,3 @@ msgstr ""
 #: D:/workspace/fruitechlabs/ampricot/input/front/data/www/localhost/index.php:213
 msgid "Off The Web"
 msgstr ""
-
