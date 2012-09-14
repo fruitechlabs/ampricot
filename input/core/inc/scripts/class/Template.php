@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: Ampricot                                        Version: 1.0.0 # ||
+|| # Product Name: Ampricot                                                       # ||
 || # License Type: Free License                                                   # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -36,7 +36,7 @@ AboutVersion=' . $this->ampricotversioncore . '
 
 [AboutText]
 Copyright (c) 2012 FruiTech Labs.
-Application: Ampricot - http://www.ampricot.com
+Product: Ampricot - http://www.ampricot.com
 Company: FruiTech Labs - http://www.fruitechlabs.com
 Developer: Abdelrahman Omran - http://www.omranic.com
 
@@ -56,6 +56,7 @@ Action: run; FileName: "explorer.exe"; Parameters: "http://localhost/"
 
 [StartupAction]
 ;AMPRICOTSTARTUPACTIONSTART
+Action: run; FileName: "hstart"; Parameters: "/noconsole /silent /wait ' . $this->ampricotinstalldirroot . '/core/inc/harmonymode.bat"
 Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
 Action: resetservices
 Action: readconfig
@@ -98,7 +99,7 @@ Type: submenu; Caption: "' . gettext('&Language') . '"; SubMenu: MenuLanguage; G
 Type: separator
 Type: submenu; Caption: "' . gettext('Ad&vanced') . '"; SubMenu: MenuAdvanced; Glyph: 99
 Type: separator
-Type: item; Caption: "' . gettext('&Support') . '"; Action: run; FileName: "explorer.exe"; Parameters: "http://support.fruitechlabs.com/forumdisplay.php?fid=1"; Glyph: 99
+Type: item; Caption: "' . gettext('&Support') . '"; Action: run; FileName: "explorer.exe"; Parameters: "http://www.ampricot.com/support/"; Glyph: 99
 Type: item; Caption: "' . gettext('&About') . '"; Action: about; Glyph: 99
 Type: item; Caption: "' . gettext('E&xit') . '"; Action: multi; Actions: ActionExit; Glyph: 99
 ;AMPRICOTMENURIGHTEND

@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: Ampricot                                        Version: 1.0.0 # ||
+|| # Product Name: Ampricot                                                       # ||
 || # License Type: Free License                                                   # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -24,14 +24,6 @@ class Reload extends Kernel
 	public function __construct()
 	{
 		parent::__construct();
-
-		// TODO: This should be handled through the main laucher's config file 'ampricot.ini' within "[StartupAction]",
-		// but for some reasons it doesn't work smoothly; It MySQL server not to start from the first execution,
-		// you've to restart the server to do so!!!
-		if ($this->ampricotconf['ampricotharmony'] == 'on')
-		{
-			exec('"../harmonymode.exe"');
-		}
 
 		$this->ampricottpl = require_once 'Template.php';
 	}

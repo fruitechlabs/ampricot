@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: Ampricot                                        Version: 1.0.0 # ||
+|| # Product Name: Ampricot                                                       # ||
 || # License Type: Free License                                                   # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -209,10 +209,16 @@ $output = '
 					<div><span class="shade">' . $ampricotconf['ampricotversionmysql'] . '</span>MySQL:</div>
 					<div><span class="shade">' . $ampricotconf['ampricotversionphp'] . '</span>PHP:</div>
 
+					<div>&nbsp;</div>
+
+					<div class="bborder1px">' . gettext('Virtual Host:') . '</div>
+					<div><input size="100%" type="text" spellcheck="false" onclick="this.select();" value="http://localhost/" /></div>
+					<div><input size="100%" type="text" spellcheck="false" onclick="this.select();" value="@AMPRICOTINSTALLDIRCORE@/front/data/www/localhost" /></div>
+
 					<div class="bborder2px">&nbsp;</div>
 					<div class="centerpad">' . gettext('Server Status: ') . (($ampricotconf['ampricotstatus'] == 'on') ? gettext('On The Web') : gettext('Off The Web')) . '</div>
-					' . ((!empty($loadavg)) ? '<div class="centerpad">Server Load: ' . $loadavg[0] . '&nbsp;&nbsp;' . $loadavg[1] . '&nbsp;&nbsp;' . $loadavg[2] . '</div>' : '') . '
-
+					<div class="centerpad" style="padding-top: 0px !important">' . gettext('Harmony Mode: ') . ucfirst($ampricotconf['ampricotharmony']) . '</div>
+					' . ((!empty($loadavg)) ? '<div class="centerpad" style="padding-top: 0px !important">' . gettext('Server Load: ') . $loadavg[0] . '&nbsp;&nbsp;' . $loadavg[1] . '&nbsp;&nbsp;' . $loadavg[2] . '</div>' : '') . '
 				</div>
 			</div>
 			<!-- sidebar END -->
@@ -225,10 +231,7 @@ $output = '
 	<div class="footer">
 		<div class="inner">
 			<div class="content">
-				<span class="floatright">
-					<input size="50%" type="text" spellcheck="false" onclick="this.select();" value="@AMPRICOTINSTALLDIRCORE@/front/data/www/localhost" style="text-align:right;" />
-				</span>
-				<input size="50%" type="text" spellcheck="false" onclick="this.select();" value="http://localhost/" />
+				<p style="text-align: center;">Copyright &copy; 2012 Ampricot | Proudly Made In Egypt.</p>
 			</div>
 		</div>
 	</div>
