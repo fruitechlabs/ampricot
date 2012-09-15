@@ -27,6 +27,7 @@ Name "Ampricot"
 !define MUI_LANGDLL_REGISTRY_VALUENAME "InstallerLanguage"
 
 # Installer attributes
+SetShellVarContext all
 RequestExecutionLevel highest
 BrandingText " "
 OutFile "..\..\..\..\binary\ampricot\${AMPRICOTINSTALLER}"
@@ -90,6 +91,7 @@ Var mui.MySQLOptsPage.ServerPort.VAL
 !include Sections.nsh
 !include MUI2.nsh
 !include Locate.nsh
+!include EnvVarUpdate.nsh
 !include FileFunc.nsh
 !include WinVer.nsh
 !include Core.nsh
@@ -362,6 +364,8 @@ Section "-post" SEC00099
     SetOutPath $QUICKLAUNCH
     CreateShortcut "$QUICKLAUNCH\${AMPRICOTNAME}.lnk" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
 
+    ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR\core\bin\php\php-${AMPRICOTVERSIONPHP}"
+ 
     CreateDirectory $INSTDIR\front\tmp\dmp
 SectionEnd
 
@@ -384,6 +388,7 @@ Section /o "-un.Main Uninstall Step" UNSEC0000
 SectionEnd
 
 Section "-un.post" UNSEC0099
+    ${EnvVarUpdate} $0 "PATH" "R" "HKLM" "$INSTDIR\core\bin\php\php-${AMPRICOTVERSIONPHP}"
     DeleteRegKey HKLM "${AMPRICOTREGKEY}"
     Delete /REBOOTOK $QUICKLAUNCH\${AMPRICOTNAME}.lnk
     Delete /REBOOTOK $SMSTARTUP\${AMPRICOTNAME}.lnk
@@ -492,7 +497,7 @@ FunctionEnd
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 # Installer License Strings
-LicenseLangString ^LicenseFile ${LANG_ENGLISH} "..\input\core\inc\parse\license\en.txt"
+LicenseLangString ^LicenseFile ${LANG_ENGLISH} "..\input\core\inc\license.txt"
 
 # Installer Language Strings
 LangString "^VCREDIST" "${LANG_ENGLISH}" "Installing Microsoft Visual C++ 2008 SP1 Redistributable Package"
