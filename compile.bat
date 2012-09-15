@@ -27,7 +27,7 @@ rename "D:\workspace\fruitechlabs\ampricot\input\core\app\adminer-3.5.1\adminer-
 xcopy /s "D:\workspace\fruitechlabs\ampricot\input\front\conf\apache\apache-2.4.xx\*" "D:\workspace\fruitechlabs\ampricot\input\front\conf\apache\apache-2.4.3\"
 xcopy /s "D:\workspace\fruitechlabs\ampricot\input\front\conf\mysql\mysql-5.5.xx\*" "D:\workspace\fruitechlabs\ampricot\input\front\conf\mysql\mysql-5.5.27\"
 xcopy /s "D:\workspace\fruitechlabs\ampricot\input\front\conf\php\php-5.4.xx\*" "D:\workspace\fruitechlabs\ampricot\input\front\conf\php\php-5.4.6\"
-xcopy "D:\toolbox\fruitechlabs\ampricot\assets\vc9.exe" "D:\workspace\fruitechlabs\ampricot\input\core\inc\"
+xcopy "D:\toolbox\fruitechlabs\ampricot\assets\vcr9.exe" "D:\workspace\fruitechlabs\ampricot\input\core\inc\"
 
 
 CALL "C:\Program Files\NSIS\Unicode\makensis.exe" "D:\workspace\fruitechlabs\ampricot\script\setup.nsi"
@@ -36,4 +36,4 @@ CALL "C:\Program Files\NSIS\Unicode\makensis.exe" "D:\workspace\fruitechlabs\amp
 rmdir /S /Q "D:\workspace\tmp\apache\","D:\workspace\tmp\mysql\","D:\workspace\tmp\php\","D:\workspace\tmp\app\"
 rmdir /S /Q "D:\workspace\fruitechlabs\ampricot\input\core\bin\","D:\workspace\fruitechlabs\ampricot\input\core\app\"
 rmdir /S /Q "D:\workspace\fruitechlabs\ampricot\input\front\conf\apache\apache-2.4.3\","D:\workspace\fruitechlabs\ampricot\input\front\conf\mysql\mysql-5.5.27\","D:\workspace\fruitechlabs\ampricot\input\front\conf\php\php-5.4.6\"
-del "D:\workspace\fruitechlabs\ampricot\input\core\inc\vc9.exe"
+del "D:\workspace\fruitechlabs\ampricot\input\core\inc\vcr9.exe"

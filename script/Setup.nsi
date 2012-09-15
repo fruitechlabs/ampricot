@@ -27,7 +27,6 @@ Name "Ampricot"
 !define MUI_LANGDLL_REGISTRY_VALUENAME "InstallerLanguage"
 
 # Installer attributes
-SetShellVarContext all
 RequestExecutionLevel highest
 BrandingText " "
 OutFile "..\..\..\..\binary\ampricot\${AMPRICOTINSTALLER}"
@@ -53,7 +52,6 @@ SetCompressorDictSize 32
 SetDatablockOptimize On
 
 # Custom Variables
-Var StartMenuGroup
 Var WINDRIVE
 
 # Apache Vars
@@ -116,17 +114,9 @@ ReserveFile "${NSISDIR}\Plugins\System.dll"
 !define MUI_WELCOMEFINISHPAGE_BITMAP "..\input\core\inc\parse\wizard.bmp"
 !define MUI_COMPONENTSPAGE_SMALLDESC
 !define MUI_COMPONENTSPAGE_CHECKBITMAP "${NSISDIR}\Contrib\Graphics\Checks\modern.bmp"
-!define MUI_STARTMENUPAGE_REGISTRY_ROOT "HKLM"
-!define MUI_STARTMENUPAGE_REGISTRY_KEY "${AMPRICOTREGKEY}"
-!define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "StartMenuGroup"
-!define MUI_STARTMENUPAGE_DEFAULTFOLDER "${AMPRICOTNAME}"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_FINISHPAGE_RUN "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
 !define MUI_FINISHPAGE_RUN_TEXT "$(^StartLink)"
-!define MUI_FINISHPAGE_QUICKLAUNCH
-!define MUI_FINISHPAGE_QUICKLAUNCH_TEXT $(^AddQuickLaunch)
-!define MUI_FINISHPAGE_STARTUP
-!define MUI_FINISHPAGE_STARTUP_TEXT $(^AddStartUp)
 !define MUI_FINISHPAGE_HARMONYMODE
 !define MUI_FINISHPAGE_HARMONYMODE_TEXT $(^ActivateHarmonyMode)
 !define MUI_FINISHPAGE_HARMONYMODELABEL_TEXT $(^ActivateHarmonyModeLabel)
@@ -144,7 +134,6 @@ ReserveFile "${NSISDIR}\Plugins\System.dll"
 !insertmacro MUI_PAGE_APACHEOPTS
 !insertmacro MUI_PAGE_MYSQLOPTS
 !insertmacro MUI_PAGE_DIRECTORY
-!insertmacro MUI_PAGE_STARTMENU "Application" "$StartMenuGroup"
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH
 !insertmacro MUI_UNPAGE_CONFIRM
@@ -162,117 +151,118 @@ ReserveFile "${NSISDIR}\Plugins\System.dll"
 # Installer sections
 Section "-pre" SEC0000
     SetOutPath $INSTDIR\core\inc
-    File /r /x parse /x harmonymode.bat ..\input\core\inc\*
-
+    File /r /x parse ..\input\core\inc\*
     DetailPrint "$(^VCREDIST)"
-    ExecWait '"$INSTDIR\core\inc\vc9.exe" /q'
-    Delete /REBOOTOK "$INSTDIR\core\inc\vc9.exe"
+    ExecWait '"$INSTDIR\core\inc\vcr9.exe" /q'
+    Delete /REBOOTOK "$INSTDIR\core\inc\vcr9.exe"
 SectionEnd
 
-Section "Apache HTTP Server ${AMPRICOTVERSIONAPACHE}" SEC0001
-    SectionIn RO
+SectionGroup "Core Components" SECGRP0000
+    Section "Apache HTTP Server ${AMPRICOTVERSIONAPACHE}" SEC0001
+        SectionIn RO
 
-    Var /GLOBAL installdirectory
-    ${str_replace} "\" "/" "$INSTDIR" "$installdirectory"
+        Var /GLOBAL installdirectory
+        ${str_replace} "\" "/" "$INSTDIR" "$installdirectory"
 
-    SetOverwrite on
-    SetOutPath $INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}
-    File /r /x cgi-bin /x conf /x htdocs /x include /x lib /x logs /x manual /x *.pdb /x *.txt ..\input\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\*
-    SetOutPath $INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\conf
-    File ..\input\core\inc\parse\httpd.conf
-    SetOutPath $INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}
-    File /r ..\input\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\*
-    SetOutPath $INSTDIR\front\conf\apache\vhost
-    File /r ..\input\front\conf\apache\vhost\*
-    SetOutPath $INSTDIR\front\data\www
-    File /r ..\input\front\data\www\*
-    SetOutPath $INSTDIR\front\data\cgi-bin
-    File /r ..\input\front\data\cgi-bin\*
-    CreateDirectory $INSTDIR\front\tmp\log\apache\localhost
+        SetOverwrite on
+        SetOutPath $INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}
+        File /r /x cgi-bin /x conf /x htdocs /x include /x lib /x logs /x manual /x *.pdb /x *.txt ..\input\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\*
+        SetOutPath $INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\conf
+        File ..\input\core\inc\parse\httpd.conf
+        SetOutPath $INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}
+        File /r ..\input\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\*
+        SetOutPath $INSTDIR\front\conf\apache\vhost
+        File /r ..\input\front\conf\apache\vhost\*
+        SetOutPath $INSTDIR\front\data\www
+        File /r ..\input\front\data\www\*
+        SetOutPath $INSTDIR\front\data\cgi-bin
+        File /r ..\input\front\data\cgi-bin\*
+        CreateDirectory $INSTDIR\front\tmp\log\apache\localhost
 
-    ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\conf\httpd.conf"
+        ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\conf\httpd.conf"
 
-    ${file_replace} "@AMPRICOTVERSIONPHP@" "${AMPRICOTVERSIONPHP}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
-    ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
-    ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
-    ${file_replace} "@AMPRICOTSERVERPORTHTTPAPACHE@" "$mui.ApacheOptsPage.ServerPortHTTP.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
-    ${file_replace} "@AMPRICOTSERVERADMINAPACHE@" "$mui.ApacheOptsPage.AdminEmail.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
-    ${file_replace} "@AMPRICOTSERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
+        ${file_replace} "@AMPRICOTVERSIONPHP@" "${AMPRICOTVERSIONPHP}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
+        ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
+        ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
+        ${file_replace} "@AMPRICOTSERVERPORTHTTPAPACHE@" "$mui.ApacheOptsPage.ServerPortHTTP.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
+        ${file_replace} "@AMPRICOTSERVERADMINAPACHE@" "$mui.ApacheOptsPage.AdminEmail.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
+        ${file_replace} "@AMPRICOTSERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
+    
+        ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-autoindex.conf"
+        ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-autoindex.conf"
+    
+        ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-dav.conf"
+        ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-dav.conf"
+    
+        ${file_replace} "@AMPRICOTSERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-info.conf"
+    
+        ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-manual.conf"
+        ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-manual.conf"
+    
+        ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-multilang-errordoc.conf"
+        ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-multilang-errordoc.conf"
+    
+        ${file_replace} "@AMPRICOTSERVERPORTHTTPSAPACHE@" "$mui.ApacheOptsPage.ServerPortHTTPS.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-ssl.conf"
+        ${file_replace} "@AMPRICOTSERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-ssl.conf"
+        ${file_replace} "@AMPRICOTSERVERADMINAPACHE@" "$mui.ApacheOptsPage.AdminEmail.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-ssl.conf"
+        ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-ssl.conf"
+    
+        ${file_replace} "@AMPRICOTSERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\vhost\localhost.conf"
+    
+        ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\data\www\localhost\index.php"
+    
+        ExecWait '"$INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\bin\httpd.exe" -k install -n AmpricotApache'
+        ExecWait 'sc config AmpricotApache start= demand'
+    SectionEnd
+    
+    Section "MySQL ${AMPRICOTVERSIONMYSQL}" SEC0002
+        SectionIn RO
+    
+        SetOverwrite on
+        SetOutPath $INSTDIR\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}
+        File /r /x data /x docs /x include /x debug /x lib /x mysql-test /x scripts /x sql-bench /x *.lib /x *.pdb /x *.ini /x COPYING /x README ..\input\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\*
+        SetOutPath $INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}
+        File /r ..\input\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\*
+        SetOutPath $INSTDIR\front\data\mysql\mysql-${AMPRICOTVERSIONMYSQL}
+        File /r ..\input\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\data\*
+        CreateDirectory $INSTDIR\front\tmp\log\mysql
+    
+        ${file_replace} "@AMPRICOTSERVERPORTMYSQL@" "$mui.MySQLOptsPage.ServerPort.VAL" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini"
+        ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini"
+        ${file_replace} "@AMPRICOTVERSIONMYSQL@" "${AMPRICOTVERSIONMYSQL}" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini"
+    
+        ExecWait '"$INSTDIR\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\bin\mysqld.exe" --install-manual AmpricotMySQL --defaults-file=$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini'
+    
+        DetailPrint "Updating MySQL 'root' password.."
+        ${file_replace} "@AMPRICOTMYSQLROOTPASS@" "$mui.MySQLOptsPage.RootPass.VAL" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.sql"
+        ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.bat"
+        ${file_replace} "@AMPRICOTVERSIONMYSQL@" "${AMPRICOTVERSIONMYSQL}" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.bat"
+    
+        ExecWait '"$INSTDIR\core\inc\mysqlresetrootpass.bat"'
+        Delete /REBOOTOK $INSTDIR\core\inc\mysqlresetrootpass.bat
+        Delete /REBOOTOK $INSTDIR\core\inc\mysqlresetrootpass.sql
+    SectionEnd
+    
+    Section "PHP ${AMPRICOTVERSIONPHP}" SEC0003
+        SectionIn RO
+    
+        SetOverwrite on
+        SetOutPath $INSTDIR\core\bin\php\php-${AMPRICOTVERSIONPHP}
+        File /r /x extras /x dev /x *.ini /x *.reg /x *.lib /x *.txt /x php.ini-development /x php.ini-production ..\input\core\bin\php\php-${AMPRICOTVERSIONPHP}\*
+        SetOutPath $INSTDIR\front\conf\php\php-${AMPRICOTVERSIONPHP}
+        File /r ..\input\front\conf\php\php-${AMPRICOTVERSIONPHP}\*
+        CreateDirectory $INSTDIR\front\tmp\log\php
+    
+        ${file_replace} "@AMPRICOTVERSIONPHP@" "${AMPRICOTVERSIONPHP}" "all" "all" "$INSTDIR\front\conf\php\php-${AMPRICOTVERSIONPHP}\php.ini"
+        ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\php\php-${AMPRICOTVERSIONPHP}\php.ini"
+    
+        ${file_replace} "#LoadModule php5_module" "LoadModule php5_module" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
+        ${file_replace} "#PHPIniDir" "PHPIniDir" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
+        ${file_replace} "#AddType application/x-httpd-php .php" "AddType application/x-httpd-php .php" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
+    SectionEnd
+SectionGroupEnd
 
-    ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-autoindex.conf"
-    ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-autoindex.conf"
-
-    ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-dav.conf"
-    ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-dav.conf"
-
-    ${file_replace} "@AMPRICOTSERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-info.conf"
-
-    ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-manual.conf"
-    ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-manual.conf"
-
-    ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-multilang-errordoc.conf"
-    ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-multilang-errordoc.conf"
-
-    ${file_replace} "@AMPRICOTSERVERPORTHTTPSAPACHE@" "$mui.ApacheOptsPage.ServerPortHTTPS.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-ssl.conf"
-    ${file_replace} "@AMPRICOTSERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-ssl.conf"
-    ${file_replace} "@AMPRICOTSERVERADMINAPACHE@" "$mui.ApacheOptsPage.AdminEmail.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-ssl.conf"
-    ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-ssl.conf"
-
-    ${file_replace} "@AMPRICOTSERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\vhost\localhost.conf"
-
-    ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\data\www\localhost\index.php"
-
-    ExecWait '"$INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\bin\httpd.exe" -k install -n AmpricotApache'
-    ExecWait 'sc config AmpricotApache start= demand'
-SectionEnd
-
-Section "MySQL ${AMPRICOTVERSIONMYSQL}" SEC0002
-    SectionIn RO
-
-    SetOverwrite on
-    SetOutPath $INSTDIR\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}
-    File /r /x data /x docs /x include /x debug /x lib /x mysql-test /x scripts /x sql-bench /x *.lib /x *.pdb /x *.ini /x COPYING /x README ..\input\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\*
-    SetOutPath $INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}
-    File /r ..\input\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\*
-    SetOutPath $INSTDIR\front\data\mysql\mysql-${AMPRICOTVERSIONMYSQL}
-    File /r ..\input\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\data\*
-    CreateDirectory $INSTDIR\front\tmp\log\mysql
-
-    ${file_replace} "@AMPRICOTSERVERPORTMYSQL@" "$mui.MySQLOptsPage.ServerPort.VAL" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini"
-    ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini"
-    ${file_replace} "@AMPRICOTVERSIONMYSQL@" "${AMPRICOTVERSIONMYSQL}" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini"
-
-    ExecWait '"$INSTDIR\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\bin\mysqld.exe" --install-manual AmpricotMySQL --defaults-file=$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini'
-
-    DetailPrint "Updating MySQL 'root' password.."
-    ${file_replace} "@AMPRICOTMYSQLROOTPASS@" "$mui.MySQLOptsPage.RootPass.VAL" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.sql"
-    ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.bat"
-    ${file_replace} "@AMPRICOTVERSIONMYSQL@" "${AMPRICOTVERSIONMYSQL}" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.bat"
-
-    ExecWait '"$INSTDIR\core\inc\mysqlresetrootpass.bat"'
-    Delete /REBOOTOK $INSTDIR\core\inc\mysqlresetrootpass.bat
-    Delete /REBOOTOK $INSTDIR\core\inc\mysqlresetrootpass.sql
-SectionEnd
-
-Section "PHP ${AMPRICOTVERSIONPHP}" SEC0003
-    SectionIn RO
-
-    SetOverwrite on
-    SetOutPath $INSTDIR\core\bin\php\php-${AMPRICOTVERSIONPHP}
-    File /r /x extras /x dev /x *.ini /x *.reg /x *.lib /x *.txt /x php.ini-development /x php.ini-production ..\input\core\bin\php\php-${AMPRICOTVERSIONPHP}\*
-    SetOutPath $INSTDIR\front\conf\php\php-${AMPRICOTVERSIONPHP}
-    File /r ..\input\front\conf\php\php-${AMPRICOTVERSIONPHP}\*
-    CreateDirectory $INSTDIR\front\tmp\log\php
-
-    ${file_replace} "@AMPRICOTVERSIONPHP@" "${AMPRICOTVERSIONPHP}" "all" "all" "$INSTDIR\front\conf\php\php-${AMPRICOTVERSIONPHP}\php.ini"
-    ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\php\php-${AMPRICOTVERSIONPHP}\php.ini"
-
-    ${file_replace} "#LoadModule php5_module" "LoadModule php5_module" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
-    ${file_replace} "#PHPIniDir" "PHPIniDir" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
-    ${file_replace} "#AddType application/x-httpd-php .php" "AddType application/x-httpd-php .php" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
-SectionEnd
-
-SectionGroup "PHP Apps" SECGRP0000
+SectionGroup "PHP Apps" SECGRP0001
     Section "phpMyAdmin ${AMPRICOTVERSIONPHPMYADMIN}" SEC0004
         SectionIn RO
 
@@ -285,6 +275,7 @@ SectionGroup "PHP Apps" SECGRP0000
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\alias\phpmyadmin.conf"
         ${file_replace} "@AMPRICOTVERSIONPHPMYADMIN@" "${AMPRICOTVERSIONPHPMYADMIN}" "all" "all" "$INSTDIR\front\conf\apache\alias\phpmyadmin.conf"
     SectionEnd
+    
     Section "Adminer ${AMPRICOTVERSIONADMINER}" SEC0005
         SectionIn RO
 
@@ -299,15 +290,42 @@ SectionGroup "PHP Apps" SECGRP0000
     SectionEnd
 SectionGroupEnd
 
+SectionGroup "Shortcuts" SECGRP0002
+    Section "System Startup" SEC0006
+        SectionIn 1 2
+        SetShellVarContext all
+        SetOutPath $SMSTARTUP
+        CreateShortcut "$SMSTARTUP\${AMPRICOTNAME}.lnk" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
+    SectionEnd
+
+    Section "Quick Launch" SEC0007
+        SectionIn 1 2
+        SetShellVarContext all
+        SetOutPath $QUICKLAUNCH
+        CreateShortcut "$QUICKLAUNCH\$(^Name).lnk" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
+    SectionEnd
+
+    Section "Start Menu" SEC0008
+        SectionIn 1 2
+        SetShellVarContext all
+        SetOutPath $SMPROGRAMS\${AMPRICOTNAME}
+        CreateShortcut "$SMPROGRAMS\${AMPRICOTNAME}\$(^StartLink).lnk" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
+        CreateShortcut "$SMPROGRAMS\${AMPRICOTNAME}\$(^UninstallLink).lnk" "$INSTDIR\core\inc\${AMPRICOTUNINSTALLER}"
+    SectionEnd
+
+    Section "Desktop" SEC0009
+        SectionIn 1 2
+        SetShellVarContext all
+        SetOutPath $DESKTOP
+        CreateShortcut "$DESKTOP\$(^Name).lnk" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
+    SectionEnd
+SectionGroupEnd
+
 Section "-post" SEC00099
+    SetShellVarContext all
+
     SetOutPath $INSTDIR\core\inc
     WriteUninstaller $INSTDIR\core\inc\${AMPRICOTUNINSTALLER}
-
-    !insertmacro MUI_STARTMENU_WRITE_BEGIN "Application"
-    SetOutPath $SMPROGRAMS\$StartMenuGroup
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\$(^StartLink).lnk" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\$(^UninstallLink).lnk" "$INSTDIR\core\inc\${AMPRICOTUNINSTALLER}"
-    !insertmacro MUI_STARTMENU_WRITE_END
 
     WriteRegStr HKLM "${AMPRICOTREGKEY}" "InstallLocation" "$INSTDIR"
     WriteRegStr HKLM "${AMPRICOTREGKEY}" "DisplayIcon" "$INSTDIR\core\inc\icon.ico"
@@ -350,50 +368,60 @@ Section "-post" SEC00099
     ${str_replace} " " "%20" "$installdirectory" "$urleninstalldirectory"
     ${file_replace} "@AMPRICOTINSTALLDIRROOTENC@" "$urleninstalldirectory" "all" "all" "$INSTDIR\core\inc\ampricot.ini"
 
+    SetOutPath $INSTDIR
+    CreateShortcut "$INSTDIR\www.lnk" "$INSTDIR\front\data\www"
+
     IfSilent +1 +2
     ${file_replace} "ampricotharmony = $\"off$\"" "ampricotharmony = $\"on$\"" "all" "all" "$INSTDIR\core\inc\ampricot.conf"
-    
+
     IfSilent +1 +3
     SetOutPath $SMSTARTUP
     CreateShortcut "$SMSTARTUP\${AMPRICOTNAME}.lnk" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
 
-    SetOutPath $INSTDIR
-    CreateShortcut "$INSTDIR\www.lnk" "$INSTDIR\front\data\www"
-
     IfSilent +1 +3
     SetOutPath $QUICKLAUNCH
     CreateShortcut "$QUICKLAUNCH\${AMPRICOTNAME}.lnk" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
+
+    IfSilent +1 +4
+    SetOutPath $SMPROGRAMS\${AMPRICOTNAME}
+    CreateShortcut "$SMPROGRAMS\${AMPRICOTNAME}\$(^StartLink).lnk" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
+    CreateShortcut "$SMPROGRAMS\${AMPRICOTNAME}\$(^UninstallLink).lnk" "$INSTDIR\core\inc\${AMPRICOTUNINSTALLER}"
+
+    IfSilent +1 +3
+    SetOutPath $DESKTOP
+    CreateShortcut "$DESKTOP\${AMPRICOTNAME}.lnk" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
 
     ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR\core\bin\php\php-${AMPRICOTVERSIONPHP}"
  
     CreateDirectory $INSTDIR\front\tmp\dmp
 SectionEnd
 
-
 # Uninstaller sections
-Section /o "-un.Main Uninstall Step" UNSEC0000
+Section /o "-un.pre" UNSEC0000
+    SetShellVarContext all
     ExecWait 'sc stop AmpricotApache'
     ExecWait 'sc stop AmpricotMySQL'
     ; Force close not closed services 
-    ExecWait '"$INSTDIR\core\inc\harmonymode.exe"'
+    ExecWait '"$INSTDIR\core\inc\hstart.exe" /noconsole /silent /wait "$INSTDIR\core\inc\harmonymode.bat"'
     ExecWait '"$INSTDIR\core\inc\${AMPRICOTLAUNCHER}" -quit -id={ampricot}'
     ExecWait '"$INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\bin\httpd.exe" -k uninstall -n AmpricotApache'
     ExecWait '"$INSTDIR\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\bin\mysqld.exe" --remove AmpricotMySQL'
+    
+    ${un.EnvVarUpdate} $0 "PATH" "R" "HKLM" "$INSTDIR\core\bin\php\php-${AMPRICOTVERSIONPHP}"
+    
+    DeleteRegKey HKLM "${AMPRICOTREGKEY}"
+    Delete /REBOOTOK $DESKTOP\${AMPRICOTNAME}.lnk
+    RmDir /r /REBOOTOK $SMPROGRAMS\${AMPRICOTNAME}
+    Delete /REBOOTOK $QUICKLAUNCH\${AMPRICOTNAME}.lnk
+    Delete /REBOOTOK $SMSTARTUP\${AMPRICOTNAME}.lnk
+    Delete /REBOOTOK $INSTDIR\www.lnk
+    
     RmDir /r /REBOOTOK $INSTDIR\core
     RmDir /r /REBOOTOK $INSTDIR\front\tmp
     ${GetTime} "" "LS" $0 $1 $2 $3 $4 $5 $6
     CreateDirectory $INSTDIR\front\.backup\$2-$1-$0-$4-$5-$6
     Rename /REBOOTOK "$INSTDIR\front\conf" "$INSTDIR\front\.backup\$2-$1-$0-$4-$5-$6\conf"
     Rename /REBOOTOK "$INSTDIR\front\data" "$INSTDIR\front\.backup\$2-$1-$0-$4-$5-$6\data"
-SectionEnd
-
-Section "-un.post" UNSEC0099
-    ${EnvVarUpdate} $0 "PATH" "R" "HKLM" "$INSTDIR\core\bin\php\php-${AMPRICOTVERSIONPHP}"
-    DeleteRegKey HKLM "${AMPRICOTREGKEY}"
-    Delete /REBOOTOK $QUICKLAUNCH\${AMPRICOTNAME}.lnk
-    Delete /REBOOTOK $SMSTARTUP\${AMPRICOTNAME}.lnk
-    Delete /REBOOTOK $INSTDIR\www.lnk
-    RmDir /r /REBOOTOK $SMPROGRAMS\$StartMenuGroup
 SectionEnd
 
 # Installer functions
@@ -469,7 +497,6 @@ FunctionEnd
 # Uninstaller functions
 Function un.onInit
     ReadRegStr $INSTDIR HKLM "${AMPRICOTREGKEY}" "InstallLocation"
-    !insertmacro MUI_STARTMENU_GETFOLDER "Application" "$StartMenuGroup"
     !insertmacro MUI_UNGETLANGUAGE
     !insertmacro SelectSection "${UNSEC0000}"
 FunctionEnd
@@ -488,10 +515,12 @@ FunctionEnd
 
 # Section Descriptions
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+!insertmacro MUI_DESCRIPTION_TEXT ${SECGRP0000} "Core software components."
+!insertmacro MUI_DESCRIPTION_TEXT ${SECGRP0001} "Optional PHP applications ready for use."
+!insertmacro MUI_DESCRIPTION_TEXT ${SECGRP0002} "Additional software shortcuts useful for quick launch."
 !insertmacro MUI_DESCRIPTION_TEXT ${SEC0001} "Apache HTTP Server, a web server software notable for playing a key role in the initial growth of the WWW."
 !insertmacro MUI_DESCRIPTION_TEXT ${SEC0002} "MySQL is a RDBMS that runs as a server providing multi-user access to a number of databases."
 !insertmacro MUI_DESCRIPTION_TEXT ${SEC0003} "PHP: Hypertext Preprocessor is a general-purpose scripting language designed for web development."
-!insertmacro MUI_DESCRIPTION_TEXT ${SECGRP0000} "Optional PHP applications ready for use."
 !insertmacro MUI_DESCRIPTION_TEXT ${SEC0004} "A tool written in PHP intended to handle the administration of MySQL over the WWW."
 !insertmacro MUI_DESCRIPTION_TEXT ${SEC0005} "A lightweight tool written in PHP intended to handle the administration of multiple RDBMS over the WWW."
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
@@ -504,8 +533,6 @@ LangString "^VCREDIST" "${LANG_ENGLISH}" "Installing Microsoft Visual C++ 2008 S
 LangString "^StartLink" "${LANG_ENGLISH}" "Start ${AMPRICOTNAME}"
 LangString "^UninstallLink" "${LANG_ENGLISH}" "Uninstall ${AMPRICOTNAME}"
 LangString "^AlreadyInstalled" "${LANG_ENGLISH}" "${AMPRICOTNAME} is apparently already installed!$\r$\nWould you like to UNINSTALL old version now?"
-LangString "^AddQuickLaunch" "${LANG_ENGLISH}" "Add to &Quick Launch"
-LangString "^AddStartUp" "${LANG_ENGLISH}" "Add to &Startup"
 LangString "^ActivateHarmonyMode" "${LANG_ENGLISH}" "Activate &Harmony Mode"
 LangString "^ActivateHarmonyModeLabel" "${LANG_ENGLISH}" "Activating Harmony Mode will FORCE CLOSE currently running applications using ports required by Ampricot."
 LangString "^ApachePageTitle" "${LANG_ENGLISH}" "Apache Server Information"
