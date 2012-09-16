@@ -211,8 +211,10 @@ SectionGroup "Core Components" SECGRP0000
     
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\data\www\localhost\index.php"
     
-        ExecWait '"$INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\bin\httpd.exe" -k install -n AmpricotApache'
-        ExecWait 'sc config AmpricotApache start= demand'
+        ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$INSTDIR" "all" "all" "$INSTDIR\core\inc\apacheserviceinstall.bat"
+        ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\core\inc\apacheserviceinstall.bat"
+        ExecWait '"$INSTDIR\core\inc\hstart.exe" /noconsole /silent /wait "$INSTDIR\core\inc\apacheserviceinstall.bat"'
+        Delete /REBOOTOK $DESKTOP\apacheserviceinstall.bat
     SectionEnd
     
     Section "MySQL ${AMPRICOTVERSIONMYSQL}" SEC0002
@@ -231,14 +233,17 @@ SectionGroup "Core Components" SECGRP0000
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini"
         ${file_replace} "@AMPRICOTVERSIONMYSQL@" "${AMPRICOTVERSIONMYSQL}" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini"
     
-        ExecWait '"$INSTDIR\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\bin\mysqld.exe" --install-manual AmpricotMySQL --defaults-file=$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini'
-    
+        ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$INSTDIR" "all" "all" "$INSTDIR\core\inc\mysqlserviceinstall.bat"
+        ${file_replace} "@AMPRICOTVERSIONMYSQL@" "${AMPRICOTVERSIONMYSQL}" "all" "all" "$INSTDIR\core\inc\mysqlserviceinstall.bat"
+        ExecWait '"$INSTDIR\core\inc\hstart.exe" /noconsole /silent /wait "$INSTDIR\core\inc\mysqlserviceinstall.bat"'
+        Delete /REBOOTOK $DESKTOP\mysqlserviceinstall.bat
+
         DetailPrint "Updating MySQL 'root' password.."
         ${file_replace} "@AMPRICOTMYSQLROOTPASS@" "$mui.MySQLOptsPage.RootPass.VAL" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.sql"
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.bat"
         ${file_replace} "@AMPRICOTVERSIONMYSQL@" "${AMPRICOTVERSIONMYSQL}" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.bat"
     
-        ExecWait '"$INSTDIR\core\inc\mysqlresetrootpass.bat"'
+        ExecWait '"$INSTDIR\core\inc\hstart.exe" /noconsole /silent /wait "$INSTDIR\core\inc\mysqlresetrootpass.bat"'
         Delete /REBOOTOK $INSTDIR\core\inc\mysqlresetrootpass.bat
         Delete /REBOOTOK $INSTDIR\core\inc\mysqlresetrootpass.sql
     SectionEnd
@@ -399,13 +404,15 @@ SectionEnd
 # Uninstaller sections
 Section /o "-un.pre" UNSEC0000
     SetShellVarContext all
-    ExecWait 'sc stop AmpricotApache'
-    ExecWait 'sc stop AmpricotMySQL'
-    ; Force close not closed services 
-    ExecWait '"$INSTDIR\core\inc\hstart.exe" /noconsole /silent /wait "$INSTDIR\core\inc\harmonymode.bat"'
-    ExecWait '"$INSTDIR\core\inc\${AMPRICOTLAUNCHER}" -quit -id={ampricot}'
-    ExecWait '"$INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\bin\httpd.exe" -k uninstall -n AmpricotApache'
-    ExecWait '"$INSTDIR\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\bin\mysqld.exe" --remove AmpricotMySQL'
+    
+    GetTempFileName $0
+    Rename $0 $0.bat
+    FileOpen $1 $0.bat w
+    FileSeek $1 0 END
+    FileWrite $1 'sc stop AmpricotApache$\nsc stop AmpricotMySQL$\nCALL "$INSTDIR\core\inc\harmonymode.bat"$\n"$INSTDIR\core\inc\${AMPRICOTLAUNCHER}" -quit -id={ampricot}$\n"$INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\bin\httpd.exe" -k uninstall -n AmpricotApache$\n"$INSTDIR\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\bin\mysqld.exe" --remove AmpricotMySQL'
+    FileClose $1
+    ExecWait '"$INSTDIR\core\inc\hstart.exe" /noconsole /silent /wait "$0.bat"'
+    Delete /REBOOTOK $0.bat
     
     ${un.EnvVarUpdate} $0 "PATH" "R" "HKLM" "$INSTDIR\core\bin\php\php-${AMPRICOTVERSIONPHP}"
     
@@ -492,6 +499,7 @@ Function .onInit
     quitnow:
     Quit
     notinstalledordone:
+    RmDir /r /REBOOTOK $TEMP\$2-$1-$0-$4-$5-$6
 FunctionEnd
 
 # Uninstaller functions
