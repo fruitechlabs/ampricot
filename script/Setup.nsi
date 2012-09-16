@@ -187,39 +187,39 @@ SectionGroup "Core Components" SECGRP0000
         ${file_replace} "@AMPRICOTSERVERPORTHTTPAPACHE@" "$mui.ApacheOptsPage.ServerPortHTTP.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
         ${file_replace} "@AMPRICOTSERVERADMINAPACHE@" "$mui.ApacheOptsPage.AdminEmail.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
         ${file_replace} "@AMPRICOTSERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
-    
+
         ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-autoindex.conf"
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-autoindex.conf"
-    
+
         ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-dav.conf"
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-dav.conf"
-    
+
         ${file_replace} "@AMPRICOTSERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-info.conf"
-    
+
         ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-manual.conf"
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-manual.conf"
-    
+
         ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-multilang-errordoc.conf"
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-multilang-errordoc.conf"
-    
+
         ${file_replace} "@AMPRICOTSERVERPORTHTTPSAPACHE@" "$mui.ApacheOptsPage.ServerPortHTTPS.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-ssl.conf"
         ${file_replace} "@AMPRICOTSERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-ssl.conf"
         ${file_replace} "@AMPRICOTSERVERADMINAPACHE@" "$mui.ApacheOptsPage.AdminEmail.VAL" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-ssl.conf"
         ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\extra\httpd-ssl.conf"
-    
+
         ${file_replace} "@AMPRICOTSERVERNAMEAPACHE@" "$mui.ApacheOptsPage.ServerName.VAL" "all" "all" "$INSTDIR\front\conf\apache\vhost\localhost.conf"
-    
+
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\data\www\localhost\index.php"
-    
+
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$INSTDIR" "all" "all" "$INSTDIR\core\inc\apacheserviceinstall.bat"
         ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\core\inc\apacheserviceinstall.bat"
         ExecWait '"$INSTDIR\core\inc\hstart.exe" /noconsole /silent /wait "$INSTDIR\core\inc\apacheserviceinstall.bat"'
         Delete /REBOOTOK $DESKTOP\apacheserviceinstall.bat
     SectionEnd
-    
+
     Section "MySQL ${AMPRICOTVERSIONMYSQL}" SEC0002
         SectionIn RO
-    
+
         SetOverwrite on
         SetOutPath $INSTDIR\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}
         File /r /x data /x docs /x include /x debug /x lib /x mysql-test /x scripts /x sql-bench /x *.lib /x *.pdb /x *.ini /x COPYING /x README ..\input\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\*
@@ -228,11 +228,11 @@ SectionGroup "Core Components" SECGRP0000
         SetOutPath $INSTDIR\front\data\mysql\mysql-${AMPRICOTVERSIONMYSQL}
         File /r ..\input\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\data\*
         CreateDirectory $INSTDIR\front\tmp\log\mysql
-    
+
         ${file_replace} "@AMPRICOTSERVERPORTMYSQL@" "$mui.MySQLOptsPage.ServerPort.VAL" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini"
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini"
         ${file_replace} "@AMPRICOTVERSIONMYSQL@" "${AMPRICOTVERSIONMYSQL}" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini"
-    
+
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$INSTDIR" "all" "all" "$INSTDIR\core\inc\mysqlserviceinstall.bat"
         ${file_replace} "@AMPRICOTVERSIONMYSQL@" "${AMPRICOTVERSIONMYSQL}" "all" "all" "$INSTDIR\core\inc\mysqlserviceinstall.bat"
         ExecWait '"$INSTDIR\core\inc\hstart.exe" /noconsole /silent /wait "$INSTDIR\core\inc\mysqlserviceinstall.bat"'
@@ -242,25 +242,25 @@ SectionGroup "Core Components" SECGRP0000
         ${file_replace} "@AMPRICOTMYSQLROOTPASS@" "$mui.MySQLOptsPage.RootPass.VAL" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.sql"
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.bat"
         ${file_replace} "@AMPRICOTVERSIONMYSQL@" "${AMPRICOTVERSIONMYSQL}" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.bat"
-    
+
         ExecWait '"$INSTDIR\core\inc\hstart.exe" /noconsole /silent /wait "$INSTDIR\core\inc\mysqlresetrootpass.bat"'
         Delete /REBOOTOK $INSTDIR\core\inc\mysqlresetrootpass.bat
         Delete /REBOOTOK $INSTDIR\core\inc\mysqlresetrootpass.sql
     SectionEnd
-    
+
     Section "PHP ${AMPRICOTVERSIONPHP}" SEC0003
         SectionIn RO
-    
+
         SetOverwrite on
         SetOutPath $INSTDIR\core\bin\php\php-${AMPRICOTVERSIONPHP}
         File /r /x extras /x dev /x *.ini /x *.reg /x *.lib /x *.txt /x php.ini-development /x php.ini-production ..\input\core\bin\php\php-${AMPRICOTVERSIONPHP}\*
         SetOutPath $INSTDIR\front\conf\php\php-${AMPRICOTVERSIONPHP}
         File /r ..\input\front\conf\php\php-${AMPRICOTVERSIONPHP}\*
         CreateDirectory $INSTDIR\front\tmp\log\php
-    
+
         ${file_replace} "@AMPRICOTVERSIONPHP@" "${AMPRICOTVERSIONPHP}" "all" "all" "$INSTDIR\front\conf\php\php-${AMPRICOTVERSIONPHP}\php.ini"
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\php\php-${AMPRICOTVERSIONPHP}\php.ini"
-    
+
         ${file_replace} "#LoadModule php5_module" "LoadModule php5_module" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
         ${file_replace} "#PHPIniDir" "PHPIniDir" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
         ${file_replace} "#AddType application/x-httpd-php .php" "AddType application/x-httpd-php .php" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
@@ -280,7 +280,7 @@ SectionGroup "PHP Apps" SECGRP0001
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\alias\phpmyadmin.conf"
         ${file_replace} "@AMPRICOTVERSIONPHPMYADMIN@" "${AMPRICOTVERSIONPHPMYADMIN}" "all" "all" "$INSTDIR\front\conf\apache\alias\phpmyadmin.conf"
     SectionEnd
-    
+
     Section "Adminer ${AMPRICOTVERSIONADMINER}" SEC0005
         SectionIn RO
 
@@ -397,14 +397,14 @@ Section "-post" SEC00099
     CreateShortcut "$DESKTOP\${AMPRICOTNAME}.lnk" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
 
     ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR\core\bin\php\php-${AMPRICOTVERSIONPHP}"
- 
+
     CreateDirectory $INSTDIR\front\tmp\dmp
 SectionEnd
 
 # Uninstaller sections
 Section /o "-un.pre" UNSEC0000
     SetShellVarContext all
-    
+
     GetTempFileName $0
     Rename $0 $0.bat
     FileOpen $1 $0.bat w
@@ -413,16 +413,16 @@ Section /o "-un.pre" UNSEC0000
     FileClose $1
     ExecWait '"$INSTDIR\core\inc\hstart.exe" /noconsole /silent /wait "$0.bat"'
     Delete /REBOOTOK $0.bat
-    
+
     ${un.EnvVarUpdate} $0 "PATH" "R" "HKLM" "$INSTDIR\core\bin\php\php-${AMPRICOTVERSIONPHP}"
-    
+
     DeleteRegKey HKLM "${AMPRICOTREGKEY}"
     Delete /REBOOTOK $DESKTOP\${AMPRICOTNAME}.lnk
     RmDir /r /REBOOTOK $SMPROGRAMS\${AMPRICOTNAME}
     Delete /REBOOTOK $QUICKLAUNCH\${AMPRICOTNAME}.lnk
     Delete /REBOOTOK $SMSTARTUP\${AMPRICOTNAME}.lnk
     Delete /REBOOTOK $INSTDIR\www.lnk
-    
+
     RmDir /r /REBOOTOK $INSTDIR\core
     RmDir /r /REBOOTOK $INSTDIR\front\tmp
     ${GetTime} "" "LS" $0 $1 $2 $3 $4 $5 $6

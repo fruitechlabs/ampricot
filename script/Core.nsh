@@ -4,12 +4,12 @@ Function GetRoot
   Push $2
   Push $3
   Push $4
- 
+
   StrCpy $1 $0 2
   StrCmp $1 "\\" UNC
     StrCpy $0 $1
     Goto done
- 
+
 UNC:
   StrCpy $2 3
   StrLen $3 $0
@@ -24,7 +24,7 @@ UNC:
       Goto loop
     IntOp $2 $2 - 1
     StrCpy $0 $0 $2
- 
+
 done:
   Pop $4
   Pop $3
@@ -223,7 +223,7 @@ FunctionEnd
 Function str_trim
     Exch $R1 # Original string
     Push $R2
- 
+
     str_trim_loop:
     StrCpy $R2 "$R1" 1
     StrCmp "$R2" " " str_trim_left
@@ -232,10 +232,10 @@ Function str_trim
     StrCmp "$R2" "$\t" str_trim_left
     GoTo str_trim_loop2
 
-    str_trim_left:   
+    str_trim_left:
     StrCpy $R1 "$R1" "" 1
     Goto str_trim_loop
- 
+
     str_trim_loop2:
     StrCpy $R2 "$R1" 1 -1
     StrCmp "$R2" " " str_trim_right
@@ -244,10 +244,10 @@ Function str_trim
     StrCmp "$R2" "$\t" str_trim_right
     GoTo str_trim_done
 
-    str_trim_right:  
+    str_trim_right:
     StrCpy $R1 "$R1" -1
     Goto str_trim_loop2
- 
+
     str_trim_done:
     Pop $R2
     Exch $R1
