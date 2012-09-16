@@ -417,6 +417,7 @@ Section "-post" SEC00099
 
     ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR\core\bin\php\php-${AMPRICOTVERSIONPHP}"
 
+    CreateDirectory $INSTDIR\core\lib
     CreateDirectory $INSTDIR\front\tmp\dmp
 SectionEnd
 
