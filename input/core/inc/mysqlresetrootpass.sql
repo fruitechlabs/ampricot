@@ -1,2 +1,0 @@
-USE `mysql`;
-UPDATE `user` SET Password=PASSWORD('@AMPRICOTMYSQLROOTPASS@') WHERE User='root';

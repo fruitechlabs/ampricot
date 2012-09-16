@@ -211,10 +211,14 @@ SectionGroup "Core Components" SECGRP0000
 
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\data\www\localhost\index.php"
 
-        ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$INSTDIR" "all" "all" "$INSTDIR\core\inc\apacheserviceinstall.bat"
-        ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\core\inc\apacheserviceinstall.bat"
-        ExecWait '"$INSTDIR\core\inc\hstart.exe" /noconsole /silent /wait "$INSTDIR\core\inc\apacheserviceinstall.bat"'
-        Delete /REBOOTOK $DESKTOP\apacheserviceinstall.bat
+        GetTempFileName $0
+        Rename $0 $0.bat
+        FileOpen $1 $0.bat w
+        FileSeek $1 0 END
+        FileWrite $1 '"$INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\bin\httpd.exe" -k install -n AmpricotApache$\nsc.exe config AmpricotApache start= demand'
+        FileClose $1
+        ExecWait '"$INSTDIR\core\inc\hstart.exe" /noconsole /silent /wait "$0.bat"'
+        Delete /REBOOTOK $0.bat
     SectionEnd
 
     Section "MySQL ${AMPRICOTVERSIONMYSQL}" SEC0002
@@ -233,19 +237,34 @@ SectionGroup "Core Components" SECGRP0000
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini"
         ${file_replace} "@AMPRICOTVERSIONMYSQL@" "${AMPRICOTVERSIONMYSQL}" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini"
 
-        ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$INSTDIR" "all" "all" "$INSTDIR\core\inc\mysqlserviceinstall.bat"
-        ${file_replace} "@AMPRICOTVERSIONMYSQL@" "${AMPRICOTVERSIONMYSQL}" "all" "all" "$INSTDIR\core\inc\mysqlserviceinstall.bat"
-        ExecWait '"$INSTDIR\core\inc\hstart.exe" /noconsole /silent /wait "$INSTDIR\core\inc\mysqlserviceinstall.bat"'
-        Delete /REBOOTOK $DESKTOP\mysqlserviceinstall.bat
+        GetTempFileName $0
+        Rename $0 $0.bat
+        FileOpen $1 $0.bat w
+        FileSeek $1 0 END
+        FileWrite $1 '"$INSTDIR\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\bin\mysqld.exe" --install-manual AmpricotMySQL --defaults-file=$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini'
+        FileClose $1
+        ExecWait '"$INSTDIR\core\inc\hstart.exe" /noconsole /silent /wait "$0.bat"'
+        Delete /REBOOTOK $0.bat
 
         DetailPrint "Updating MySQL 'root' password.."
-        ${file_replace} "@AMPRICOTMYSQLROOTPASS@" "$mui.MySQLOptsPage.RootPass.VAL" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.sql"
-        ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.bat"
-        ${file_replace} "@AMPRICOTVERSIONMYSQL@" "${AMPRICOTVERSIONMYSQL}" "all" "all" "$INSTDIR\core\inc\mysqlresetrootpass.bat"
 
-        ExecWait '"$INSTDIR\core\inc\hstart.exe" /noconsole /silent /wait "$INSTDIR\core\inc\mysqlresetrootpass.bat"'
-        Delete /REBOOTOK $INSTDIR\core\inc\mysqlresetrootpass.bat
-        Delete /REBOOTOK $INSTDIR\core\inc\mysqlresetrootpass.sql
+        GetTempFileName $0
+        Rename $0 $0.sql
+        FileOpen $1 $0.sql w
+        FileSeek $1 0 END
+        FileWrite $1 'USE `mysql`;$\nUPDATE `user` SET Password=PASSWORD($\'$mui.MySQLOptsPage.RootPass.VAL$\') WHERE User=$\'root$\';'
+        FileClose $1
+
+        GetTempFileName $2
+        Rename $2 $2.bat
+        FileOpen $3 $2.bat w
+        FileSeek $3 0 END
+        FileWrite $3 'for /f "tokens=5 delims= " %%p in ($\'netstat -a -n -o ^| findstr 0.0:6033$\') do taskkill.exe /f /t /pid %%p$\n"$INSTDIR\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\bin\mysqld.exe" --no-defaults --default-storage-engine=MyISAM --skip-innodb --port=6033 --datadir="$INSTDIR\front\data\mysql\mysql-${AMPRICOTVERSIONMYSQL}" --skip-grant-tables --bootstrap --standalone <"$0.sql"'
+        FileClose $3
+        ExecWait '"$INSTDIR\core\inc\hstart.exe" /noconsole /silent /wait "$2.bat"'
+
+        Delete /REBOOTOK $0.sql
+        Delete /REBOOTOK $2.bat
     SectionEnd
 
     Section "PHP ${AMPRICOTVERSIONPHP}" SEC0003

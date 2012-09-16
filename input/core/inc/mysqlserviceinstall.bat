@@ -1,1 +1,0 @@
-"@AMPRICOTINSTALLDIRCORE@\core\bin\mysql\mysql-@AMPRICOTVERSIONMYSQL@\bin\mysqld.exe" --install-manual AmpricotMySQL --defaults-file=@AMPRICOTINSTALLDIRCORE@\front\conf\mysql\mysql-@AMPRICOTVERSIONMYSQL@\mysql.ini
