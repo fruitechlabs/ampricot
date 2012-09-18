@@ -1,0 +1,39 @@
+appicon ICON "updater.ico"
+
+#include <winver.h>
+
+// Get updates from this appcast feed:
+FeedURL     APPCAST     {"http://www.ampricot.com/appcast.xml"}
+
+// Version information
+1 VERSIONINFO
+ FILEVERSION     1,0,0,0
+ PRODUCTVERSION  1,0,0,0
+ FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
+ FILEFLAGS       0
+ FILEOS          VOS_NT_WINDOWS32
+ FILETYPE        VFT_APP
+ FILESUBTYPE     VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0" // US English, Unicode
+        BEGIN
+            VALUE "Comments", "Ampricot Updater"
+            VALUE "CompanyName", "FruiTech Labs\0"
+            VALUE "FileDescription", "Ampricot Updater\0"
+            VALUE "FileVersion", "1.0.0.0\0"
+            VALUE "InternalName", "updater.exe\0"
+            VALUE "OriginalFilename", "updater.exe\0"
+            VALUE "LegalCopyright", "Copyright (c) 2012 FruiTech Labs.\0"
+            VALUE "ProductName", "Ampricot\0"
+            VALUE "ProductVersion", "1.0.0.0\0"
+        END
+    END
+
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0409, 0x04B0
+    END
+END
+
