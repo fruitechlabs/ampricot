@@ -3,9 +3,9 @@ REM ## Compile Ampricot ##
 REM ######################
 
 
-"C:\Program Files\7-Zip\7z.exe" x "D:\source\apache\httpd-%1-bin-win32-vc9.7z" -o"D:\workspace\fruitechlabs\ampricot\input\core\bin\apache\"
-"C:\Program Files\7-Zip\7z.exe" x "D:\source\mysql\mysql-%2-bin-win32-vc9.7z" -o"D:\workspace\fruitechlabs\ampricot\input\core\bin\mysql\"
-"C:\Program Files\7-Zip\7z.exe" x "D:\source\php\php-%3-bin-win32-vc9.7z" -o"D:\workspace\fruitechlabs\ampricot\input\core\bin\php\"
+"C:\Program Files\7-Zip\7z.exe" x "D:\binary\apache\httpd-%1-bin-win32-vc9.7z" -o"D:\workspace\fruitechlabs\ampricot\input\core\bin\apache\"
+"C:\Program Files\7-Zip\7z.exe" x "D:\binary\mysql\mysql-%2-bin-win32-vc9.7z" -o"D:\workspace\fruitechlabs\ampricot\input\core\bin\mysql\"
+"C:\Program Files\7-Zip\7z.exe" x "D:\binary\php\php-%3-bin-win32-vc9.7z" -o"D:\workspace\fruitechlabs\ampricot\input\core\bin\php\"
 "C:\Program Files\7-Zip\7z.exe" x "D:\script\php\phpmyadmin\phpMyAdmin-%4-all-languages.7z" -o"D:\workspace\fruitechlabs\ampricot\input\core\app\"
 
 
