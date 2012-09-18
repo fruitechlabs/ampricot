@@ -1,56 +1,20 @@
-/*
- *  This file is part of WinSparkle (http://winsparkle.org)
- *
- *  This example code is public domain.
- *
- *
- *  Originally written by Vadim Zeitlin, modified by Vaclav Slavik.
- *
- *
- *  This program is intentionally as simple as possible and shouldn't be seen
- *  as an example of how to write a proper Win32 application (why should you
- *  want to do this anyhow when you have wxWidgets). It's just a test bed for
- *  WinSparkle.dll which it uses.
- *
- */
-
-/*-------------------------------------------------------------------------*
-   headers
- *-------------------------------------------------------------------------*/
-
+// Headers
 #include "winsparkle.h"
-
 #include <windows.h>
 #include <windowsx.h>
-
 #include <stdio.h>
 #include <tchar.h>
 
-/*-------------------------------------------------------------------------*
-   constants
- *-------------------------------------------------------------------------*/
-
+// Constants
 #define MAIN_WIN_CLASS_NAME    _TEXT("app_psdk_main_win_class")
-
 #define IDB_CHECK_FOR_UPDATES   100
 
-
-/*-------------------------------------------------------------------------*
-   globals
- *-------------------------------------------------------------------------*/
-
+// Globals
 HINSTANCE g_hInstance;
 HWND g_hwndMain;
 
-
-/*-------------------------------------------------------------------------*
-   callbacks
- *-------------------------------------------------------------------------*/
-
-void OnCheckForUpdates(HWND hwnd,
-                       int id,
-                       HWND hwndCtl,
-                       UINT codeNotify)
+// Callbacks
+void OnCheckForUpdates(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
 {
     if ( id == IDB_CHECK_FOR_UPDATES )
     {
@@ -70,7 +34,7 @@ void OnDestroy(HWND hwnd)
 
 LRESULT CALLBACK MainWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-    switch ( msg )
+    switch (msg)
     {
         HANDLE_MSG(hwnd, WM_COMMAND, OnCheckForUpdates);
         HANDLE_MSG(hwnd, WM_DESTROY, OnDestroy);
@@ -82,10 +46,7 @@ LRESULT CALLBACK MainWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     return 0;
 }
 
-/*-------------------------------------------------------------------------*
-   initialization functions
- *-------------------------------------------------------------------------*/
-
+// Initialization Functions
 int RegisterMainClass()
 {
     WNDCLASS wc;
@@ -101,20 +62,15 @@ int RegisterMainClass()
     return RegisterClass(&wc) != 0;
 }
 
-
-/*-------------------------------------------------------------------------*
-   entry point
- *-------------------------------------------------------------------------*/
-
-int APIENTRY WinMain(HINSTANCE hInstance,
-                     HINSTANCE hPrevInstance,
-                     LPSTR lpCmdLine,
-                     int nCmdShow)
+// Entry Point
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
     g_hInstance = hInstance;
 
-    if ( !RegisterMainClass() )
+    if (!RegisterMainClass())
+	{
         return 1;
+	}
 
     /* initialize WinSparkle as soon as the app itself is initialized, right
        before entering the event loop: */
@@ -122,7 +78,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 
     {
         MSG msg;
-        while ( GetMessage(&msg, NULL, 0, 0) )
+        while (GetMessage(&msg, NULL, 0, 0))
         {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
