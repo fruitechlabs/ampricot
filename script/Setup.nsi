@@ -11,7 +11,7 @@ Name "Ampricot"
 !define AMPRICOTVERSIONMYSQL "5.5.27"
 !define AMPRICOTVERSIONPHP "5.4.7"
 !define AMPRICOTVERSIONPHPMYADMIN "3.5.2.2"
-!define AMPRICOTVERSIONADMINER "3.5.1"
+!define AMPRICOTVERSIONADMINER "3.6.1"
 !define AMPRICOTCOMPANY "FruiTech Labs"
 !define AMPRICOTURLTEXT "www.ampricot.com"
 !define AMPRICOTURL "http://www.ampricot.com"
@@ -179,6 +179,8 @@ SectionGroup "Core Components" SECGRP0000
         File /r ..\input\front\data\cgi-bin\*
         CreateDirectory $INSTDIR\front\tmp\log\apache\localhost
 
+        DetailPrint "Compile Apache Configuration Files..."
+
         ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\conf\httpd.conf"
 
         ${file_replace} "@AMPRICOTVERSIONPHP@" "${AMPRICOTVERSIONPHP}" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
@@ -211,6 +213,7 @@ SectionGroup "Core Components" SECGRP0000
 
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\data\www\localhost\index.php"
 
+        DetailPrint "Install Apache Service..."
         GetTempFileName $0
         Rename $0 $0.bat
         FileOpen $1 $0.bat w
@@ -233,9 +236,13 @@ SectionGroup "Core Components" SECGRP0000
         File /r ..\input\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\data\*
         CreateDirectory $INSTDIR\front\tmp\log\mysql
 
+        DetailPrint "Compile MySQL Configuration Files..."
+
         ${file_replace} "@AMPRICOTSERVERPORTMYSQL@" "$mui.MySQLOptsPage.ServerPort.VAL" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini"
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini"
         ${file_replace} "@AMPRICOTVERSIONMYSQL@" "${AMPRICOTVERSIONMYSQL}" "all" "all" "$INSTDIR\front\conf\mysql\mysql-${AMPRICOTVERSIONMYSQL}\mysql.ini"
+
+        DetailPrint "Install MySQL Service..."
 
         GetTempFileName $0
         Rename $0 $0.bat
@@ -277,6 +284,8 @@ SectionGroup "Core Components" SECGRP0000
         File /r ..\input\front\conf\php\php-${AMPRICOTVERSIONPHP}\*
         CreateDirectory $INSTDIR\front\tmp\log\php
 
+        DetailPrint "Compile PHP Configuration Files..."
+
         ${file_replace} "@AMPRICOTVERSIONPHP@" "${AMPRICOTVERSIONPHP}" "all" "all" "$INSTDIR\front\conf\php\php-${AMPRICOTVERSIONPHP}\php.ini"
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\php\php-${AMPRICOTVERSIONPHP}\php.ini"
 
@@ -296,6 +305,8 @@ SectionGroup "PHP Apps" SECGRP0001
         SetOutPath $INSTDIR\front\conf\apache\alias
         File ..\input\front\conf\apache\alias\phpmyadmin.conf
 
+        DetailPrint "Compile phpMyAdmin -Apache Alias- Configuration Files..."
+
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\alias\phpmyadmin.conf"
         ${file_replace} "@AMPRICOTVERSIONPHPMYADMIN@" "${AMPRICOTVERSIONPHPMYADMIN}" "all" "all" "$INSTDIR\front\conf\apache\alias\phpmyadmin.conf"
     SectionEnd
@@ -308,6 +319,8 @@ SectionGroup "PHP Apps" SECGRP0001
         File /r ..\input\core\app\adminer-${AMPRICOTVERSIONADMINER}\*
         SetOutPath $INSTDIR\front\conf\apache\alias
         File ..\input\front\conf\apache\alias\adminer.conf
+
+        DetailPrint "Compile Adminer -Apache Alias- Configuration Files..."
 
         ${file_replace} "@AMPRICOTINSTALLDIRCORE@" "$installdirectory" "all" "all" "$INSTDIR\front\conf\apache\alias\adminer.conf"
         ${file_replace} "@AMPRICOTVERSIONADMINER@" "${AMPRICOTVERSIONADMINER}" "all" "all" "$INSTDIR\front\conf\apache\alias\adminer.conf"
@@ -348,6 +361,8 @@ SectionGroupEnd
 Section "-post" SEC00099
     SetShellVarContext all
 
+    DetailPrint "Compile Ampricot Uninstaller..."
+
     SetOutPath $INSTDIR\core\inc
     WriteUninstaller $INSTDIR\core\inc\${AMPRICOTUNINSTALLER}
 
@@ -378,6 +393,8 @@ Section "-post" SEC00099
     WriteRegStr HKLM "${AMPRICOTREGKEY}" "InstallSource" ""
     WriteRegStr HKLM "${AMPRICOTREGKEY}" "LocalPackage" ""
     WriteRegStr HKLM "${AMPRICOTREGKEY}" "Readme" ""
+
+    DetailPrint "Compile Ampricot Configuration Files..."
 
     ${file_replace} "@AMPRICOTVERSIONCORE@" "${AMPRICOTVERSIONCORE}" "all" "all" "$INSTDIR\core\inc\ampricot.conf"
     ${file_replace} "@AMPRICOTVERSIONAPACHE@" "${AMPRICOTVERSIONAPACHE}" "all" "all" "$INSTDIR\core\inc\ampricot.conf"
@@ -425,6 +442,8 @@ SectionEnd
 Section /o "-un.pre" UNSEC0000
     SetShellVarContext all
 
+    DetailPrint "Uninstall Apache/MySQL Services..."
+
     GetTempFileName $0
     Rename $0 $0.bat
     FileOpen $1 $0.bat w
@@ -436,6 +455,8 @@ Section /o "-un.pre" UNSEC0000
 
     ${un.EnvVarUpdate} $0 "PATH" "R" "HKLM" "$INSTDIR\core\bin\php\php-${AMPRICOTVERSIONPHP}"
 
+    DetailPrint "Clean Registry..."
+
     DeleteRegKey HKLM "${AMPRICOTREGKEY}"
     Delete /REBOOTOK $DESKTOP\${AMPRICOTNAME}.lnk
     RmDir /r /REBOOTOK $SMPROGRAMS\${AMPRICOTNAME}
@@ -445,6 +466,10 @@ Section /o "-un.pre" UNSEC0000
 
     RmDir /r /REBOOTOK $INSTDIR\core
     RmDir /r /REBOOTOK $INSTDIR\front\tmp
+
+
+    DetailPrint "Backup Data/Configuration Files..."
+
     ${GetTime} "" "LS" $0 $1 $2 $3 $4 $5 $6
     CreateDirectory $INSTDIR\front\.backup\$2-$1-$0-$4-$5-$6
     Rename /REBOOTOK "$INSTDIR\front\conf" "$INSTDIR\front\.backup\$2-$1-$0-$4-$5-$6\conf"
@@ -557,7 +582,7 @@ FunctionEnd
 LicenseLangString ^LicenseFile ${LANG_ENGLISH} "..\input\core\inc\license.txt"
 
 # Installer Language Strings
-LangString "^VCREDIST" "${LANG_ENGLISH}" "Installing Microsoft Visual C++ 2008 SP1 Redistributable Package"
+LangString "^VCREDIST" "${LANG_ENGLISH}" "Install Microsoft Visual C++ 2008 SP1 Redistributable Package"
 LangString "^StartLink" "${LANG_ENGLISH}" "Start ${AMPRICOTNAME}"
 LangString "^UninstallLink" "${LANG_ENGLISH}" "Uninstall ${AMPRICOTNAME}"
 LangString "^AlreadyInstalled" "${LANG_ENGLISH}" "${AMPRICOTNAME} is apparently already installed!$\r$\nWould you like to UNINSTALL old version now?"
