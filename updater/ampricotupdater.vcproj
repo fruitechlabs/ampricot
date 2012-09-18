@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="updater"
+	Name="ampricotupdater"
 	ProjectGUID="{1C6A0960-D5A1-4A8F-854D-8CFA999C5A25}"
-	RootNamespace="updater"
+	RootNamespace="ampricotupdater"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -177,7 +177,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\updater.c"
+				RelativePath=".\ampricotupdater.c"
 				>
 			</File>
 		</Filter>
@@ -193,7 +193,7 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath=".\updater.rc"
+				RelativePath=".\ampricotupdater.rc"
 				>
 			</File>
 		</Filter>

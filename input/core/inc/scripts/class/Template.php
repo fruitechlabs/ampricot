@@ -114,6 +114,7 @@ Action: readconfig
 
 [ActionExit]
 ;ACTIONEXITSTART
+Action: run; FileName: "hstart.exe"; Parameters: "/noconsole /silent /wait ' . $this->ampricotinstalldirroot . '/core/inc/killupdater.bat"
 Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors
 Action: service; Service: AmpricotMySQL; ServiceAction: stop; Flags: ignoreerrors
 Action: exit
