@@ -348,11 +348,15 @@ class Process extends Kernel
 		{
 			$findtext    = ';extension=' . $phpextensionargv[1] . '.dll';
 			$replacetext = 'extension=' . $phpextensionargv[1] . '.dll';
+			$findtext    = ';zend_extension=' . $phpextensionargv[1] . '.dll';
+			$replacetext = 'zend_extension=' . $phpextensionargv[1] . '.dll';
 		}
 		else
 		{
 			$findtext    = 'extension=' . $phpextensionargv[1] . '.dll';
 			$replacetext = ';extension=' . $phpextensionargv[1] . '.dll';
+			$findtext    = 'zend_extension=' . $phpextensionargv[1] . '.dll';
+			$replacetext = ';zend_extension=' . $phpextensionargv[1] . '.dll';
 		}
 
 		$inifilecontents = str_replace($findtext, $replacetext, $inifilecontents);

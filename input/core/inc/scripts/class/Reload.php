@@ -104,12 +104,14 @@ Action: readconfig
 		foreach($phpinilines as $line)
 		{
 			$phpextmatch = array();
+			$phpzendextmatch = array();
 
-			if(preg_match('/^(;)?extension\s*=\s*"?([a-z0-9_]+)\.dll"?/i', $line, $phpextmatch))
+			if(preg_match('/^(;)?extension\s*=\s*"?([a-z0-9_]+)\.dll"?/i', $line, $phpextmatch) OR preg_match('/^(;)?zend_extension\s*=\s*"?([a-z0-9_]+)\.dll"?/i', $line, $phpzendextmatch))
 			{
 				$phpextname = $phpextmatch[2];
+				$phpzendextname = $phpzendextmatch[2];
 
-				if($phpextmatch[1] == ';')
+				if($phpextmatch[1] == ';' OR $phpzendextmatch[1] == ';')
 				{
 					$phpextini[$phpextname] = 0;
 				}
