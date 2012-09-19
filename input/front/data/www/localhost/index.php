@@ -2,10 +2,10 @@
 /*==================================================================================*\
 || ################################################################################ ||
 || # Product Name: Ampricot                                                       # ||
-|| # License Type: Free License                                                   # ||
+|| # License Type: MIT License                                                    # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
-|| #           Copyright ©2005-2012 FruiTechLabs. All Rights Reserved.            # ||
+|| #              Copyright ©2012 FruiTechLabs. All Rights Reserved.              # ||
 || #     This product may be redistributed in whole or significant part under     # ||
 || # "The MIT License (MIT)" - http://www.opensource.org/licenses/mit-license.php # ||
 || # 																			  # ||
@@ -231,7 +231,7 @@ $output = '
 	<div class="footer">
 		<div class="inner">
 			<div class="content">
-				<p style="text-align: center;">Copyright &copy; 2012 Ampricot | Proudly Made In Egypt.</p>
+				<p style="text-align: center;">Copyright &copy; 2012 <a href="http://www.fruitechlabs.com" target="_blank">FruiTech Labs</a> | Proudly Made In Egypt.</p>
 			</div>
 		</div>
 	</div>
