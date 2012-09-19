@@ -67,7 +67,7 @@ class Process extends Kernel
 		if (!is_dir($this->ampricotdirdata . '/www/' . $vhostdir))
 		{
 			exec('mkdir "' . $this->ampricotdirdata . '/www/' . $vhostdir . '"');
-			@file_put_contents($this->ampricotdirdata . '/www/' . $vhostdir . '/index.html', str_replace('localhost', $vhostdir, @file_get_contents($this->ampricotdirdata . '/www/' . 'localhost/index.html')));
+			@file_put_contents($this->ampricotdirdata . '/www/' . $vhostdir . '/index.php', str_replace('localhost', $vhostdir, @file_get_contents($this->ampricotdirdata . '/www/' . 'localhost/index.php')));
 		}
 
 		if (!is_dir($this->ampricotdirtmp . '/log/' . $vhostdir))
