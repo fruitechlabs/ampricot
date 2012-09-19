@@ -344,19 +344,15 @@ class Process extends Kernel
 	{
 		$inifilecontents = @file_get_contents($this->ampricotphpini) or die ("$this->ampricotphpini file not found!");
 
-		if ($phpextensionargv[2] == 'on')
+			if ($phpextensionargv[2] == 'on')
 		{
-			$findtext    = ';extension=' . $phpextensionargv[1] . '.dll';
-			$replacetext = 'extension=' . $phpextensionargv[1] . '.dll';
-			$findtext    = ';zend_extension=' . $phpextensionargv[1] . '.dll';
-			$replacetext = 'zend_extension=' . $phpextensionargv[1] . '.dll';
+			$findtext    = array(';extension=' . $phpextensionargv[1] . '.dll', ';zend_extension="' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/ext/' . $phpextensionargv[1] . '.dll"');
+			$replacetext = array('extension=' . $phpextensionargv[1] . '.dll', 'zend_extension="' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/ext/' . $phpextensionargv[1] . '.dll"');
 		}
 		else
 		{
-			$findtext    = 'extension=' . $phpextensionargv[1] . '.dll';
-			$replacetext = ';extension=' . $phpextensionargv[1] . '.dll';
-			$findtext    = 'zend_extension=' . $phpextensionargv[1] . '.dll';
-			$replacetext = ';zend_extension=' . $phpextensionargv[1] . '.dll';
+			$findtext    = array('extension=' . $phpextensionargv[1] . '.dll', 'zend_extension="' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/ext/' . $phpextensionargv[1] . '.dll"');
+			$replacetext = array(';extension=' . $phpextensionargv[1] . '.dll', ';zend_extension="' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/ext/' . $phpextensionargv[1] . '.dll"');
 		}
 
 		$inifilecontents = str_replace($findtext, $replacetext, $inifilecontents);
