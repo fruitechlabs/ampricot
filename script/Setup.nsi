@@ -445,7 +445,7 @@ Section /o "-un.pre" UNSEC0000
     Rename $0 $0.bat
     FileOpen $1 $0.bat w
     FileSeek $1 0 END
-    FileWrite $1 'sc stop AmpricotApache$\nsc stop AmpricotMySQL$\nCALL "$INSTDIR\core\inc\harmonymode.bat"$\n"$INSTDIR\core\inc\${AMPRICOTLAUNCHER}" -quit -id={ampricot}$\n"$INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\bin\httpd.exe" -k uninstall -n AmpricotApache$\n"$INSTDIR\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\bin\mysqld.exe" --remove AmpricotMySQL'
+    FileWrite $1 'sc stop AmpricotApache$\nsc stop AmpricotMySQL$\nCALL "$INSTDIR\core\inc\harmonymode.bat"$\nCALL "$INSTDIR\core\inc\killupdater.bat"$\n"$INSTDIR\core\inc\${AMPRICOTLAUNCHER}" -quit -id={ampricot}$\n"$INSTDIR\core\bin\apache\apache-${AMPRICOTVERSIONAPACHE}\bin\httpd.exe" -k uninstall -n AmpricotApache$\n"$INSTDIR\core\bin\mysql\mysql-${AMPRICOTVERSIONMYSQL}\bin\mysqld.exe" --remove AmpricotMySQL'
     FileClose $1
     ExecWait '"$INSTDIR\core\inc\hstart.exe" /noconsole /silent /wait "$0.bat"'
     Delete /REBOOTOK $0.bat
