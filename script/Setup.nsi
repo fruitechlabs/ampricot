@@ -330,9 +330,7 @@ SectionGroupEnd
 SectionGroup "Shortcuts" SECGRP0002
     Section "System Startup" SEC0006
         SectionIn 1 2
-        SetShellVarContext all
-        SetOutPath $SMSTARTUP
-        CreateShortcut "$SMSTARTUP\${AMPRICOTNAME}.lnk" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
+        WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Run" "${AMPRICOTNAME}" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
     SectionEnd
 
     Section "Quick Launch" SEC0007
@@ -415,9 +413,8 @@ Section "-post" SEC00099
     IfSilent +1 +2
     ${file_replace} "ampricotharmony = $\"off$\"" "ampricotharmony = $\"on$\"" "all" "all" "$INSTDIR\core\inc\ampricot.conf"
 
-    IfSilent +1 +3
-    SetOutPath $SMSTARTUP
-    CreateShortcut "$SMSTARTUP\${AMPRICOTNAME}.lnk" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
+    IfSilent +1 +2
+    WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Run" "${AMPRICOTNAME}" "$INSTDIR\core\inc\${AMPRICOTLAUNCHER}"
 
     IfSilent +1 +3
     SetOutPath $QUICKLAUNCH
@@ -461,7 +458,6 @@ Section /o "-un.pre" UNSEC0000
     Delete /REBOOTOK $DESKTOP\${AMPRICOTNAME}.lnk
     RmDir /r /REBOOTOK $SMPROGRAMS\${AMPRICOTNAME}
     Delete /REBOOTOK $QUICKLAUNCH\${AMPRICOTNAME}.lnk
-    Delete /REBOOTOK $SMSTARTUP\${AMPRICOTNAME}.lnk
     Delete /REBOOTOK $INSTDIR\www.lnk
 
     RmDir /r /REBOOTOK $INSTDIR\core
