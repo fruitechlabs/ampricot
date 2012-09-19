@@ -57,12 +57,12 @@ Action: run; FileName: "explorer.exe"; Parameters: "http://localhost/"
 [StartupAction]
 ;AMPRICOTSTARTUPACTIONSTART
 Action: run; FileName: "ampricotupdater.exe"
-Action: run; FileName: "hstart.exe"; Parameters: "/noconsole /silent /wait ' . $this->ampricotinstalldirroot . '/core/inc/harmonymode.bat"
-Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "hstart.exe"; Parameters: "/noconsole /silent /wait ' . $this->ampricotinstalldirroot . '/core/inc/harmonymode.bat"; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: ignoreerrors waituntilterminated
 Action: resetservices
 Action: readconfig
-Action: service; Service: AmpricotApache; ServiceAction: startresume; Flags: ignoreerrors
-Action: service; Service: AmpricotMySQL; ServiceAction: startresume; Flags: ignoreerrors
+Action: service; Service: AmpricotApache; ServiceAction: startresume; Flags: ignoreerrors waituntilterminated
+Action: service; Service: AmpricotMySQL; ServiceAction: startresume; Flags: ignoreerrors waituntilterminated
 ;AMPRICOTSTARTUPACTIONEND
 
 [Menu.Right.Settings]
@@ -107,29 +107,29 @@ Type: item; Caption: "' . gettext('E&xit') . '"; Action: multi; Actions: ActionE
 
 [ActionReload]
 ;ACTIONRELOADSTART
-Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: ignoreerrors waituntilterminated
 Action: resetservices
 Action: readconfig
 ;ACTIONRELOADEND
 
 [ActionExit]
 ;ACTIONEXITSTART
-Action: run; FileName: "hstart.exe"; Parameters: "/noconsole /silent /wait ' . $this->ampricotinstalldirroot . '/core/inc/killupdater.bat"
-Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors
-Action: service; Service: AmpricotMySQL; ServiceAction: stop; Flags: ignoreerrors
+Action: run; FileName: "hstart.exe"; Parameters: "/noconsole /silent /wait ' . $this->ampricotinstalldirroot . '/core/inc/killupdater.bat"; Flags: ignoreerrors waituntilterminated
+Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
+Action: service; Service: AmpricotMySQL; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
 Action: exit
 ;ACTIONEXITEND
 
 [ActionServiceStartAll]
 ;ACTIONSERVICESTARTALLSTART
-Action: service; Service: AmpricotApache; ServiceAction: startresume; Flags: ignoreerrors
-Action: service; Service: AmpricotMySQL; ServiceAction: startresume; Flags: ignoreerrors
+Action: service; Service: AmpricotApache; ServiceAction: startresume; Flags: ignoreerrors waituntilterminated
+Action: service; Service: AmpricotMySQL; ServiceAction: startresume; Flags: ignoreerrors waituntilterminated
 ;ACTIONSERVICESTARTALLEND
 
 [ActionServiceStopAll]
 ;ACTIONSERVICESTOPALLSTART
-Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors
-Action: service; Service: AmpricotMySQL; ServiceAction: stop; Flags: ignoreerrors
+Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
+Action: service; Service: AmpricotMySQL; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
 ;ACTIONSERVICESTOPALLEND
 
 [ActionServiceRestartAll]
@@ -142,8 +142,8 @@ Action: service; Service: AmpricotMySQL; ServiceAction: startresume; Flags: igno
 
 [ActionSwitchHarmonyMode]
 ;ACTIONSWITCHHARMONYMODESTART
-Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' SwitchHarmonyMode.php on"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' SwitchHarmonyMode.php on"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: ignoreerrors waituntilterminated
 Action: service; Service: AmpricotApache; ServiceAction: restart
 Action: resetservices
 Action: readconfig
@@ -151,8 +151,8 @@ Action: readconfig
 
 [ActionSwitchServerStatus]
 ;ACTIONSWITCHSERVERSTATUSSTART
-Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' SwitchServerStatus.php on"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' SwitchServerStatus.php on"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: ignoreerrors waituntilterminated
 Action: service; Service: AmpricotApache; ServiceAction: restart
 Action: resetservices
 Action: readconfig
@@ -232,7 +232,7 @@ Type: separator
 
 [MenuApacheTools]
 ;MENUAPACHETOOLSSTART
-Type: item; Caption: "' . gettext('Test Port 80') . '"; Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php.exe"; Parameters: "-c ' . $this->ampricotphpini . ' TestPort.php 0"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated; Glyph: 99
+Type: item; Caption: "' . gettext('Test Port 80') . '"; Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php.exe"; Parameters: "-c ' . $this->ampricotphpini . ' TestPort.php 0"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: ignoreerrors waituntilterminated; Glyph: 99
 Type: item; Caption: "' . gettext('httpd.conf') . '"; Action: run; FileName: "notepad.exe"; parameters: "' . $this->ampricotapacheconf . '"; Glyph: 99
 Type: item; Caption: "' . gettext('access.log') . '"; Action: run; FileName: "notepad.exe"; parameters: "' . $this->ampricotdirtmp . '/log/apache/access.log"; Glyph: 99
 Type: item; Caption: "' . gettext('error.log') . '"; Action: run; FileName: "notepad.exe"; parameters: "' . $this->ampricotdirtmp . '/log/apache/error.log"; Glyph: 99
@@ -240,9 +240,9 @@ Type: item; Caption: "' . gettext('error.log') . '"; Action: run; FileName: "not
 
 [ActionApacheServiceInstall]
 ;ACTIONAPACHESERVICEINSTALLSTART
-Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php.exe"; Parameters: "-c ' . $this->ampricotphpini . ' TestPort.php 1"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "' . $this->ampricotinstalldirapache . '/apache-' . $this->ampricotversionapache . '/bin/httpd.exe"; Parameters: "' . $this->ampricotserviceapacheinstall . '"; ShowCmd: hidden; Flags: waituntilterminated
-Action: run; FileName: "sc"; Parameters: "config AmpricotApache start= demand"; ShowCmd: hidden; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php.exe"; Parameters: "-c ' . $this->ampricotphpini . ' TestPort.php 1"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirapache . '/apache-' . $this->ampricotversionapache . '/bin/httpd.exe"; Parameters: "' . $this->ampricotserviceapacheinstall . '"; ShowCmd: hidden; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "sc"; Parameters: "config AmpricotApache start= demand"; ShowCmd: hidden; Flags: ignoreerrors waituntilterminated
 Action: resetservices
 Action: readconfig
 ;ACTIONAPACHESERVICEINSTALLEND
@@ -250,15 +250,15 @@ Action: readconfig
 [ActionApacheServiceUninstall]
 ;ACTIONAPACHESERVICEUNINSTALLSTART
 Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
-Action: run; FileName: "' . $this->ampricotinstalldirapache . '/apache-' . $this->ampricotversionapache . '/bin/httpd.exe"; Parameters: "' . $this->ampricotserviceapacheuninstall . '"; ShowCmd: hidden; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirapache . '/apache-' . $this->ampricotversionapache . '/bin/httpd.exe"; Parameters: "' . $this->ampricotserviceapacheuninstall . '"; ShowCmd: hidden; Flags: ignoreerrors waituntilterminated
 Action: resetservices
 Action: readconfig
 ;ACTIONAPACHESERVICEUNINSTALLEND
 
 [ActionApacheAliasAdd]
 ;ACTIONAPACHEALIASADDSTART
-Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php.exe"; Parameters: "-c ' . $this->ampricotphpini . ' AliasAdd.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php.exe"; Parameters: "-c ' . $this->ampricotphpini . ' AliasAdd.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: ignoreerrors waituntilterminated
 Action: service; Service: AmpricotApache; ServiceAction: restart
 Action: resetservices
 Action: readconfig
@@ -266,8 +266,8 @@ Action: readconfig
 
 [ActionApacheVHostAdd]
 ;ACTIONAPACHEVHOSTADDSTART
-Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php.exe"; Parameters: "-c ' . $this->ampricotphpini . ' VHostAdd.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
-Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php.exe"; Parameters: "-c ' . $this->ampricotphpini . ' VHostAdd.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: ignoreerrors waituntilterminated
 Action: service; Service: AmpricotApache; ServiceAction: restart
 Action: resetservices
 Action: readconfig
@@ -288,7 +288,7 @@ Type: submenu; Caption: "' . gettext('Tools') . '"; SubMenu: MenuMySQLTools; Gly
 
 [MenuMySQLService]
 ;MENUMYSQLSERVICESTART
-Type: item; Caption: "' . gettext('Start Service') . '"; Action: service; Service: AmpricotMySQL; ServiceAction: startresume; Flags: ignoreerrors; Glyph: 99
+Type: item; Caption: "' . gettext('Start Service') . '"; Action: service; Service: AmpricotMySQL; ServiceAction: startresume; Flags: ignoreerrors waituntilterminated; Glyph: 99
 Type: item; Caption: "' . gettext('Stop Service') . '"; Action: service; Service: AmpricotMySQL; ServiceAction: stop; Glyph: 99
 Type: item; Caption: "' . gettext('Restart Service') . '"; Action: service; Service: AmpricotMySQL; ServiceAction: restart; Glyph: 99
 Type: separator
@@ -306,7 +306,7 @@ Type: item; Caption: "' . gettext('error.log') . '"; Action: run; FileName: "not
 
 [ActionResetMySQLPass]
 ;ACTIONRESETMYSQLPASSSTART
-Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php.exe"; Parameters: "-c ' . $this->ampricotphpini . ' ResetMySQLPass.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php.exe"; Parameters: "-c ' . $this->ampricotphpini . ' ResetMySQLPass.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: ignoreerrors waituntilterminated
 Action: service; Service: AmpricotMySQL; ServiceAction: restart
 Action: resetservices
 Action: readconfig
@@ -322,7 +322,7 @@ Action: readconfig
 [ActionMySQLServiceUninstall]
 ;ACTIONMYSQLSERVICEUNINSTALLSTART
 Action: service; Service: AmpricotMySQL; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
-Action: run; FileName: "' . $this->ampricotinstalldirmysql . '/mysql-' . $this->ampricotversionmysql . '/bin/mysqld.exe"; Parameters: "' . $this->ampricotservicemysqluninstall . '"; ShowCmd: hidden; Flags: waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirmysql . '/mysql-' . $this->ampricotversionmysql . '/bin/mysqld.exe"; Parameters: "' . $this->ampricotservicemysqluninstall . '"; ShowCmd: hidden; Flags: ignoreerrors waituntilterminated
 Action: resetservices
 Action: readconfig
 ;ACTIONMYSQLSERVICEUNINSTALLEND
