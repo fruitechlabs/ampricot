@@ -173,10 +173,11 @@ $output = '
 					<li class="page_item"><a href="http://www.ampricot.com/faq/">' . gettext('FAQ') . '</a></li>
 					<li class="page_item"><a href="http://www.ampricot.com/screenshots/">' . gettext('Screenshots') . '</a></li>
 					<li class="page_item"><a href="http://www.ampricot.com/download/">' . gettext('Downloads') . '</a></li>
-					<li class="page_item"><a href="http://www.ampricot.com/contributors/">' . gettext('Contributors') . '</a></li>
 					<li class="page_item"><a href="http://www.ampricot.com/news/">' . gettext('News') . '</a></li>
+					<li class="page_item"><a href="http://www.ampricot.com/contributors/">' . gettext('Contributors') . '</a></li>
+					<li class="page_item"><a href="http://www.fruitechlabs.com/about/">' . gettext('About Us') . '</a></li>
 					<li class="page_item"><a href="http://www.ampricot.com/contact/">' . gettext('Contact') . '</a></li>
-					<li class="page_item"><a href="http://support.fruitechlabs.com/forumdisplay.php?fid=1">' . gettext('Support') . '</a></li>
+					<li class="page_item"><a href="http://www.ampricot.com/support/">' . gettext('Support') . '</a></li>
 				</ul>
 				<!-- navigation END -->
 			</div>
