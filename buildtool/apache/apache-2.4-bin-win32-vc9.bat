@@ -4,22 +4,33 @@ CALL "C:\Program Files\Microsoft Visual Studio 9.0\VC\bin\vcvars32.bat"
 REM ####################
 REM ## Compile Apache ##
 REM ####################
+REM ## Input Arguments:
+REM ## - %1: Apache version
+REM ## - %2: Apache APR version
+REM ## - %3: Apache APR-ICONV version
+REM ## - %4: Apache APR-UTIL version
+REM ## - %5: Apache Openssl version
+REM ## - %6: Apache PCRE version
+REM ## - %7: Apache Zlib version
+REM ## Ex. "2.4.3" "1.4.6" "1.2.1" "1.5.1" "1.0.1c" "8.31" "1.2.7"
+REM ####################
+
 
 
 REM # Extract Sources
 "C:\Program Files\7-Zip\7z.exe" x "D:\source\apache\httpd-%1.7z" -o"C:\source\apache\"
-"C:\Program Files\7-Zip\7z.exe" x "D:\source\apr\apr-1.4.6.7z" -o"C:\source\apache\httpd-%1\srclib\"
-rename "C:\source\apache\httpd-%1\srclib\apr-1.4.6" "apr"
-"C:\Program Files\7-Zip\7z.exe" x "D:\source\apr-iconv\apr-iconv-1.2.1.7z" -o"C:\source\apache\httpd-%1\srclib\"
-rename "C:\source\apache\httpd-%1\srclib\apr-iconv-1.2.1" "apr-iconv"
-"C:\Program Files\7-Zip\7z.exe" x "D:\source\apr-util\apr-util-1.4.1.7z" -o"C:\source\apache\httpd-%1\srclib\"
-rename "C:\source\apache\httpd-%1\srclib\apr-util-1.4.1" "apr-util"
-"C:\Program Files\7-Zip\7z.exe" x "D:\source\openssl\openssl-1.0.1c.7z" -o"C:\source\apache\httpd-%1\srclib\"
-rename "C:\source\apache\httpd-%1\srclib\openssl-1.0.1c" "openssl"
-"C:\Program Files\7-Zip\7z.exe" x "D:\source\pcre\pcre-8.31.7z" -o"C:\source\apache\httpd-%1\srclib\"
-rename "C:\source\apache\httpd-%1\srclib\pcre-8.31" "pcre"
-"C:\Program Files\7-Zip\7z.exe" x "D:\source\zlib\zlib-1.2.7.7z" -o"C:\source\apache\httpd-%1\srclib\"
-rename "C:\source\apache\httpd-%1\srclib\zlib-1.2.7" "zlib"
+"C:\Program Files\7-Zip\7z.exe" x "D:\source\apr\apr-%2.7z" -o"C:\source\apache\httpd-%1\srclib\"
+rename "C:\source\apache\httpd-%1\srclib\apr-%2" "apr"
+"C:\Program Files\7-Zip\7z.exe" x "D:\source\apr-iconv\apr-iconv-%3.7z" -o"C:\source\apache\httpd-%1\srclib\"
+rename "C:\source\apache\httpd-%1\srclib\apr-iconv-%3" "apr-iconv"
+"C:\Program Files\7-Zip\7z.exe" x "D:\source\apr-util\apr-util-%4.7z" -o"C:\source\apache\httpd-%1\srclib\"
+rename "C:\source\apache\httpd-%1\srclib\apr-util-%4" "apr-util"
+"C:\Program Files\7-Zip\7z.exe" x "D:\source\openssl\openssl-%5.7z" -o"C:\source\apache\httpd-%1\srclib\"
+rename "C:\source\apache\httpd-%1\srclib\openssl-%5" "openssl"
+"C:\Program Files\7-Zip\7z.exe" x "D:\source\pcre\pcre-%6.7z" -o"C:\source\apache\httpd-%1\srclib\"
+rename "C:\source\apache\httpd-%1\srclib\pcre-%6" "pcre"
+"C:\Program Files\7-Zip\7z.exe" x "D:\source\zlib\zlib-%7.7z" -o"C:\source\apache\httpd-%1\srclib\"
+rename "C:\source\apache\httpd-%1\srclib\zlib-%7" "zlib"
 
 
 REM # Convert Line Ends
