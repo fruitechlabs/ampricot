@@ -59,10 +59,10 @@ Devenv "C:\source\apache\httpd-%1\Apache.sln" /build "Release|Win32" /project "I
 
 
 REM # Package Apache
-rename "C:\Apache22" "apache-%1-bin-win32-vc9"
+rename "C:\Apache22" "httpd-%1-bin-win32-vc9"
 "C:\Program Files\7-Zip\7z.exe" a -t7z "D:\binary\apache\httpd-%1-bin-win32-vc9.7z" "C:\httpd-%1-bin-win32-vc9\"
 
 
 REM # Clean workspace
 cd "C:\"
-rmdir /S /Q "C:\source\apache\","C:\binary\apache\","C:\apache-%1-bin-win32-vc9\"
+rmdir /S /Q "C:\source\apache\","C:\httpd-%1-bin-win32-vc9\"

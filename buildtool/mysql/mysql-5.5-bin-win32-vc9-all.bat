@@ -1,3 +1,4 @@
+CALL "D:\workspace\fruitechlabs\ampricot\buildtool\mysql\mysql-5.5-bin-win32-vc9.bat" 5.5.28 > "C:\mysql-5.5.28-bin-win32-vc9.txt"
 CALL "D:\workspace\fruitechlabs\ampricot\buildtool\mysql\mysql-5.5-bin-win32-vc9.bat" 5.5.27 > "C:\mysql-5.5.27-bin-win32-vc9.txt"
 CALL "D:\workspace\fruitechlabs\ampricot\buildtool\mysql\mysql-5.5-bin-win32-vc9.bat" 5.5.25a > "C:\mysql-5.5.25a-bin-win32-vc9.txt"
 CALL "D:\workspace\fruitechlabs\ampricot\buildtool\mysql\mysql-5.5-bin-win32-vc9.bat" 5.5.24 > "C:\mysql-5.5.24-bin-win32-vc9.txt"
