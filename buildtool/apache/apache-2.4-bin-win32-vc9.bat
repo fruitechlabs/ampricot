@@ -9,10 +9,10 @@ REM ## - %1: Apache version
 REM ## - %2: Apache APR version
 REM ## - %3: Apache APR-ICONV version
 REM ## - %4: Apache APR-UTIL version
-REM ## - %5: Apache Openssl version
-REM ## - %6: Apache PCRE version
-REM ## - %7: Apache Zlib version
-REM ## Ex. "2.4.3" "1.4.6" "1.2.1" "1.5.1" "1.0.1c" "8.31" "1.2.7"
+REM ## - %5: Openssl version
+REM ## - %6: PCRE version
+REM ## - %7: Zlib version
+REM ## Ex. 2.4.3 1.4.6 1.2.1 1.4.1 1.0.1c 8.31 1.2.7
 REM ####################
 
 
