@@ -90,6 +90,7 @@ Var mui.MySQLOptsPage.ServerPort.VAL
 !include MUI2.nsh
 !include Locate.nsh
 !include EnvVarUpdate.nsh
+!include WinMessages.nsh
 !include FileFunc.nsh
 !include WinVer.nsh
 !include Core.nsh
@@ -292,6 +293,9 @@ SectionGroup "Core Components" SECGRP0000
         ${file_replace} "#LoadModule php5_module" "LoadModule php5_module" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
         ${file_replace} "#AddType application/x-httpd-php .php" "AddType application/x-httpd-php .php" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
 
+        WriteRegExpandStr HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "PHPRC" "$INSTDIR\front\conf\php\php-${AMPRICOTVERSIONPHP}"
+        SendMessage ${HWND_BROADCAST} ${WM_WININICHANGE} 0 "STR:Environment" /TIMEOUT=5000
+
         CreateDirectory $INSTDIR\front\tmp\dmp
         CreateDirectory $INSTDIR\front\tmp\sess
     SectionEnd
@@ -451,6 +455,9 @@ Section /o "-un.pre" UNSEC0000
     FileClose $1
     ExecWait '"$INSTDIR\core\inc\hstart.exe" /noconsole /silent /wait "$0.bat"'
     Delete /REBOOTOK $0.bat
+
+    DeleteRegValue HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "PHPRC"
+    SendMessage ${HWND_BROADCAST} ${WM_WININICHANGE} 0 "STR:Environment" /TIMEOUT=5000
 
     ${un.EnvVarUpdate} $0 "PATH" "R" "HKLM" "$INSTDIR\core\bin\php\php-${AMPRICOTVERSIONPHP}"
 
