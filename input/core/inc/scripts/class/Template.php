@@ -115,6 +115,7 @@ Action: readconfig
 [ActionExit]
 ;ACTIONEXITSTART
 Action: run; FileName: "hstart.exe"; Parameters: "/noconsole /silent /wait ' . $this->ampricotinstalldirroot . '/core/inc/killupdater.bat"; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "hstart.exe"; Parameters: "/noconsole /silent /wait ' . $this->ampricotinstalldirroot . '/core/inc/cleanonexit.bat"; Flags: ignoreerrors waituntilterminated
 Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
 Action: service; Service: AmpricotMySQL; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
 Action: exit
@@ -158,6 +159,14 @@ Action: resetservices
 Action: readconfig
 ;ACTIONSWITCHSERVERSTATUSEND
 
+[ActionCleanOnExit]
+;ACTIONCLEANONEXITSTART
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' SwitchCleanOnExit.php on"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . $this->ampricotphpini . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: ignoreerrors waituntilterminated
+Action: resetservices
+Action: readconfig
+;ACTIONCLEANONEXITEND
+
 [MenuLanguage]
 ;MENULANGUAGESTART
 ;MENULANGUAGEEND
@@ -170,6 +179,7 @@ Type: submenu; Caption: "' . gettext('Browse Directories') . '"; SubMenu: MenuAd
 Type: separator
 Type: item; Caption: "' . gettext('Activate &Harmony Mode') . '"; Action: multi; Actions: ActionSwitchHarmonyMode; Glyph: 99
 Type: item; Caption: "' . gettext('Server On The &Web') . '"; Action: multi; Actions: ActionSwitchServerStatus; Glyph: 99
+Type: item; Caption: "' . gettext('&Clean On Exit') . '"; Action: multi; Actions: ActionCleanOnExit; Glyph: 99
 Type: separator
 Type: item; Caption: "' . gettext('&Reload Settings') . '"; Action: multi; Actions: ActionReload; Glyph: 99
 ;MENUADVANCEDEND

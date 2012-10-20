@@ -40,6 +40,18 @@ class Reload extends Kernel
 		}
 	}
 
+	public function cleanonexit()
+	{
+		if ($this->ampricotconf['ampricotcleanonexit'] == 'on')
+		{
+			$this->ampricottpl = str_replace(array('SwitchCleanOnExit.php on', 'ActionCleanOnExit; Glyph: 99'), array('SwitchCleanOnExit.php off', 'ActionCleanOnExit; Glyph: 3'), $this->ampricottpl);
+		}
+		else
+		{
+			$this->ampricottpl = str_replace(array('SwitchCleanOnExit.php off', 'ActionCleanOnExit; Glyph: 3'), array('SwitchCleanOnExit.php on', 'ActionCleanOnExit; Glyph: 99'), $this->ampricottpl);
+		}
+	}
+
 	public function harmonymode()
 	{
 		if ($this->ampricotconf['ampricotharmony'] == 'on')
@@ -474,6 +486,7 @@ Type: item; Caption: "' . gettext('More versions...') . '"; Action: run; FileNam
 	public function commit()
 	{
 		$this->serverstatus();
+		$this->cleanonexit();
 		$this->harmonymode();
 		$this->language();
 		$this->apacheversion();
