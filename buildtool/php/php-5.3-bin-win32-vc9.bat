@@ -36,7 +36,7 @@ xcopy "D:\source\php\tools\source\apache24\lib\*" "C:\source\php\php5dev\vc9\x86
 REM # Compile PHP
 cd "C:\source\php\php5dev\vc9\x86\php-%1\"
 CALL "C:\source\php\php5dev\vc9\x86\php-%1\buildconf"
-CALL "C:\source\php\php5dev\vc9\x86\php-%1\configure" "--enable-snapshot-build" "--disable-static-analyze" "--enable-debug-pack" "--enable-apc-debug=no" "--with-config-file-scan-dir=../../../../front/conf/php/php-%1/" "--with-oci8=C:\source\php\php5dev\vc9\x86\deps\oci,shared" "--with-oci8-11g=C:\source\php\php5dev\vc9\x86\deps\oci,shared" "--with-pdo-oci=C:\source\php\php5dev\vc9\x86\deps\oci,shared"
+CALL "C:\source\php\php5dev\vc9\x86\php-%1\configure" "--enable-snapshot-build" "--disable-static-analyze" "--enable-debug-pack" "--enable-apc-debug=no" "--with-oci8=C:\source\php\php5dev\vc9\x86\deps\oci,shared" "--with-oci8-11g=C:\source\php\php5dev\vc9\x86\deps\oci,shared" "--with-pdo-oci=C:\source\php\php5dev\vc9\x86\deps\oci,shared"
 nmake snap
 
 
