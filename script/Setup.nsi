@@ -291,6 +291,9 @@ SectionGroup "Core Components" SECGRP0000
 
         ${file_replace} "#LoadModule php5_module" "LoadModule php5_module" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
         ${file_replace} "#AddType application/x-httpd-php .php" "AddType application/x-httpd-php .php" "all" "all" "$INSTDIR\front\conf\apache\apache-${AMPRICOTVERSIONAPACHE}\httpd.conf"
+
+        CreateDirectory $INSTDIR\front\tmp\dmp
+        CreateDirectory $INSTDIR\front\tmp\sess
     SectionEnd
 SectionGroupEnd
 
@@ -431,7 +434,6 @@ Section "-post" SEC00099
     ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR\core\bin\php\php-${AMPRICOTVERSIONPHP}"
 
     CreateDirectory $INSTDIR\core\lib
-    CreateDirectory $INSTDIR\front\tmp\dmp
 SectionEnd
 
 # Uninstaller sections
