@@ -4,6 +4,10 @@ CALL "C:\Program Files\Microsoft Visual Studio 9.0\VC\bin\vcvars32.bat"
 REM ###################
 REM ## Compile MySQL ##
 REM ###################
+REM ## Input Arguments:
+REM ## - %1: MySQL version
+REM ## Ex. 5.5.28
+REM ####################
 
 
 REM # Copy Sources

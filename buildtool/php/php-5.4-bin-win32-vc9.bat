@@ -4,6 +4,10 @@ CALL "C:\Program Files\Microsoft Visual Studio 9.0\VC\bin\vcvars32.bat"
 REM #################
 REM ## Compile PHP ##
 REM #################
+REM ## Input Arguments:
+REM ## - %1: PHP version
+REM ## Ex. 5.4.8
+REM ####################
 
 
 REM # Copy Binary Tools Sources

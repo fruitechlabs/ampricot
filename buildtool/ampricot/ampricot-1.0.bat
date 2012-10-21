@@ -1,12 +1,20 @@
 REM ######################
 REM ## Compile Ampricot ##
 REM ######################
+REM ## Input Arguments:
+REM ## - %1: Apache version
+REM ## - %2: MySQL version
+REM ## - %3: PHP version
+REM ## - %4: phpMyAdmin version
+REM ## - %5: Adminer version
+REM ## Ex. 2.4.3 5.5.28 5.4.8 3.5.3 3.6.1
+REM ####################
 
 
 "C:\Program Files\7-Zip\7z.exe" x "D:\binary\apache\httpd-%1-bin-win32-vc9.7z" -o"D:\workspace\fruitechlabs\ampricot\input\core\bin\apache\"
 "C:\Program Files\7-Zip\7z.exe" x "D:\binary\mysql\mysql-%2-bin-win32-vc9.7z" -o"D:\workspace\fruitechlabs\ampricot\input\core\bin\mysql\"
 "C:\Program Files\7-Zip\7z.exe" x "D:\binary\php\php-%3-bin-win32-vc9.7z" -o"D:\workspace\fruitechlabs\ampricot\input\core\bin\php\"
-"C:\Program Files\7-Zip\7z.exe" x "D:\script\php\phpmyadmin\phpMyAdmin-%4-all-languages.7z" -o"D:\workspace\fruitechlabs\ampricot\input\core\app\"
+"C:\Program Files\7-Zip\7z.exe" x "D:\code\php\phpmyadmin\phpMyAdmin-%4-all-languages.7z" -o"D:\workspace\fruitechlabs\ampricot\input\core\app\"
 
 
 rename "D:\workspace\fruitechlabs\ampricot\input\core\bin\apache\httpd-%1-bin-win32-vc9" "apache-%1"
@@ -14,7 +22,7 @@ rename "D:\workspace\fruitechlabs\ampricot\input\core\bin\mysql\mysql-%2-bin-win
 rename "D:\workspace\fruitechlabs\ampricot\input\core\bin\php\php-%3-bin-win32-vc9" "php-%3"
 rename "D:\workspace\fruitechlabs\ampricot\input\core\app\phpMyAdmin-%4-all-languages" "phpmyadmin-%4"
 
-xcopy "D:\script\php\adminer\adminer-%5.php" "D:\workspace\fruitechlabs\ampricot\input\core\app\adminer-%5\"
+xcopy "D:\code\php\adminer\adminer-%5.php" "D:\workspace\fruitechlabs\ampricot\input\core\app\adminer-%5\"
 rename "D:\workspace\fruitechlabs\ampricot\input\core\app\adminer-%5\adminer-%5.php" "index.php"
 
 
