@@ -37,7 +37,7 @@ ShowUninstDetails hide
 InstallDirRegKey HKLM "${AMPRICOTREGKEY}" "InstallLocation"
 
 # File info
-VIProductVersion "${AMPRICOTVERSIONCORE}"
+VIProductVersion "${AMPRICOTVERSIONCORE}.0"
 VIAddVersionKey ProductName "Ampricot"
 VIAddVersionKey ProductVersion "${AMPRICOTVERSIONCORE}"
 VIAddVersionKey CompanyName "${AMPRICOTCOMPANY}"
