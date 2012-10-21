@@ -408,7 +408,7 @@ Section "-post" SEC00099
     ${file_replace} "@AMPRICOTVERSIONPHP@" "${AMPRICOTVERSIONPHP}" "all" "all" "$INSTDIR\core\inc\ampricot.ini"
     ${file_replace} "@AMPRICOTINSTALLDIRROOT@" "$installdirectory" "all" "all" "$INSTDIR\core\inc\ampricot.ini"
     ${file_replace} "@AMPRICOTVERSIONCORE@" "${AMPRICOTVERSIONCORE}" "all" "all" "$INSTDIR\core\inc\ampricot.ini"
-    ${file_replace} "@AMPRICOTINSTALLDIRROOT@" "$installdirectory" "all" "all" "$INSTDIR\core\inc\cleanonexit.bat"
+    ${file_replace} "@AMPRICOTINSTALLDIRROOT@" "$INSTDIR" "all" "all" "$INSTDIR\core\inc\cleanonexit.bat"
 
     Var /GLOBAL urleninstalldirectory
     ${str_replace} " " "%20" "$installdirectory" "$urleninstalldirectory"

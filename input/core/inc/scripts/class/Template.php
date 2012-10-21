@@ -115,9 +115,9 @@ Action: readconfig
 [ActionExit]
 ;ACTIONEXITSTART
 Action: run; FileName: "hstart.exe"; Parameters: "/noconsole /silent /wait ' . $this->ampricotinstalldirroot . '/core/inc/killupdater.bat"; Flags: ignoreerrors waituntilterminated
-Action: run; FileName: "hstart.exe"; Parameters: "/noconsole /silent /wait ' . $this->ampricotinstalldirroot . '/core/inc/cleanonexit.bat"; Flags: ignoreerrors waituntilterminated
 Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
 Action: service; Service: AmpricotMySQL; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "hstart.exe"; Parameters: "/noconsole /silent /wait ' . $this->ampricotinstalldirroot . '/core/inc/cleanonexit.bat"; Flags: ignoreerrors waituntilterminated
 Action: exit
 ;ACTIONEXITEND
 

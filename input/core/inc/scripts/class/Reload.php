@@ -122,7 +122,7 @@ Action: readconfig
 			{
 				$phpextname = (!empty($phpzendextmatch[2]) ? $phpzendextmatch[2] : $phpextmatch[2]);
 
-				if($phpextmatch[1] == ';' OR $phpzendextmatch[1] == ';')
+				if((isset($phpextmatch[1]) AND $phpextmatch[1] == ';') OR (isset($phpzendextmatch[1]) AND $phpzendextmatch[1] == ';'))
 				{
 					$phpextini[$phpextname] = 0;
 				}
@@ -428,7 +428,7 @@ Action: readconfig
 				$actionphpversion .= '[ActionPHPVersion_' . $cleanphpversion2 . "]\r\n;ACTIONPHPVERSION_" . $cleanphpversion2 . "_START\r\n" .
 'Action: service; Service: AmpricotApache; ServiceAction: stop; Flags: ignoreerrors waituntilterminated
 Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' SwitchPHPVersion.php ' . $cleanphpversion . '"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: ignoreerrors waituntilterminated
-Action: run; FileName: "setx"; Parameters: "PHPRC "' . $this->ampricotinstalldirroot . '/front/conf/php/' . $phpversion . '" /m"; ShowCmd: hidden; Flags: ignoreerrors waituntilterminated
+Action: run; FileName: "setx"; Parameters: "PHPRC \'' . $this->ampricotinstalldirroot . '/front/conf/php/' . $phpversion . '\' /m"; ShowCmd: hidden; Flags: ignoreerrors waituntilterminated
 Action: run; FileName: "sc"; Parameters: "start AmpricotApache"; ShowCmd: hidden; Flags: ignoreerrors waituntilterminated
 Action: run; FileName: "' . $this->ampricotinstalldirphp . '/php-' . $this->ampricotversionphp . '/php-win.exe"; Parameters: "-c ' . str_replace(' ', '%20', $this->ampricotphpini) . ' Refresh.php"; WorkingDir: "' . $this->ampricotinstalldirroot . '/core/inc/scripts"; Flags: ignoreerrors waituntilterminated
 Action: resetservices
