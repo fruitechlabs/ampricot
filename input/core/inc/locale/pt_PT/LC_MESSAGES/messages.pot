@@ -1,0 +1,540 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Ampricot 1.1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-10-21 18:22+0200\n"
+"PO-Revision-Date: 2013-02-12 11:52-0000\n"
+"Last-Translator: Jonadabe <jondabe@hotmail.com>\n"
+"Language-Team: FruiTech Labs <support@ampricot.com>\n"
+"Language: pt_PT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SearchPath-0: ../../../../..\n"
+
+#: ../../../../../core/inc/scripts/class/Process.php:25
+#, php-format
+msgid "Do you really want to delete '%1$s' virtual host?"
+msgstr "Tem a certeza que deseja eliminar o host virtual '%1$s'?"
+
+#: ../../../../../core/inc/scripts/class/Process.php:25
+#: ../../../../../core/inc/scripts/class/Process.php:141
+#, php-format
+msgid "Type 'yes' to confirm.."
+msgstr "Escreva 'sim' para confirmar..."
+
+#: ../../../../../core/inc/scripts/class/Process.php:34
+#: ../../../../../core/inc/scripts/class/Process.php:92
+#: ../../../../../core/inc/scripts/class/Process.php:114
+#, php-format
+msgid "%1$s"
+msgstr "%1$s"
+
+#: ../../../../../core/inc/scripts/class/Process.php:34
+#, php-format
+msgid "Virtual Host deleted successfully!"
+msgstr "Host virtual eliminado com sucesso!"
+
+#: ../../../../../core/inc/scripts/class/Process.php:34
+#: ../../../../../core/inc/scripts/class/Process.php:40
+#: ../../../../../core/inc/scripts/class/Process.php:55
+#: ../../../../../core/inc/scripts/class/Process.php:62
+#: ../../../../../core/inc/scripts/class/Process.php:92
+#: ../../../../../core/inc/scripts/class/Process.php:135
+#: ../../../../../core/inc/scripts/class/Process.php:149
+#: ../../../../../core/inc/scripts/class/Process.php:155
+#: ../../../../../core/inc/scripts/class/Process.php:170
+#: ../../../../../core/inc/scripts/class/Process.php:177
+#: ../../../../../core/inc/scripts/class/Process.php:199
+#: ../../../../../core/inc/scripts/class/Process.php:203
+#: ../../../../../core/inc/scripts/class/Process.php:242
+#: ../../../../../core/inc/scripts/class/Process.php:389
+#: ../../../../../core/inc/scripts/class/Process.php:400
+#, php-format
+msgid "Press Enter to exit..."
+msgstr "Pressione Enter para sair..."
+
+#: ../../../../../core/inc/scripts/class/Process.php:40
+msgid "Virtual Host not deleted!"
+msgstr "Host virtual não eliminado!"
+
+#: ../../../../../core/inc/scripts/class/Process.php:48
+#, php-format
+msgid "Enter your Virtual Host."
+msgstr "Introduza o seu Host Virtual."
+
+#: ../../../../../core/inc/scripts/class/Process.php:48
+#, php-format
+msgid ""
+"Example: 'test' Would create a new virtual host with the url: 'http://test/' "
+"which points to: '%1$stest/'"
+msgstr ""
+"Exemplo: 'teste' Seria criado um novo Host Virtual com o url: 'http://"
+"teste/' que aponta para: '%1$steste/'"
+
+#: ../../../../../core/inc/scripts/class/Process.php:55
+msgid "Invalid Virtual Host! Virtual Host not created!"
+msgstr "Host Virtual inválido! Host Virtual não pode ser criado!"
+
+#: ../../../../../core/inc/scripts/class/Process.php:62
+#, php-format
+msgid "Virtual Host already exists!"
+msgstr "Host Virtual já existe!"
+
+#: ../../../../../core/inc/scripts/class/Process.php:92
+#, php-format
+msgid "Virtual Host created successfully!"
+msgstr "Virtual Host criado com sucesso!"
+
+#: ../../../../../core/inc/scripts/class/Process.php:105
+#, php-format
+msgid "Your port '%1$s' is actually used by:"
+msgstr "A sua porta '%1$s' está atualmente a ser usada por:"
+
+#: ../../../../../core/inc/scripts/class/Process.php:123
+msgid ""
+"Information not available, it might be 'Skype' or another windows "
+"application!"
+msgstr ""
+"Informação não disponível. Pode ser o 'Skype' ou outra aplicação windows!"
+
+#: ../../../../../core/inc/scripts/class/Process.php:127
+msgid ""
+"Can NOT install 'Apache Service', please stop the above application(s) and "
+"try again!"
+msgstr ""
+"NÃO é possível instalar 'Apache Service'. Por favor pare a(s) aplicação(ões) "
+"acima e tente novamente!"
+
+#: ../../../../../core/inc/scripts/class/Process.php:132
+#, php-format
+msgid "Congrats! Your port '%1$s' is not actually used."
+msgstr "Parabéns! A sua porta '%1$s' não está atualmente a ser usada."
+
+#: ../../../../../core/inc/scripts/class/Process.php:141
+#, php-format
+msgid "Do you really want to delete '%1$s' alias?"
+msgstr "Tem a certeza que deseja eliminar o alias '%1$s'?"
+
+#: ../../../../../core/inc/scripts/class/Process.php:149
+msgid "Alias deleted successfully!"
+msgstr "Alias eliminado com sucesso!"
+
+#: ../../../../../core/inc/scripts/class/Process.php:155
+msgid "Alias not deleted!"
+msgstr "Alias não eliminado!"
+
+#: ../../../../../core/inc/scripts/class/Process.php:163
+msgid "Enter your alias."
+msgstr "Introduza o seu alias."
+
+#: ../../../../../core/inc/scripts/class/Process.php:163
+msgid ""
+"Example: 'test' Would create an alias for the url: 'http://localhost/test/'"
+msgstr ""
+"Exemplo: 'teste' criaria um alias para o url: 'http://localhost/teste/'"
+
+#: ../../../../../core/inc/scripts/class/Process.php:170
+msgid "Invalid Alias! Alias not created!"
+msgstr "Alias inválido! Alias não foi criado!"
+
+#: ../../../../../core/inc/scripts/class/Process.php:177
+#, php-format
+msgid "Alias already exists!"
+msgstr "Alias já existe!"
+
+#: ../../../../../core/inc/scripts/class/Process.php:182
+#, php-format
+msgid "Enter the destination of your alias -fully qualified directory path-."
+msgstr "Introduza o destina do seu alias -caminho completo para a sua pasta-."
+
+#: ../../../../../core/inc/scripts/class/Process.php:182
+#, php-format
+msgid ""
+"Example: 'c:/test/' Would make 'http://localhost/%1$s/' point to: 'c:/test/'"
+msgstr ""
+"Exemplo: 'c:/teste/' faria com que 'http://localhost/%1$s/' apontasse para: "
+"'c:/teste/'"
+
+#: ../../../../../core/inc/scripts/class/Process.php:199
+msgid "Alias created successfully!"
+msgstr "Alias criado com sucesso!"
+
+#: ../../../../../core/inc/scripts/class/Process.php:203
+msgid "This directory doesn't exist! Alias not created!"
+msgstr "Esta pasta não existe! Alias não foi criado!"
+
+#: ../../../../../core/inc/scripts/class/Process.php:230
+msgid ""
+"Sorry, this 'PHP' version doesn't seem to be compatible with your actual "
+"'Apache' version. Switching 'PHP' version cancelled!"
+msgstr ""
+"Desculpa, esta versão de 'PHP' não parece ser compatível com a sua versão "
+"atual do 'Apache'. A mudança da versão 'PHP' foi cancelada!"
+
+#: ../../../../../core/inc/scripts/class/Process.php:234
+msgid ""
+"Sorry, this 'Apache' version doesn't seem to be compatible with your actual "
+"'PHP' version. Switching 'Apache' version cancelled!"
+msgstr ""
+"Desculpa, mas esta versão de 'Apache' não parece ser compatível com a sua "
+"versão atual do 'PHP'. A mudança da sua versão do 'Apache' foi cancelada!"
+
+#: ../../../../../core/inc/scripts/class/Process.php:238
+msgid "Unknown operands!"
+msgstr "Operadores desconhecidos!"
+
+#: ../../../../../core/inc/scripts/class/Process.php:383
+msgid "Enter new MySQL root password:"
+msgstr "Introduza nova palavra-passe root do MySQL:"
+
+#: ../../../../../core/inc/scripts/class/Process.php:389
+msgid "Invalid new MySQL root password! MySQL root password not changed!"
+msgstr "Palavra-chave inválida para a root do MySQL! Não foi alterada!"
+
+#: ../../../../../core/inc/scripts/class/Process.php:394
+#, php-format
+msgid "Confirm new MySQL root password:"
+msgstr "Confirmar nova palavra-chave root do MySQL:"
+
+#: ../../../../../core/inc/scripts/class/Process.php:400
+msgid "The passwords you typed do not match. MySQL root password not changed!"
+msgstr ""
+"As palavras-chaves que escreveu não condizem. A palavra-chave root do MySQL "
+"não foram alteradas!"
+
+#: ../../../../../core/inc/scripts/class/Reload.php:113
+msgid "Sorry, PHP configuration file 'php.ini' doesn't exist!"
+msgstr "Desculpe, mas o ficheiro de configuração PHP 'php.ini' não existe!"
+
+#: ../../../../../core/inc/scripts/class/Reload.php:210
+msgid "Sorry, Apache configuration file 'httpd.conf' doesn't exist!"
+msgstr ""
+"Desculpe, mas o ficheiro de configuração Apache 'httpd.conf' não existe!"
+
+#: ../../../../../core/inc/scripts/class/Reload.php:275
+#: ../../../../../core/inc/scripts/class/Reload.php:327
+msgid "Access Online"
+msgstr "Acesso Online"
+
+#: ../../../../../core/inc/scripts/class/Reload.php:277
+msgid "Edit Alias"
+msgstr "Editar Alias"
+
+#: ../../../../../core/inc/scripts/class/Reload.php:278
+msgid "Delete Alias"
+msgstr "Eliminar Alias"
+
+#: ../../../../../core/inc/scripts/class/Reload.php:328
+msgid "Browse Directory"
+msgstr "Ver pasta"
+
+#: ../../../../../core/inc/scripts/class/Reload.php:330
+msgid "Edit Virtual Host"
+msgstr "Editar Host Virtual"
+
+#: ../../../../../core/inc/scripts/class/Reload.php:331
+msgid "Delete Virtual Host"
+msgstr "Eliminar Host Virtual"
+
+#: ../../../../../core/inc/scripts/class/Reload.php:333
+#: ../../../../../core/inc/scripts/class/Template.php:247
+msgid "access.log"
+msgstr "acessos.log"
+
+#: ../../../../../core/inc/scripts/class/Reload.php:334
+#: ../../../../../core/inc/scripts/class/Template.php:248
+#: ../../../../../core/inc/scripts/class/Template.php:314
+#: ../../../../../core/inc/scripts/class/Template.php:367
+msgid "error.log"
+msgstr "erros.log"
+
+#: ../../../../../core/inc/scripts/class/Reload.php:398
+#: ../../../../../core/inc/scripts/class/Reload.php:443
+#: ../../../../../core/inc/scripts/class/Reload.php:476
+msgid "More versions..."
+msgstr "Mais versões..."
+
+#: ../../../../../core/inc/scripts/class/Template.php:48
+msgid "All sevices running!"
+msgstr "Todos serviços ativos!"
+
+#: ../../../../../core/inc/scripts/class/Template.php:49
+msgid "Some sevices running!"
+msgstr "Alguns serviços ativos!"
+
+#: ../../../../../core/inc/scripts/class/Template.php:50
+msgid "No sevices running!"
+msgstr "Nenhum serviço ativo!"
+
+#: ../../../../../core/inc/scripts/class/Template.php:85
+msgid "Public Homepage"
+msgstr "Página pública principal"
+
+#: ../../../../../core/inc/scripts/class/Template.php:86
+msgid "Public Directory"
+msgstr "Pasta pública"
+
+#: ../../../../../core/inc/scripts/class/Template.php:88
+msgid "Apache Alias"
+msgstr "Alias do Apache"
+
+#: ../../../../../core/inc/scripts/class/Template.php:89
+msgid "Virtual Host"
+msgstr "Host Virtual"
+
+#: ../../../../../core/inc/scripts/class/Template.php:91
+msgid "Apache"
+msgstr "Apache"
+
+#: ../../../../../core/inc/scripts/class/Template.php:92
+msgid "MySQL"
+msgstr "MySQL"
+
+#: ../../../../../core/inc/scripts/class/Template.php:93
+msgid "PHP"
+msgstr "PHP"
+
+#: ../../../../../core/inc/scripts/class/Template.php:95
+msgid "Start All Services"
+msgstr "Iniciar todos serviços"
+
+#: ../../../../../core/inc/scripts/class/Template.php:96
+msgid "Stop All Services"
+msgstr "Parar todos serviços"
+
+#: ../../../../../core/inc/scripts/class/Template.php:97
+msgid "Restart All Services"
+msgstr "Reiniciar todos serviços"
+
+#: ../../../../../core/inc/scripts/class/Template.php:99
+msgid "&Language"
+msgstr "&Idioma"
+
+#: ../../../../../core/inc/scripts/class/Template.php:101
+msgid "Ad&vanced"
+msgstr "A&vançado"
+
+#: ../../../../../core/inc/scripts/class/Template.php:103
+msgid "&Support"
+msgstr "&Suporte"
+
+#: ../../../../../core/inc/scripts/class/Template.php:104
+msgid "&About"
+msgstr "&Acerca"
+
+#: ../../../../../core/inc/scripts/class/Template.php:105
+#, fuzzy
+msgid "E&xit"
+msgstr "Sair"
+
+#: ../../../../../core/inc/scripts/class/Template.php:178
+msgid "Browse Directories"
+msgstr "Ver &Diretórios"
+
+#: ../../../../../core/inc/scripts/class/Template.php:180
+msgid "Activate &Harmony Mode"
+msgstr "Ativar Modo &Harmonia"
+
+#: ../../../../../core/inc/scripts/class/Template.php:181
+msgid "Server On The &Web"
+msgstr "Servidor Ligado na &Web"
+
+#: ../../../../../core/inc/scripts/class/Template.php:182
+#, fuzzy
+msgid "&Clean On Exit"
+msgstr "Limpar ao Sair"
+
+#: ../../../../../core/inc/scripts/class/Template.php:184
+msgid "&Reload Settings"
+msgstr "&Reabrir Definições"
+
+#: ../../../../../core/inc/scripts/class/Template.php:189
+msgid "cgi-bin"
+msgstr "cgi-bin"
+
+#: ../../../../../core/inc/scripts/class/Template.php:190
+msgid "MySQL Data"
+msgstr "Dados MySQL"
+
+#: ../../../../../core/inc/scripts/class/Template.php:195
+#: ../../../../../core/inc/scripts/class/Template.php:288
+#: ../../../../../core/inc/scripts/class/Template.php:342
+msgid "Version"
+msgstr "Versão"
+
+#: ../../../../../core/inc/scripts/class/Template.php:196
+#: ../../../../../core/inc/scripts/class/Template.php:289
+msgid "Service"
+msgstr "Serviço"
+
+#: ../../../../../core/inc/scripts/class/Template.php:197
+msgid "Modules"
+msgstr "Módulos"
+
+#: ../../../../../core/inc/scripts/class/Template.php:198
+#: ../../../../../core/inc/scripts/class/Template.php:290
+#: ../../../../../core/inc/scripts/class/Template.php:345
+msgid "Tools"
+msgstr "Ferramentas"
+
+#: ../../../../../core/inc/scripts/class/Template.php:209
+#: ../../../../../core/inc/scripts/class/Template.php:301
+msgid "Start Service"
+msgstr "Iniciar Serviço"
+
+#: ../../../../../core/inc/scripts/class/Template.php:210
+#: ../../../../../core/inc/scripts/class/Template.php:302
+msgid "Stop Service"
+msgstr "Parar Serviço"
+
+#: ../../../../../core/inc/scripts/class/Template.php:211
+#: ../../../../../core/inc/scripts/class/Template.php:303
+msgid "Restart Service"
+msgstr "Reiniciar Serviço"
+
+#: ../../../../../core/inc/scripts/class/Template.php:213
+#: ../../../../../core/inc/scripts/class/Template.php:305
+msgid "Install Service"
+msgstr "Instalar Serviço"
+
+#: ../../../../../core/inc/scripts/class/Template.php:214
+#: ../../../../../core/inc/scripts/class/Template.php:306
+msgid "Uninstall Service"
+msgstr "Desinstalar Serviço"
+
+#: ../../../../../core/inc/scripts/class/Template.php:218
+msgid "Add Alias"
+msgstr "Adicionar Alias"
+
+#: ../../../../../core/inc/scripts/class/Template.php:228
+msgid "Add Virtual Host"
+msgstr "Adicionar Host Virtual"
+
+#: ../../../../../core/inc/scripts/class/Template.php:245
+msgid "Test Port 80"
+msgstr "Testar Porta 80"
+
+#: ../../../../../core/inc/scripts/class/Template.php:246
+msgid "httpd.conf"
+msgstr "httpd.conf"
+
+#: ../../../../../core/inc/scripts/class/Template.php:311
+msgid "Console"
+msgstr "Consola"
+
+#: ../../../../../core/inc/scripts/class/Template.php:312
+msgid "Reset Root Password"
+msgstr "Redefinir Palavra-chave root"
+
+#: ../../../../../core/inc/scripts/class/Template.php:313
+msgid "mysql.ini"
+msgstr "mysql.ini"
+
+#: ../../../../../core/inc/scripts/class/Template.php:343
+msgid "Settings"
+msgstr "Definições"
+
+#: ../../../../../core/inc/scripts/class/Template.php:344
+msgid "Extensions"
+msgstr "Extensões"
+
+#: ../../../../../core/inc/scripts/class/Template.php:366
+msgid "php.ini"
+msgstr "php.ini"
+
+#: ../../../../../front/data/www/localhost/index.php:118
+msgid "Apache Virtual Hosts:"
+msgstr "Hosts Virtuais no Apache:"
+
+#: ../../../../../front/data/www/localhost/index.php:126
+msgid "Apache Alias:"
+msgstr "Alias do Apache:"
+
+#: ../../../../../front/data/www/localhost/index.php:134
+msgid "Apache Loaded Modules:"
+msgstr "Módulos Apache em memória:"
+
+#: ../../../../../front/data/www/localhost/index.php:142
+msgid "PHP Loaded Extensions:"
+msgstr "Extensões PHP em memória:"
+
+#: ../../../../../front/data/www/localhost/index.php:172
+msgid "Homepage"
+msgstr "Página principal"
+
+#: ../../../../../front/data/www/localhost/index.php:173
+msgid "FAQ"
+msgstr "Perguntas frequentes"
+
+#: ../../../../../front/data/www/localhost/index.php:174
+msgid "Screenshots"
+msgstr ""
+
+#: ../../../../../front/data/www/localhost/index.php:175
+msgid "Downloads"
+msgstr "Transferências"
+
+#: ../../../../../front/data/www/localhost/index.php:176
+msgid "News"
+msgstr "Notícias"
+
+#: ../../../../../front/data/www/localhost/index.php:177
+msgid "Contributors"
+msgstr "Contribuintes"
+
+#: ../../../../../front/data/www/localhost/index.php:178
+msgid "About Us"
+msgstr "Quem somos"
+
+#: ../../../../../front/data/www/localhost/index.php:179
+msgid "Contact"
+msgstr "Contacto"
+
+#: ../../../../../front/data/www/localhost/index.php:180
+msgid "Support"
+msgstr "Suporte"
+
+#: ../../../../../front/data/www/localhost/index.php:201
+msgid "Navigation:"
+msgstr "Navegação:"
+
+#: ../../../../../front/data/www/localhost/index.php:202
+msgid "Home"
+msgstr "Principal"
+
+#: ../../../../../front/data/www/localhost/index.php:203
+msgid "PHP Info"
+msgstr "Informações PHP"
+
+#: ../../../../../front/data/www/localhost/index.php:204
+msgid "PHP Credits"
+msgstr "Créditos PHP"
+
+#: ../../../../../front/data/www/localhost/index.php:215
+msgid "Virtual Host:"
+msgstr "Host Virtual:"
+
+#: ../../../../../front/data/www/localhost/index.php:220
+msgid "Server Status: "
+msgstr "Estado do Servidor:"
+
+#: ../../../../../front/data/www/localhost/index.php:220
+msgid "On The Web"
+msgstr "Ligado na Web"
+
+#: ../../../../../front/data/www/localhost/index.php:220
+msgid "Off The Web"
+msgstr "Desligado na Web"
+
+#: ../../../../../front/data/www/localhost/index.php:221
+msgid "Harmony Mode: "
+msgstr "Modo Harmonia:"
+
+#: ../../../../../front/data/www/localhost/index.php:222
+msgid "Server Load: "
+msgstr ""
